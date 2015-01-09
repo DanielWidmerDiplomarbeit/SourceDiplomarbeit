@@ -99,9 +99,9 @@
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Forms.1.3.0.6292\build\portable-win+net45+wp80+MonoAndroid10+MonoTouch10\Xamarin.Forms.targets" Condition="Exists('..\packages\Xamarin.Forms.1.3.0.6292\build\portable-win+net45+wp80+MonoAndroid10+MonoTouch10\Xamarin.Forms.targets')" />
   <ItemGroup>
-    <ProjectReference Include="..\TodoMvvm\TodoMvvm.csproj">
+    <ProjectReference Include="..\TodoMvvm\ZeusMobile.csproj">
       <Project>{5F610EA1-9E35-4870-AE9B-5E18B4B4D5B8}</Project>
-      <Name>TodoMvvm</Name>
+      <Name>ZeusMobile</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

@@ -56,7 +56,10 @@ namespace TodoMvvm
 			public const int Icon = 2130837506;
 			
 			// aapt resource value: 0x7f020003
-			public const int plus = 2130837507;
+			public const int monoandroidsplash = 2130837507;
+			
+			// aapt resource value: 0x7f020004
+			public const int plus = 2130837508;
 			
 			static Drawable()
 			{
@@ -71,8 +74,8 @@ namespace TodoMvvm
 		public partial class Id
 		{
 			
-			// aapt resource value: 0x7f060000
-			public const int myButton = 2131099648;
+			// aapt resource value: 0x7f070000
+			public const int myButton = 2131165184;
 			
 			static Id()
 			{
@@ -137,6 +140,22 @@ namespace TodoMvvm
 			}
 			
 			private String()
+			{
+			}
+		}
+		
+		public partial class Style
+		{
+			
+			// aapt resource value: 0x7f060000
+			public const int Mono_Android_Theme_Splash = 2131099648;
+			
+			static Style()
+			{
+				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
+			}
+			
+			private Style()
 			{
 			}
 		}
