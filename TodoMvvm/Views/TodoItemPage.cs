@@ -9,16 +9,22 @@ namespace TodoMvvm
 {
 	public class TodoItemPage : ContentPage
 	{
-		string name, description;
-
+	
 		public TodoItemPage ()
 		{
 			this.SetBinding (ContentPage.TitleProperty, "Name");
 
 			NavigationPage.SetHasNavigationBar (this, true);
+
 			var nameLabel = new Label { Text = "Name" };
 			var nameEntry = new Entry { Text = "<new>" };
 			nameEntry.SetBinding (Entry.TextProperty, "Name");
+
+			var schDatumLabel = new Label { Text = "Schadensdatum" };
+			var schDatumPicker = new DatePicker  {  Format = "D"};
+
+			schDatumPicker.VerticalOptions = LayoutOptions.Center;
+			schDatumPicker.SetBinding (DatePicker.DateProperty, "Schadensdatum");
 
 			var notesLabel = new Label { Text = "Notes" };
 			var notesEntry = new Entry ();
@@ -47,6 +53,7 @@ namespace TodoMvvm
 				VerticalOptions = LayoutOptions.StartAndExpand,
 				Padding = new Thickness(20),
 				Children = {nameLabel, nameEntry, 
+					schDatumLabel, schDatumPicker,
 					notesLabel, notesEntry,
 					doneLabel, doneEntry,
 					saveButton, cancelButton, deleteButton, speakButton}

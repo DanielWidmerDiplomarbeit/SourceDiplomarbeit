@@ -46,6 +46,18 @@ namespace TodoMvvm
 			}
 		}
 
+		public DateTime Schadensdatum
+		{
+			get { return todo.Schadensdatum; }
+			set
+			{
+				if (todo.Schadensdatum == value)
+					return;
+				todo.Schadensdatum = value;
+				OnPropertyChanged ();
+			}
+		}
+
 		public string Notes
 		{
 			get { return todo.Notes; }

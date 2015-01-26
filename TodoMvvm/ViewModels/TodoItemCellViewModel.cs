@@ -10,6 +10,8 @@ namespace TodoMvvm
 
 		public string Name { get { return todo.Name; }}
 
+		public DateTime Schadensdatum { get { return todo.Schadensdatum; }}
+
 		public bool Done {get { return todo.Done; }}
 
 		public TodoItemCellViewModel (TodoItem todoItem)

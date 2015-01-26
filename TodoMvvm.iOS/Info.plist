@@ -9,7 +9,7 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>MinimumOSVersion</key>
-	<string>7.0</string>
+	<string>8.0</string>
 	<key>UIDeviceFamily</key>
 	<array>
 		<integer>2</integer>
@@ -34,6 +34,7 @@
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
 		<string>UIInterfaceOrientationLandscapeLeft</string>
+		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 </dict>
 </plist>
