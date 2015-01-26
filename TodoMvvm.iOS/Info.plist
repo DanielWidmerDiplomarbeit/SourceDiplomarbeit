@@ -2,10 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>CFBundleDisplayName</key>
-	<string>TodoMvvm</string>
-	<key>CFBundleIdentifier</key>
-	<string>com.your-company.TodoMvvm.iOS</string>
 	<key>CFBundleShortVersionString</key>
 	<string>1.0</string>
 	<key>CFBundleVersion</key>
@@ -30,6 +26,14 @@
 	<array>
 		<string>Icon-60@2x</string>
 		<string>Icon@2x</string>
+	</array>
+	<key>CFBundleDisplayName</key>
+	<string>ZEUSMobile</string>
+	<key>CFBundleIdentifier</key>
+	<string>com.conf.ZEUSMobile</string>
+	<key>UISupportedInterfaceOrientations~ipad</key>
+	<array>
+		<string>UIInterfaceOrientationLandscapeLeft</string>
 	</array>
 </dict>
 </plist>
