@@ -26,6 +26,7 @@ namespace TodoMvvm
 
 			// This is where we copy in the prepopulated database
 			Console.WriteLine (path);
+			//File.Delete (path);
 			if (!File.Exists (path)) {
 				File.Copy (sqliteFilename, path);
 			}

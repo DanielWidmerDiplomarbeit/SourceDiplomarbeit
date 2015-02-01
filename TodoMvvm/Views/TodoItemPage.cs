@@ -22,8 +22,6 @@ namespace TodoMvvm
 
 			var schDatumLabel = new Label { Text = "Schadensdatum" };
 			var schDatumPicker = new DatePicker  {  Format = "D"};
-
-			schDatumPicker.VerticalOptions = LayoutOptions.Center;
 			schDatumPicker.SetBinding (DatePicker.DateProperty, "Schadensdatum");
 
 			var notesLabel = new Label { Text = "Notes" };

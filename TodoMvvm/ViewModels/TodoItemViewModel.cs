@@ -10,35 +10,35 @@ namespace TodoMvvm
 
 		ICommand saveCommand, deleteCommand, cancelCommand, speakCommand;
 
-		public TodoItemViewModel (TodoItem todoItem) 
+		public TodoItemViewModel (TodoItem todoItem)
 		{
 			todo = todoItem;
 			saveCommand = new Command (Save);
 			deleteCommand = new Command (Delete);
-			cancelCommand = new Command (() => Navigation.Pop());
+			cancelCommand = new Command (() => Navigation.Pop ());
 			speakCommand = new Command (Speak);
 		}
 
-		public void Save () 
+		public void Save ()
 		{
 			MessagingCenter.Send (this, "TodoSaved", todo);
 			Navigation.Pop ();
 		}
-		public void Delete () 
+
+		public void Delete ()
 		{
 			MessagingCenter.Send (this, "TodoDeleted", todo);
 			Navigation.Pop ();
 		}
-		public void Speak () 
+
+		public void Speak ()
 		{
 			MessagingCenter.Send (this, "TodoSpeak", todo);
 		}
 
-		public string Name
-		{
+		public string Name {
 			get { return todo.Name; }
-			set
-			{
+			set {
 				if (todo.Name == value)
 					return;
 				todo.Name = value;
@@ -46,11 +46,15 @@ namespace TodoMvvm
 			}
 		}
 
-		public DateTime Schadensdatum
-		{
-			get { return todo.Schadensdatum; }
-			set
-			{
+		public DateTime Schadensdatum {
+			get { 
+
+				if (todo.Schadensdatum.Equals( DateTime.MinValue)) { 
+					todo.Schadensdatum = DateTime.Now;
+				}
+				return todo.Schadensdatum; 
+			}
+			set {
 				if (todo.Schadensdatum == value)
 					return;
 				todo.Schadensdatum = value;
@@ -58,11 +62,9 @@ namespace TodoMvvm
 			}
 		}
 
-		public string Notes
-		{
+		public string Notes {
 			get { return todo.Notes; }
-			set
-			{
+			set {
 				if (todo.Notes == value)
 					return;
 				todo.Notes = value;
@@ -70,11 +72,9 @@ namespace TodoMvvm
 			}
 		}
 
-		public bool Done
-		{
+		public bool Done {
 			get { return todo.Done; }
-			set
-			{
+			set {
 				if (todo.Done == value)
 					return;
 				todo.Done = value;
@@ -82,26 +82,22 @@ namespace TodoMvvm
 			}
 		}
 
-		public bool CanDelete
-		{
+		public bool CanDelete {
 			get { return todo.ID > 0; }
 		}
-		public bool CanCancel
-		{
+
+		public bool CanCancel {
 			get { return !CanDelete; }
 		}
 
 		/// <summary>Can only speak if there is some text</summary>
-		public bool CanSpeak
-		{
+		public bool CanSpeak {
 			get { return (!string.IsNullOrEmpty (todo.Name)) | (!string.IsNullOrEmpty (todo.Notes)); }
 		}
 
-		public ICommand SaveCommand
-		{
+		public ICommand SaveCommand {
 			get { return saveCommand; }
-			set
-			{
+			set {
 				if (saveCommand == value)
 					return;
 				saveCommand = value;
@@ -109,11 +105,9 @@ namespace TodoMvvm
 			}
 		}
 
-		public ICommand DeleteCommand
-		{
+		public ICommand DeleteCommand {
 			get { return deleteCommand; }
-			set
-			{
+			set {
 				if (deleteCommand == value)
 					return;
 				deleteCommand = value;
@@ -121,11 +115,9 @@ namespace TodoMvvm
 			}
 		}
 
-		public ICommand CancelCommand
-		{
+		public ICommand CancelCommand {
 			get { return cancelCommand; }
-			set
-			{
+			set {
 				if (cancelCommand == value)
 					return;
 				cancelCommand = value;
@@ -133,11 +125,9 @@ namespace TodoMvvm
 			}
 		}
 
-		public ICommand SpeakCommand
-		{
+		public ICommand SpeakCommand {
 			get { return speakCommand; }
-			set
-			{
+			set {
 				if (speakCommand == value)
 					return;
 				speakCommand = value;
