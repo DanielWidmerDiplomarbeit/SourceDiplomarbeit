@@ -46,12 +46,7 @@ namespace TodoMvvm
 				App.Database.DeleteItem(model.ID);
 				Reload();
 			});
-
-			MessagingCenter.Subscribe<TodoItemViewModel, TodoItem> (this, "TodoSpeak", (sender, model) => {
-
-				Xamarin.Forms.DependencyService.Get<ITextToSpeech>().Speak(model.Name + " " + model.Notes);
-
-			});
+				
 
 			MessagingCenter.Subscribe<TodoListPage, TodoItem> (this, "TodoAdd", (sender, viewModel) => {
 				var todo = new TodoItem();
@@ -66,9 +61,6 @@ namespace TodoMvvm
 					tospeak += t.Name + " ";
 				if (tospeak == "") tospeak = "there are no tasks to do";
 
-				Xamarin.Forms.DependencyService.Get<ITextToSpeech>().Speak(tospeak);
-
-				//App.Speech.Speak(tospeak);
 			});
 		}
 

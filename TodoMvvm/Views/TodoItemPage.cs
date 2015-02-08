@@ -43,10 +43,6 @@ namespace TodoMvvm
 			deleteButton.SetBinding (Button.IsVisibleProperty, "CanDelete");
 
 
-			var speakButton = new Button { Text = "Speak" };
-			speakButton.SetBinding (Button.CommandProperty, "SpeakCommand");
-			speakButton.SetBinding (Button.IsVisibleProperty, "CanSpeak");
-		
 			Content = new StackLayout {
 				VerticalOptions = LayoutOptions.StartAndExpand,
 				Padding = new Thickness(20),
@@ -54,7 +50,7 @@ namespace TodoMvvm
 					schDatumLabel, schDatumPicker,
 					notesLabel, notesEntry,
 					doneLabel, doneEntry,
-					saveButton, cancelButton, deleteButton, speakButton}
+					saveButton, cancelButton, deleteButton}
 			};
 
 		}

@@ -16,7 +16,6 @@ namespace TodoMvvm
 			saveCommand = new Command (Save);
 			deleteCommand = new Command (Delete);
 			cancelCommand = new Command (() => Navigation.Pop ());
-			speakCommand = new Command (Speak);
 		}
 
 		public void Save ()
@@ -31,10 +30,7 @@ namespace TodoMvvm
 			Navigation.Pop ();
 		}
 
-		public void Speak ()
-		{
-			MessagingCenter.Send (this, "TodoSpeak", todo);
-		}
+	
 
 		public string Name {
 			get { return todo.Name; }
@@ -89,11 +85,7 @@ namespace TodoMvvm
 		public bool CanCancel {
 			get { return !CanDelete; }
 		}
-
-		/// <summary>Can only speak if there is some text</summary>
-		public bool CanSpeak {
-			get { return (!string.IsNullOrEmpty (todo.Name)) | (!string.IsNullOrEmpty (todo.Notes)); }
-		}
+			
 
 		public ICommand SaveCommand {
 			get { return saveCommand; }
