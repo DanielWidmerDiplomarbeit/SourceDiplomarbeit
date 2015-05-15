@@ -1,11 +1,12 @@
 ﻿using System;
 using NUnit.Framework;
 using System.IO;
-using TodoMvvm;
+using ZeusMobile;
 using System.Linq;
-using ZeusMobileTest;
-using QuickTodo;
+using ZeusMobile.Data;
+using ZeusMobile.Helpers;
 using System.Collections.Generic;
+using ZeusMobile.Models;
 
 namespace ZeusMobileTest
 {
@@ -15,8 +16,6 @@ namespace ZeusMobileTest
 		[Test]
 		public void Pass ()
 		{
-
-
 			var sqliteFilename = "TestDbLite.db3";
 			string documentsPath = Environment.GetFolderPath (Environment.SpecialFolder.Personal);
 			string libraryPath = Path.Combine (documentsPath, "..", "Library"); 
@@ -34,16 +33,16 @@ namespace ZeusMobileTest
 			var database = AppConn.TestDataBase ;
 
 			var demoData = new DemoData ();
-			demoData.buildDemoData ();
+			demoData.BuildDemoData ();
 
 			List<Subject> subjects = demoData.Subjects;
 			List<Versicherter> versicherte = demoData.Versicherte;
-			List<SchadensExperte> SchadensExperten = demoData.SchadensExperten;
+			List<SchadensExperte> schadensExperten = demoData.SchadensExperten;
 
 
 			database.SaveSubjects (subjects);
 			database.SaveVersicherte (versicherte);
-			database.SaveSchadensExperten (SchadensExperten);
+			database.SaveSchadensExperten (schadensExperten);
 
 			List<Subject> testSubjects = database.GetSubjects().ToList();
 			List<Versicherter> testVersicherte = database.GetVersicherte().ToList();

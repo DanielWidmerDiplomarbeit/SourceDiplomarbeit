@@ -1,7 +1,6 @@
-﻿using System;
-using Xamarin.Forms;
+﻿using Xamarin.Forms;
 
-namespace TodoMvvm
+namespace ZeusMobile
 {
 	public class TodoItemCell : ViewCell
 	{

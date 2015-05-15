@@ -1,6 +1,7 @@
 ﻿using System;
+using ZeusMobile.Models;
 
-namespace TodoMvvm
+namespace ZeusMobile.ViewModels
 {
 	class TodoItemCellViewModel : BaseViewModel
 	{

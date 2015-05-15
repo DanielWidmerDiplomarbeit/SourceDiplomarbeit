@@ -1,17 +1,11 @@
-﻿using System;
-using SQLite.Net;
-using System.Collections.Generic;
-using TodoMvvm;
-using System.Linq;
+﻿using System.Collections.Generic;
+using ZeusMobile.Models;
 
-namespace QuickTodo
+namespace ZeusMobile.Helpers
 {
 	public class DemoData
 	{
-		public DemoData(){
-		}
-
-		public List<Subject> Subjects {
+	    public List<Subject> Subjects {
 			get; 
 			private set;
 		}
@@ -26,7 +20,7 @@ namespace QuickTodo
 			private set;
 		}
 
-		public void buildDemoData()
+		public void BuildDemoData()
 		{
 
 		var versichertenNr = 3215;
@@ -64,14 +58,14 @@ namespace QuickTodo
 
 		private List<Subject> DemoSubjects()
 		{
-			var _subjects = new List<Subject> {
-				new Subject() {Name = "Kunde Adam", Rolle = "Kunde" },
-				new Subject() {Name = "Kunde Bruno", Rolle = "Kunde" },
-				new Subject() {Name = "Expertin Eva", Rolle = "Experte" },
-				new Subject() {Name = "Experte Zorro", Rolle = "Experte" }
+			var subjects = new List<Subject> {
+				new Subject {Name = "Kunde Adam", Rolle = "Kunde" },
+				new Subject {Name = "Kunde Bruno", Rolle = "Kunde" },
+				new Subject {Name = "Expertin Eva", Rolle = "Experte" },
+				new Subject {Name = "Experte Zorro", Rolle = "Experte" }
 			};
 
-			return _subjects;
+			return subjects;
 		}
 
 	}

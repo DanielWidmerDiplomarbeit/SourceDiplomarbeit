@@ -1,12 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using Xamarin.Forms;
+using ZeusMobile.ViewModels;
 
-namespace TodoMvvm
+namespace ZeusMobile
 {
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = false, Inherited = false)]
     public class ViewTypeAttribute : Attribute
@@ -31,7 +28,7 @@ namespace TodoMvvm
 
         public static Page CreatePage(Type viewModelType)
         {
-            Type viewType = null;
+            Type viewType;
 
             if (typeDictionary.ContainsKey(viewModelType))
             {
@@ -53,7 +50,7 @@ namespace TodoMvvm
 
         public static Page CreatePage(BaseViewModel viewModel)
         {
-            Type viewType = null;
+            Type viewType;
             if (typeDictionary.ContainsKey(viewModel.GetType()))
             {
                 viewType = typeDictionary[viewModel.GetType()];

@@ -1,20 +1,20 @@
-﻿using System;
-using Xamarin.Forms;
+﻿using Xamarin.Forms;
+using ZeusMobile.ViewModels;
 
-namespace TodoMvvm
+namespace ZeusMobile
 {
 	class ViewModelNavigation
 	{
-		readonly Page implementor;
+		readonly Page _implementor;
 
 		public ViewModelNavigation (Page implementor)
 		{
-			this.implementor = implementor;
+			_implementor = implementor;
 		}
 
 		public void Push (Page page)
 		{
-			implementor.Navigation.PushAsync (page);
+			_implementor.Navigation.PushAsync (page);
 		}
 
 		public void Push<TViewModel> ()
@@ -25,17 +25,17 @@ namespace TodoMvvm
 
 		public void Pop ()
 		{
-			implementor.Navigation.PopAsync ();
+			_implementor.Navigation.PopAsync ();
 		}
 
 		public void PopToRoot ()
 		{
-			implementor.Navigation.PopToRootAsync ();
+			_implementor.Navigation.PopToRootAsync ();
 		}
 
 		public void PushModal (Page page)
 		{
-			implementor.Navigation.PushModalAsync (page);
+			_implementor.Navigation.PushModalAsync (page);
 		}
 
 		public void PushModal<TViewModel> ()
@@ -46,10 +46,10 @@ namespace TodoMvvm
 
 		public void PopModal ()
 		{
-			var modalParent = implementor;
+			var modalParent = _implementor;
 			while (modalParent.Parent as Page != null)
 				modalParent = (Page) modalParent.Parent;
-			implementor.Navigation.PopModalAsync ();
+			_implementor.Navigation.PopModalAsync ();
 		}
 	}
 }

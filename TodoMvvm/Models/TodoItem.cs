@@ -1,15 +1,11 @@
 ﻿using System;
 using SQLite.Net.Attributes;
 
-namespace TodoMvvm
+namespace ZeusMobile.Models
 {
 	public class TodoItem
 	{
-		public TodoItem ()
-		{
-		}
-
-		[PrimaryKey, AutoIncrement]
+	    [PrimaryKey, AutoIncrement]
 		public int ID { get; set; }
 		public string Name { get; set; }
         

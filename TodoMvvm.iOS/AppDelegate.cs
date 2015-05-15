@@ -1,10 +1,11 @@
 ﻿using System;
+using System.IO;
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
 using Xamarin.Forms;
-using System.IO;
+using ZeusMobile;
 
-namespace TodoMvvm
+namespace ZeusMobileiOS
 {
 	[Register ("AppDelegate")]
 	public partial class AppDelegate : UIApplicationDelegate

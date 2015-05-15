@@ -1,14 +1,15 @@
-﻿using System;
-using Xamarin.Forms;
+﻿using Xamarin.Forms;
+using ZeusMobile.Data;
+using ZeusMobile.Models;
+using ZeusMobile.ViewModels;
+using ZeusMobile.Views;
 
-namespace TodoMvvm
+namespace ZeusMobile
 {
 	public static class App
 	{
 		static void RegisterTypes ()
 		{
-			// This can be replaced by any number of MVVM tools. It is done this way merely because this 
-			// is not intended to be a demo of those tools.
 			ViewFactory.Register<TodoListPage, TodoListViewModel> ();
 			ViewFactory.Register<TodoItemPage, TodoItemViewModel> ();
 		}

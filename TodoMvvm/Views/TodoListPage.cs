@@ -1,12 +1,13 @@
 ﻿using Xamarin.Forms;
+using ZeusMobile.Models;
 
-namespace TodoMvvm
+namespace ZeusMobile.Views
 {
 	public class TodoListPage : ContentPage
 	{
 		public TodoListPage ()
 		{
-			Title = "TodoMvvm";
+			Title = "ZeusMobile";
 
 			NavigationPage.SetHasNavigationBar (this, true);
 

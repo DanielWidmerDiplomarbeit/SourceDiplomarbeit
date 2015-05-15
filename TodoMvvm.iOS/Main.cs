@@ -1,6 +1,6 @@
 ﻿using MonoTouch.UIKit;
 
-namespace TodoMvvm
+namespace ZeusMobileiOS
 {
 	public class Application
 	{

@@ -1,13 +1,10 @@
-﻿using System;
-using SQLite.Net.Attributes;
-
-namespace TodoMvvm
+﻿namespace ZeusMobile.Models
 {
 	public class Versicherter : Subject
 	{
 		public Versicherter(){
-			ID = base.ID;
-			Name = base.Name;
+			ID = ID;
+			Name = Name;
 		}
 		public int VersichertenNr { get; set; }
 	}

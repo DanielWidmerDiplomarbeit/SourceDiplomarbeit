@@ -1,21 +1,22 @@
 ﻿using System;
 using System.Windows.Input;
 using Xamarin.Forms;
+using ZeusMobile.Models;
 
-namespace TodoMvvm
+namespace ZeusMobile.ViewModels
 {
 	class TodoItemViewModel : BaseViewModel
 	{
 		TodoItem todo;
 
-		ICommand saveCommand, deleteCommand, cancelCommand;
+		ICommand _saveCommand, _deleteCommand, _cancelCommand;
 
 		public TodoItemViewModel (TodoItem todoItem)
 		{
 			todo = todoItem;
-			saveCommand = new Command (Save);
-			deleteCommand = new Command (Delete);
-			cancelCommand = new Command (() => Navigation.Pop ());
+			_saveCommand = new Command (Save);
+			_deleteCommand = new Command (Delete);
+			_cancelCommand = new Command (() => Navigation.Pop ());
 		}
 
 		public void Save ()
@@ -88,31 +89,31 @@ namespace TodoMvvm
 			
 
 		public ICommand SaveCommand {
-			get { return saveCommand; }
+			get { return _saveCommand; }
 			set {
-				if (saveCommand == value)
+				if (_saveCommand == value)
 					return;
-				saveCommand = value;
+				_saveCommand = value;
 				OnPropertyChanged ();
 			}
 		}
 
 		public ICommand DeleteCommand {
-			get { return deleteCommand; }
+			get { return _deleteCommand; }
 			set {
-				if (deleteCommand == value)
+				if (_deleteCommand == value)
 					return;
-				deleteCommand = value;
+				_deleteCommand = value;
 				OnPropertyChanged ();
 			}
 		}
 
 		public ICommand CancelCommand {
-			get { return cancelCommand; }
+			get { return _cancelCommand; }
 			set {
-				if (cancelCommand == value)
+				if (_cancelCommand == value)
 					return;
-				cancelCommand = value;
+				_cancelCommand = value;
 				OnPropertyChanged ();
 			}
 		}

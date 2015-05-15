@@ -1,7 +1,6 @@
-﻿using System;
-using SQLite.Net.Attributes;
+﻿using SQLite.Net.Attributes;
 
-namespace TodoMvvm
+namespace ZeusMobile.Models
 {
 	public class Subject
 	{

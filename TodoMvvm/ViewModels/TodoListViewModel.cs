@@ -1,24 +1,23 @@
-﻿using System;
-using System.Windows.Input;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using Xamarin.Forms;
+﻿using System.Collections.ObjectModel;
 using System.Linq;
+using Xamarin.Forms;
+using ZeusMobile.Models;
+using ZeusMobile.Views;
 
-namespace TodoMvvm
+namespace ZeusMobile.ViewModels
 {
     class TodoListViewModel : BaseViewModel
     {
-        ObservableCollection<TodoItemCellViewModel> contents = new ObservableCollection<TodoItemCellViewModel>();
+        ObservableCollection<TodoItemCellViewModel> _contents = new ObservableCollection<TodoItemCellViewModel>();
 
         public ObservableCollection<TodoItemCellViewModel> Contents
         {
-            get { return contents; }
+            get { return _contents; }
             set
             {
-                if (contents == value)
+                if (_contents == value)
                     return;
-                contents = value;
+                _contents = value;
                 OnPropertyChanged();
             }
         }
@@ -29,7 +28,7 @@ namespace TodoMvvm
 
             foreach (var t in all)
             {
-                contents.Add(new TodoItemCellViewModel(t));
+                _contents.Add(new TodoItemCellViewModel(t));
             }
 
             MessagingCenter.Subscribe<TodoItemViewModel, TodoItem>(this, "TodoSaved", (sender, model) =>
@@ -71,27 +70,27 @@ namespace TodoMvvm
             Contents = x;
         }
 
-        object selectedItem;
+        object _selectedItem;
         public object SelectedItem
         {
-            get { return selectedItem; }
+            get { return _selectedItem; }
             set
             {
-                if (selectedItem == value)
+                if (_selectedItem == value)
                     return;
                 // something was selected
-                selectedItem = value;
+                _selectedItem = value;
 
                 OnPropertyChanged();
 
-                if (selectedItem != null)
+                if (_selectedItem != null)
                 {
 
-                    var todovm = new TodoItemViewModel(((TodoItemCellViewModel)selectedItem).Item);
+                    var todovm = new TodoItemViewModel(((TodoItemCellViewModel)_selectedItem).Item);
 
                     Navigation.Push(ViewFactory.CreatePage(todovm));
 
-                    selectedItem = null;
+                    _selectedItem = null;
                 }
             }
         }
