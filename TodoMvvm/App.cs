@@ -26,15 +26,15 @@ namespace TodoMvvm
 			return mainNav;
 		}
 
-		static SQLite.Net.SQLiteConnection conn;
-		static TodoItemDatabase database;
+		static SQLite.Net.SQLiteConnection _conn;
+		static TodoItemDatabase _database;
 		public static void SetDatabaseConnection (SQLite.Net.SQLiteConnection connection)
 		{
-			conn = connection;
-			database = new TodoItemDatabase (conn);
+			_conn = connection;
+			_database = new TodoItemDatabase (_conn);
 		}
 		public static TodoItemDatabase Database {
-			get { return database; }
+			get { return _database; }
 		}
 
 	}

@@ -8,7 +8,7 @@ namespace TodoMvvm
 	{
 		TodoItem todo;
 
-		ICommand saveCommand, deleteCommand, cancelCommand, speakCommand;
+		ICommand saveCommand, deleteCommand, cancelCommand;
 
 		public TodoItemViewModel (TodoItem todoItem)
 		{
@@ -116,16 +116,7 @@ namespace TodoMvvm
 				OnPropertyChanged ();
 			}
 		}
-
-		public ICommand SpeakCommand {
-			get { return speakCommand; }
-			set {
-				if (speakCommand == value)
-					return;
-				speakCommand = value;
-				OnPropertyChanged ();
-			}
-		}
+			
 	}
 }
 

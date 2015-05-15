@@ -1,5 +1,4 @@
-﻿using System;
-using SQLite.Net;
+﻿using SQLite.Net;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -11,19 +10,36 @@ namespace TodoMvvm
 
 		SQLiteConnection database;
 
-		/// <summary>
-		/// Initializes a new instance of the <see cref="Tasky.DL.TaskDatabase"/> TaskDatabase. 
-		/// if the database doesn't exist, it will create the database and all the tables.
-		/// </summary>
-		/// <param name='path'>
-		/// Path.
-		/// </param>
 		public TodoItemDatabase(SQLiteConnection conn)
 		{
 			database = conn;
-			// create the tables
 			database.CreateTable<TodoItem>();
+			database.CreateTable<Subject>();
+			database.CreateTable<Versicherter>();
+			database.CreateTable<SchadensExperte>();
 		}
+
+		public IEnumerable<Subject> GetSubjects ()
+		{
+			lock (locker) {
+				return (from i in database.Table<Subject>() select i).ToList();
+			}
+		}
+
+		public IEnumerable<Versicherter> GetVersicherte()
+		{
+			lock (locker) {
+				return (from i in database.Table<Versicherter>() select i).ToList();
+			}
+		}
+
+		public IEnumerable<SchadensExperte> GetSchadensExperten ()
+		{
+			lock (locker) {
+				return (from i in database.Table<SchadensExperte>() select i).ToList();
+			}
+		}
+
 
 		public IEnumerable<TodoItem> GetItems ()
 		{
@@ -44,6 +60,19 @@ namespace TodoMvvm
 			lock (locker) {
 				return database.Table<TodoItem>().FirstOrDefault(x => x.ID == id);
 			}
+		}
+
+		public int SaveSubjects ( List<Subject> items){
+
+			return database.InsertAll (items, typeof(Subject));			
+		}
+		public int SaveVersicherte ( List<Versicherter> items){
+
+			return database.InsertAll (items, typeof(Versicherter));			
+		}
+		public int SaveSchadensExperten ( List<SchadensExperte> items){
+
+			return database.InsertAll (items, typeof(SchadensExperte));			
 		}
 
 		public int SaveItem (TodoItem item) 

@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
-using TodoMvvm;
 using Xamarin.Forms;
 using System.IO;
 
@@ -49,4 +46,3 @@ namespace TodoMvvm
 		}
 	}
 }
-

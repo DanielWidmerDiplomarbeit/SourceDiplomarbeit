@@ -7,104 +7,94 @@ using System.Linq;
 
 namespace TodoMvvm
 {
-	class TodoListViewModel : BaseViewModel
-	{
-		ObservableCollection<TodoItemCellViewModel> contents = new ObservableCollection<TodoItemCellViewModel> ();
-		public ObservableCollection<TodoItemCellViewModel> Contents { 
-			get { return contents; } 
-			set
-			{
-				if (contents == value)
-					return;
-				contents = value;
-				OnPropertyChanged ();
-			}
-		}
+    class TodoListViewModel : BaseViewModel
+    {
+        ObservableCollection<TodoItemCellViewModel> contents = new ObservableCollection<TodoItemCellViewModel>();
 
-		public TodoListViewModel ()
-		{
-			// HACK: don't need these any more, I packaged a pre-populated SQLite database file
-//			App.Database.SaveItem (new TodoItem{ Name = "Buy apples", Notes = "Macintosh" });
-//			App.Database.SaveItem (new TodoItem{ Name = "Buy pears", Notes = "" });
-//			App.Database.SaveItem (new TodoItem{ Name = "Buy milk", Notes = "Soy" });
-//			App.Database.SaveItem (new TodoItem{ Name = "Buy bananas", Notes = "" });
-//			App.Database.SaveItem (new TodoItem{ Name = "Buy kiwi", Notes = "" });
-//			App.Database.SaveItem (new TodoItem{ Name = "Buy oranges", Notes = "" });
+        public ObservableCollection<TodoItemCellViewModel> Contents
+        {
+            get { return contents; }
+            set
+            {
+                if (contents == value)
+                    return;
+                contents = value;
+                OnPropertyChanged();
+            }
+        }
 
-			var all = App.Database.GetItems ().ToList();
+        public TodoListViewModel()
+        {
+            var all = App.Database.GetItems().ToList();
 
-			foreach (var t in all) {
-				contents.Add (new TodoItemCellViewModel (t));
-			}
+            foreach (var t in all)
+            {
+                contents.Add(new TodoItemCellViewModel(t));
+            }
 
-			MessagingCenter.Subscribe<TodoItemViewModel, TodoItem> (this, "TodoSaved", (sender, model) => {
-				App.Database.SaveItem(model);
-				Reload();
-			});
+            MessagingCenter.Subscribe<TodoItemViewModel, TodoItem>(this, "TodoSaved", (sender, model) =>
+            {
+                App.Database.SaveItem(model);
+                Reload();
+            });
 
-			MessagingCenter.Subscribe<TodoItemViewModel, TodoItem> (this, "TodoDeleted", (sender, model) => {
-				App.Database.DeleteItem(model.ID);
-				Reload();
-			});
-				
+            MessagingCenter.Subscribe<TodoItemViewModel, TodoItem>(this, "TodoDeleted", (sender, model) =>
+            {
+                App.Database.DeleteItem(model.ID);
+                Reload();
+            });
 
-			MessagingCenter.Subscribe<TodoListPage, TodoItem> (this, "TodoAdd", (sender, viewModel) => {
-				var todo = new TodoItem();
-				var todovm = new TodoItemViewModel(todo);
-				Navigation.Push (ViewFactory.CreatePage (todovm));
-			});
+            MessagingCenter.Subscribe<TodoListPage, TodoItem>(this, "TodoAdd", (sender, viewModel) =>
+            {
+                var todo = new TodoItem();
+                var todovm = new TodoItemViewModel(todo);
+                Navigation.Push(ViewFactory.CreatePage(todovm));
+            });
+        }
 
-			MessagingCenter.Subscribe<TodoListPage> (this, "TodoListSpeak", (sender) => {
-				var todos = App.Database.GetItemsNotDone();
-				var tospeak = "";
-				foreach (var t in todos)
-					tospeak += t.Name + " ";
-				if (tospeak == "") tospeak = "there are no tasks to do";
+        void Reload()
+        {
+            var all = App.Database.GetItems().ToList();
 
-			});
-		}
+            // HACK: this kinda breaks iOS "NSInternalInconsistencyException". Works fine in Android.
+            //			Contents.Clear ();
+            //			foreach (var t in all) {
+            //				Contents.Add (new TodoItemCellViewModel (t));
+            //			}
 
-		void Reload() 
-		{
-			var all = App.Database.GetItems ().ToList();
+            // HACK: this works in iOS.
+            var x = new ObservableCollection<TodoItemCellViewModel>();
+            foreach (var t in all)
+            {
+                x.Add(new TodoItemCellViewModel(t));
+            }
+            Contents = x;
+        }
 
-			// HACK: this kinda breaks iOS "NSInternalInconsistencyException". Works fine in Android.
-//			Contents.Clear ();
-//			foreach (var t in all) {
-//				Contents.Add (new TodoItemCellViewModel (t));
-//			}
+        object selectedItem;
+        public object SelectedItem
+        {
+            get { return selectedItem; }
+            set
+            {
+                if (selectedItem == value)
+                    return;
+                // something was selected
+                selectedItem = value;
 
-			// HACK: this works in iOS.
-			var x = new ObservableCollection<TodoItemCellViewModel> ();
-			foreach (var t in all) {
-				x.Add (new TodoItemCellViewModel (t));
-			}
-			Contents = x;
-		}
+                OnPropertyChanged();
 
-		object selectedItem;
-		public object SelectedItem
-		{
-			get { return selectedItem; }
-			set
-			{
-				if (selectedItem == value)
-					return;
-				// something was selected
-				selectedItem = value;
+                if (selectedItem != null)
+                {
 
-				OnPropertyChanged ();
+                    var todovm = new TodoItemViewModel(((TodoItemCellViewModel)selectedItem).Item);
 
-				if (selectedItem != null) {
+                    Navigation.Push(ViewFactory.CreatePage(todovm));
 
-					var todovm = new TodoItemViewModel (((TodoItemCellViewModel)selectedItem).Item);
-
-					Navigation.Push (ViewFactory.CreatePage (todovm));
-
-					selectedItem = null;
-				}
-			}
-		}
-	}
+                    selectedItem = null;
+                }
+            }
+        }
+    }
 }
 
