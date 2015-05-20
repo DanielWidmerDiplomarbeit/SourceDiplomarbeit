@@ -9,7 +9,7 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>MinimumOSVersion</key>
-	<string>8.0</string>
+	<string></string>
 	<key>UIDeviceFamily</key>
 	<array>
 		<integer>2</integer>
@@ -23,10 +23,7 @@
 		<string>UIInterfaceOrientationPortrait</string>
 	</array>
 	<key>CFBundleIconFiles</key>
-	<array>
-		<string>Icon-60@2x</string>
-		<string>Icon@2x</string>
-	</array>
+	<array/>
 	<key>CFBundleDisplayName</key>
 	<string>ZEUSMobile</string>
 	<key>CFBundleIdentifier</key>
