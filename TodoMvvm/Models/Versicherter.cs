@@ -8,19 +8,16 @@ namespace ZeusMobile.Models
     public class Versicherter
     {
         [MaxLength(20)]
-        [ForeignKey(typeof(Subject))]
+        [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
 
-        [OneToOne(CascadeOperations = CascadeOperation.All)]
-        public Subject Subject { get; set; }
-
-
-
+        [ForeignKey(typeof(Subject))]
+        public int SubjektId { get; set; }
+        
+        [OneToMany(CascadeOperations = CascadeOperation.All)]
+        public List<Police> Policen { get; set; }
+        
         [MaxLength(20)]
         public int VersichertenNr { get; set; }
-
-        [OneToMany]
-        public List<Police> Polices { get; set; }
-
     }
 }

@@ -28,13 +28,13 @@ namespace ZeusMobile
 		}
 
 		static SQLite.Net.SQLiteConnection _conn;
-		static TodoItemDatabase _database;
+		static DataBase _database;
 		public static void SetDatabaseConnection (SQLite.Net.SQLiteConnection connection)
 		{
 			_conn = connection;
-			_database = new TodoItemDatabase (_conn);
+			_database = new DataBase (_conn);
 		}
-		public static TodoItemDatabase Database {
+		public static DataBase Database {
 			get { return _database; }
 		}
 
