@@ -10,18 +10,18 @@ namespace ZeusMobile
 	{
 		static void RegisterTypes ()
 		{
-			ViewFactory.Register<TodoListPage, TodoListViewModel> ();
-			ViewFactory.Register<TodoItemPage, TodoItemViewModel> ();
+			ViewFactory.Register<SchadenListPage, SchadenListeViewModel> ();
+			ViewFactory.Register<SchadenItemPage, SchadenItemViewModel> ();
 		}
 
 		public static Page GetMainPage ()
 		{
 			RegisterTypes ();
-			var mainNav = new NavigationPage (ViewFactory.CreatePage<TodoListViewModel> ());
+			var mainNav = new NavigationPage (ViewFactory.CreatePage<SchadenListeViewModel> ());
 
-			MessagingCenter.Subscribe<TodoListViewModel, TodoItem> (mainNav, "TodoItemSelected", (sender, viewModel) => {
-				var todovm = new TodoItemViewModel (viewModel);
-				mainNav.Navigation.PushAsync (ViewFactory.CreatePage (todovm));
+			MessagingCenter.Subscribe<SchadenListeViewModel, Schaden> (mainNav, "TodoItemSelected", (sender, viewModel) => {
+				var schadenvm = new SchadenItemViewModel (viewModel);
+				mainNav.Navigation.PushAsync (ViewFactory.CreatePage (schadenvm));
 			});
 
 			return mainNav;
