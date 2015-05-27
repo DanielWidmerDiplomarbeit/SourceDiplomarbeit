@@ -6,38 +6,46 @@ using ZeusMobile.Views;
 
 namespace ZeusMobile
 {
-	public static class App
-	{
-		static void RegisterTypes ()
-		{
-			ViewFactory.Register<SchadenListPage, SchadenListeViewModel> ();
-			ViewFactory.Register<SchadenItemPage, SchadenItemViewModel> ();
-		}
+    public static class App
+    {
+        private static void RegisterTypes()
+        {
+            ViewFactory.Register<SchadenNavigationView, SchadenNavigationViewModel>();
+            ViewFactory.Register<SchadenListeView, SchadenListeViewModel>();
+            ViewFactory.Register<VersicherteView, VersicherteViewModel>();
+            ViewFactory.Register<PolicenView, PolicenViewModel>();
+            ViewFactory.Register<ObjekteView, ObjekteViewModel>();
+            ViewFactory.Register<SchadenView, SchadenViewModel>();
+            ViewFactory.Register<ProtokollView, ProtokollViewModel>();
+        }
 
-		public static Page GetMainPage ()
-		{
-			RegisterTypes ();
-			var mainNav = new NavigationPage (ViewFactory.CreatePage<SchadenListeViewModel> ());
 
-			MessagingCenter.Subscribe<SchadenListeViewModel, Schaden> (mainNav, "TodoItemSelected", (sender, viewModel) => {
-				var schadenvm = new SchadenItemViewModel (viewModel);
-				mainNav.Navigation.PushAsync (ViewFactory.CreatePage (schadenvm));
-			});
+        public static Page GetMainPage()
+        {
+            RegisterTypes();
+            var mainNav = new NavigationPage(ViewFactory.CreatePage<SchadenListeViewModel>());
 
-			return mainNav;
-		}
+            MessagingCenter.Subscribe<SchadenNavigationViewModel, Schaden>(mainNav, "TodoItemSelected", (sender, viewModel) =>
+            {
+                var schadenvm = new SchadenNavigationViewModel(viewModel);
+                mainNav.Navigation.PushAsync(ViewFactory.CreatePage(schadenvm));
+            });
 
-		static SQLite.Net.SQLiteConnection _conn;
-		static DataBase _database;
-		public static void SetDatabaseConnection (SQLite.Net.SQLiteConnection connection)
-		{
-			_conn = connection;
-			_database = new DataBase (_conn);
-		}
-		public static DataBase Database {
-			get { return _database; }
-		}
+            return mainNav;
+        }
 
-	}
+        static SQLite.Net.SQLiteConnection _conn;
+        static DataBase _database;
+        public static void SetDatabaseConnection(SQLite.Net.SQLiteConnection connection)
+        {
+            _conn = connection;
+            _database = new DataBase(_conn);
+        }
+        public static DataBase Database
+        {
+            get { return _database; }
+        }
+
+    }
 }
 

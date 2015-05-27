@@ -170,9 +170,9 @@ namespace ZeusMobile.Data
         {
             var Schaeden = new List<Schaden> {
 
-            new Schaden { GebaeudeNummer = 1711, Gemeinde = "Netstal", Strasse = "Obergasse", Hausnr = 1, HausnrZusatz = "A", Parzelle = 576, Land = "CH", PLZ = "8754", Ort = "Netstal"},
-            new Schaden { GebaeudeNummer = 1718, Gemeinde = "Netstal", Strasse = "Obergasse", Hausnr = 1, HausnrZusatz = "A", Parzelle = 416, Land = "CH", PLZ = "8754", Ort = "Netstal"},
-            new Schaden { GebaeudeNummer = 1719, Gemeinde = "Netstal", Strasse = "Am Bergli", Hausnr = 323, HausnrZusatz = null, Parzelle = 256, Land = "CH", PLZ = "8754", Ort = "Netstal"}
+				new Schaden { GebaeudeNummer = 1711, Eintrittsdatum = DateTime.Parse("01.07.2015"), Meldedatum = DateTime.Parse("02.07.2015"), Gemeinde = "Netstal", Strasse = "Obergasse", Hausnr = 1, HausNrZusatz = "A", Parzelle = 576, Land = "CH", PLZ = "8754", Ort = "Netstal"},
+				new Schaden { GebaeudeNummer = 1718, Eintrittsdatum = DateTime.Parse("01.08.2015"), Meldedatum = DateTime.Parse("02.08.2015"), Gemeinde = "Netstal", Strasse = "Obergasse", Hausnr = 1, HausNrZusatz = "A", Parzelle = 416, Land = "CH", PLZ = "8754", Ort = "Netstal"},
+				new Schaden { GebaeudeNummer = 1719, Eintrittsdatum = DateTime.Parse("01.08.2015"), Meldedatum = DateTime.Parse("02.08.2015"), Gemeinde = "Netstal", Strasse = "Am Bergli", Hausnr = 323, HausNrZusatz = null, Parzelle = 256, Land = "CH", PLZ = "8754", Ort = "Netstal"}
          };
             return Schaeden;
         }
@@ -180,8 +180,8 @@ namespace ZeusMobile.Data
         private List<SchadenProtokoll> DemoSchadenProtokoll()
         {
             var schadenProtokollList = new List<SchadenProtokoll> {
-            new SchadenProtokoll { ProtokollNr = 1, Eintrittsdatum = DateTime.Parse("01.07.2015"), Meldedatum = DateTime.Parse("02.07.2015"), Beschreibung = "Lawine",Approxsumme = 1200000, Selbstbehalt = 500},
-            new SchadenProtokoll { ProtokollNr = 2, Eintrittsdatum = DateTime.Parse("01.08.2015"), Meldedatum = DateTime.Parse("02.08.2015"), Beschreibung = "Gleiche Lawine", Approxsumme = 500000, Selbstbehalt = 600},
+            new SchadenProtokoll { ProtokollNr = 1,  Beschreibung = "Lawine",Approxsumme = 1200000, Selbstbehalt = 500},
+            new SchadenProtokoll { ProtokollNr = 2, Beschreibung = "Gleiche Lawine", Approxsumme = 500000, Selbstbehalt = 600},
          };
             return schadenProtokollList;
         }
