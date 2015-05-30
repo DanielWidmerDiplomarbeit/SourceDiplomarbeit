@@ -16,7 +16,7 @@ namespace ZeusMobile.Data
         public DataBase(SQLiteConnection conn)
         {
             database = conn;
-             
+
             database.CreateTable<Subject>();
             database.CreateTable<Versicherter>();
             database.CreateTable<SchadensExperte>();
@@ -26,11 +26,19 @@ namespace ZeusMobile.Data
             database.CreateTable<Versicherungsobjekt>();
         }
 
-        public List<Subject> GetSubjects()
+        public List<Subject> GetSubjekte()
         {
             lock (locker)
             {
                 return (from i in database.Table<Subject>() select i).ToList();
+            }
+        }
+
+        public Subject GetSubject(int subjectId)
+        {
+            lock (locker)
+            {
+                return database.Find<Subject>(x => x.Id == subjectId);
             }
         }
 
@@ -42,19 +50,35 @@ namespace ZeusMobile.Data
             }
         }
 
-        public IEnumerable<SchadensExperte> GetSchadensExperten()
+        public Versicherter GetVersicherter(int versicherterId)
+        {
+            lock (locker)
+            {
+                return database.Find<Versicherter>(x => x.Id == versicherterId);
+            }
+        }
+
+        public List<SchadensExperte> GetSchadensExperten()
         {
             lock (locker)
             {
                 return (from i in database.Table<SchadensExperte>() select i).ToList();
             }
         }
-        
-        public IEnumerable<SchadenProtokoll> GetSchadenProtokolle()
+
+        public List<SchadenProtokoll> GetSchadenProtokolle()
         {
             lock (locker)
             {
                 return (from i in database.Table<SchadenProtokoll>() select i).ToList();
+            }
+        }
+
+        public SchadenProtokoll GetSchadenProtokoll(int schadenId)
+        {
+            lock (locker)
+            {
+                return database.Find<SchadenProtokoll>(x => x.Id == schadenId);
             }
         }
 
@@ -67,6 +91,13 @@ namespace ZeusMobile.Data
             }
         }
 
+        public Police getPolice(int schadenId)
+        {
+            lock (locker)
+            {
+                return database.Find<Police>(x => x.Id == schadenId);
+            }
+        }
 
 
         public List<Schaden> GetSchaeden()
@@ -77,8 +108,6 @@ namespace ZeusMobile.Data
             }
         }
 
-
-
         public List<Versicherungsobjekt> getVersicherungsobjekte()
         {
             lock (locker)
@@ -86,36 +115,10 @@ namespace ZeusMobile.Data
                 return (from i in database.Table<Versicherungsobjekt>() select i).ToList();
             }
         }
-        
-
-
-        public IEnumerable<Schaden> GetItems()
-        {
-            lock (locker)
-            {
-                return (from i in database.Table<Schaden>() select i).ToList();
-            }
-        }
-
-        public IEnumerable<Schaden> GetItemsNotDone()
-        {
-            lock (locker)
-            {
-                return database.Query<Schaden>("SELECT * FROM [TodoItem] WHERE [Done] = 0");
-            }
-        }
-
-        public Schaden GetItem(int id)
-        {
-            lock (locker)
-            {
-                return database.Table<Schaden>().FirstOrDefault(x => x.Id == id);
-            }
-        }
 
         public void InsertOrReplaceAllSubjectsWithChildren(List<Subject> items)
         {
-             database.InsertOrReplaceAllWithChildren(items);
+            database.InsertOrReplaceAllWithChildren(items);
         }
 
         public void InsertOrReplaceAllVersicherteWithChildren(List<Versicherter> items)
@@ -133,48 +136,8 @@ namespace ZeusMobile.Data
             database.InsertOrReplaceAllWithChildren(items);
         }
 
-        public int InsertSubjects(List<Subject> items)
-        {
-            return database.InsertAll(items, typeof(Subject));
-        }
 
-        public int SaveVersicherte(List<Versicherter> items)
-        {
-            return database.InsertAll(items, typeof(Versicherter));
-        }
-
-        public int SaveSchadensExperten(List<SchadensExperte> items)
-        {
-            return database.InsertAll(items, typeof(SchadensExperte));
-        }
-
-        public int SavePolicen(List<Police> polices)
-        {
-            return database.InsertAll(polices, typeof(Police));
-        }
-
-        public int SaveVersicherungsObjekte(List<Versicherungsobjekt> Versicherungsobjekte)
-        {
-            return database.InsertAll(Versicherungsobjekte, typeof(Versicherungsobjekt));
-        }
-
-        public int SaveSchaeden(List<Schaden> schaedenList)
-        {
-            return database.InsertAll(schaedenList, typeof(Schaden));
-        }
-
-        public int SaveProtokolle(List<SchadenProtokoll> schaedenList)
-        {
-            return database.InsertAll(schaedenList, typeof(SchadenProtokoll));
-        }
-
-        public int Save(List<Object> dataList, Type modelType)
-        {
-            return database.InsertAll(dataList, modelType);
-        }
-
-
-        public int SaveItem(Schaden item)
+        public int SaveSchaden(Schaden item)
         {
             lock (locker)
             {
@@ -186,15 +149,6 @@ namespace ZeusMobile.Data
                 return database.Insert(item);
             }
         }
-
-        public int DeleteItem(int id)
-        {
-            lock (locker)
-            {
-                return database.Delete<Schaden>(id);
-            }
-        }
-
 
     }
 }

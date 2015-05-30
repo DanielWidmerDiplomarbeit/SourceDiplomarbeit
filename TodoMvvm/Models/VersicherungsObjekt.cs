@@ -35,5 +35,19 @@ namespace ZeusMobile.Models
         public string Hydrant { get; set; }
         
         public enumBauart Bauart { get; set; }
+
+        [Ignore]
+        public string ObjektListeText
+        {
+            get
+            {
+                var listenText = Bezeichnung;
+                if (!string.IsNullOrEmpty(ObjektId))
+                {
+                    listenText += ", " + ObjektId;
+                }
+                return listenText;
+            }
+        }
     }
 }

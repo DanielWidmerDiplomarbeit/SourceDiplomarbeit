@@ -20,6 +20,23 @@ namespace ZeusMobile.Models
         public string Rolle { get; set; }
         
         [MaxLength(20)]
-        public string Name { get; set; }
+        public string Name { get; set; }        
+
+        [MaxLength(20)]
+        public string Vorname { get; set; }
+
+        [Ignore]
+        public string SubjectListeText
+        {
+            get
+            {
+                var listenText = Name;
+                if (!string.IsNullOrEmpty(Vorname))
+                {
+                    listenText += ", " + Vorname;
+                }
+                return listenText;
+            }
+        }
     }
 }

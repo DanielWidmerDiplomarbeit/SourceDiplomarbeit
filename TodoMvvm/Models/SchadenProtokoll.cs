@@ -32,5 +32,23 @@ namespace ZeusMobile.Models
         public decimal Minimum { get; set; }
         public decimal Maximum { get; set; }
         public DateTime LetzteBearbeitung { get; set; }
+
+        [Ignore]
+        public String ProtokollListeText
+        {
+            get
+            {
+                var listenText = Beschreibung;
+                if (!string.IsNullOrEmpty(ProtokollNr.ToString()))
+                {
+                    listenText += ", " + ProtokollNr;
+                }
+                if (!string.IsNullOrEmpty(Beschreibung))
+                {
+                    listenText += " " + Beschreibung.PadLeft(50);
+                }
+                return listenText;
+            }
+        }
     }
 }

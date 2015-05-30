@@ -19,5 +19,6 @@ namespace ZeusMobile.Models
         
         [MaxLength(20)]
         public int VersichertenNr { get; set; }
+
     }
 }

@@ -51,7 +51,7 @@ namespace ZeusMobileTest
             var demoData = new DemoData();
             demoData.BuildDemoData(database);
 
-            Assert.AreEqual(4, database.GetSubjects().ToList().Count());
+            Assert.AreEqual(4, database.GetSubjekte().ToList().Count());
             Assert.AreEqual(2, database.GetVersicherte().ToList().Count());
             Assert.AreEqual(2, database.GetSchadensExperten().ToList().Count());
             Assert.AreEqual(3, database.GetSchaeden().ToList().Count());

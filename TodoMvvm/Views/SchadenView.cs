@@ -20,9 +20,6 @@ namespace ZeusMobile.Views
             var statusEntry = new Entry { };
             statusEntry.SetBinding(Entry.TextProperty, "Status");
 
-            //var strasseLabel = new Label { Text = "Strasse" };
-            //var strasseEntry = new Entry { };
-            //strasseEntry.SetBinding(Entry.TextProperty, "Strasse");
 
             var hausNrLabel = new Label { Text = "HausNr" };
             var hausNrEntry = new Entry { };

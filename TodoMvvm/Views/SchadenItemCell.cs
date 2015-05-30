@@ -9,7 +9,7 @@ namespace ZeusMobile
 			var label = new Label {
 				YAlign = TextAlignment.Center
 			};
-			label.SetBinding (Label.TextProperty, "Strasse");
+			label.SetBinding (Label.TextProperty, "SchadenListeText");
 
 			var layout = new StackLayout {
 				Padding = new Thickness(20, 0, 0, 0),

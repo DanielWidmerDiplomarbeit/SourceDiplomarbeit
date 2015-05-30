@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using SQLite.Net.Attributes;
 using SQLiteNetExtensions.Attributes;
 
@@ -44,16 +45,29 @@ namespace ZeusMobile.Models
         [ForeignKey(typeof(Versicherter))]
         public int VersicherterId { get; set; }
         
-        [MaxLength(15)]
+        [MaxLength(15), NotNull]
         public string PolicenNr { get; set; }
 
-        [MaxLength(20)]
+        [MaxLength(20), NotNull]
         public string Bezeichnung { get; set; }
 
         public EnumAbteilung Abteilung { get; set; }
         
         public EnumKategorie Kategorie { get; set; }
 
+        [Ignore]
+        public string PoliceListeText
+        {
+            get
+            {
+                var listenText = Bezeichnung;
+                if (!string.IsNullOrEmpty(PolicenNr))
+                {
+                    listenText += ", " + PolicenNr;
+                }
+               return listenText;
+            }
+        }
 
     }
 }

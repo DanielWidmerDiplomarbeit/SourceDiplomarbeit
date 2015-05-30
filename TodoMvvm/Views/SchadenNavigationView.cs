@@ -21,26 +21,26 @@ namespace ZeusMobile.Views
           };
 
             var versicherteNaviCell = new TextCell();
-            versicherteNaviCell.SetBinding(TextCell.TextProperty, "Name");
+            versicherteNaviCell.SetBinding(TextCell.TextProperty, "Subject.SubjectListeText");
             versicherteNaviCell.Tapped += versicherteNaviCelll_Tapped;
 
             var policeNaviCell = new TextCell();
-            policeNaviCell.SetBinding(TextCell.TextProperty, "PoliceNr");
+            policeNaviCell.SetBinding(TextCell.TextProperty, "Police.PoliceListeText");
             policeNaviCell.Tapped += policeNaviCell_Tapped;
 
             var objektNaviCell = new TextCell();
-            objektNaviCell.SetBinding(TextCell.TextProperty, "ObjektNr");
+            objektNaviCell.SetBinding(TextCell.TextProperty, "Versicherungsobjekt.ObjektListeText");
             objektNaviCell.Tapped += objektNaviCell_Tapped;
 
             var schadenNaviCell = new TextCell();
-            schadenNaviCell.SetBinding(TextCell.TextProperty, "Strasse");
+            schadenNaviCell.SetBinding(TextCell.TextProperty, "Schaden.SchadenListeText");
             schadenNaviCell.Tapped += schadenNaviCell_Tapped;
 
             var protokollNaviCell = new TextCell();
-            protokollNaviCell.SetBinding(TextCell.TextProperty, "ProtokollId");
+            protokollNaviCell.SetBinding(TextCell.TextProperty, "Protokoll.ProtokollListeText");
             protokollNaviCell.Tapped += protokollNaviCell_Tapped;
 
-            TableView tableView = new TableView
+            var tableView = new TableView
             {
                 Intent = TableIntent.Form,
                 Root = new TableRoot("TableView Title")

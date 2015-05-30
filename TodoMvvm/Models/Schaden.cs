@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using SQLite.Net.Attributes;
 using SQLiteNetExtensions.Attributes;
 
@@ -17,12 +16,12 @@ namespace ZeusMobile.Models
             Abgeschlossen = 9
         }
 
-		public enum EnumPrioritaet
-		{
-			Sofort = 1,
-			Dringend = 2,
-			Normal = 3
-		}
+        public enum EnumPrioritaet
+        {
+            Sofort = 1,
+            Dringend = 2,
+            Normal = 3
+        }
 
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
@@ -32,7 +31,10 @@ namespace ZeusMobile.Models
 
         [ForeignKey(typeof(Police))]
         public int PoliceId { get; set; }
-        
+
+        [MaxLength(100)]
+        public string Beschreibung { get; set; }
+
         [MaxLength(50)]
         public string Strasse { get; set; }
 
@@ -46,7 +48,7 @@ namespace ZeusMobile.Models
         public string Land { get; set; }
 
         [MaxLength(6)]
-        public string PLZ { get; set; }
+        public string Plz { get; set; }
 
         [MaxLength(50)]
         public string Ort { get; set; }
@@ -60,12 +62,34 @@ namespace ZeusMobile.Models
         [MaxLength(10)]
         public int GebaeudeNummer { get; set; }
 
-		public EnumPrioritaet Prioritaet { get; set; }
+        public EnumPrioritaet Prioritaet { get; set; }
 
-		public DateTime Eintrittsdatum { get; set; }
+        public DateTime Eintrittsdatum { get; set; }
 
-		public DateTime Meldedatum { get; set; }
+        public DateTime Meldedatum { get; set; }
 
         public EnumStatus Status { get; set; }
+
+        [Ignore]
+        public String SchadenListeText
+        {
+            get
+            {
+                var listenText = Beschreibung;
+                if (!string.IsNullOrEmpty(Strasse))
+                {
+                    listenText += ", " + Strasse;
+                }
+                if (!string.IsNullOrEmpty(Hausnr.ToString()))
+                {
+                    listenText += " " + Hausnr;
+                }
+                if (!string.IsNullOrEmpty(HausNrZusatz))
+                {
+                    listenText += " " + HausNrZusatz;
+                }
+                return listenText;
+            }
+        }
     }
 }

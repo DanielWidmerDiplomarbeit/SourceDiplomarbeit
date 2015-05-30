@@ -30,45 +30,16 @@ namespace ZeusMobile.ViewModels
             {
                 _schadensAuswahlListe.Add(new SchadenCellViewModel(t));
             }
-
-
-            MessagingCenter.Subscribe<SchadenViewModel, Schaden>(this, "SchadenSave", (sender, model) =>
-            {
-                App.Database.SaveItem(model);
-                Reload();
-            });
-
-
-
-
-            //MessagingCenter.Subscribe<SchadenViewModel, Schaden>(this, "SchadenDelete", (sender, model) =>
-            //{
-            //    App.Database.DeleteItem(model.Id);
-            //    Reload();
-            //});
-
-            //MessagingCenter.Subscribe<SchadenListeView, Schaden>(this, "SchadenAdd", (sender, viewModel) =>
-            //{
-            //    var Schaden = new Schaden();
-            //    var Schadenvm = new SchadenNavigationViewModel(Schaden);
-            //    Navigation.Push(ViewFactory.CreatePage(Schadenvm));
-            //});
-
-
-
-
-            MessagingCenter.Subscribe<SchadenNavigationViewModel, Schaden>(this, "SchadenListeReload", (sender, viewModel) =>
-                {
-                    Reload();
-                });
+            
+            MessagingCenter.Subscribe<SchadenNavigationViewModel, Schaden>(this, "SchadenListeReload", (sender, viewModel) => Reload());
         }
 
         void Reload()
         {
-            var all = App.Database.GetItems().ToList();
+            var alleSchaeden = App.Database.GetSchaeden().ToList();
 
             var x = new ObservableCollection<SchadenCellViewModel>();
-            foreach (var t in all)
+            foreach (var t in alleSchaeden)
             {
                 x.Add(new SchadenCellViewModel(t));
             }
@@ -105,9 +76,9 @@ namespace ZeusMobile.ViewModels
                 if (_selectedItem != null)
                 {
 
-                    var Schadenvm = new SchadenNavigationViewModel(((SchadenCellViewModel)_selectedItem).Item);
+                    var schadenvm = new SchadenNavigationViewModel(((SchadenCellViewModel)_selectedItem).Schaden);
 
-                    Navigation.Push(ViewFactory.CreatePage(Schadenvm));
+                    Navigation.Push(ViewFactory.CreatePage(schadenvm));
 
                     _selectedItem = null;
                 }
