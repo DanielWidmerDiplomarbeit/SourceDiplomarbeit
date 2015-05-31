@@ -7,12 +7,12 @@ namespace ZeusMobile.Views
 {
     public class SchadenNavigationView : ContentPage
     {
-
+		private bool first = true;
+		
         public SchadenNavigationView()
         {
 
-
-            Label header = new Label
+            var header = new Label
           {
               Text = "Schaden bearbeiten",
               FontSize = 30,
@@ -65,7 +65,7 @@ namespace ZeusMobile.Views
                 }
             };
 
-            this.Content = new StackLayout
+            Content = new StackLayout
             {
                 Children = 
                 {
@@ -100,7 +100,15 @@ namespace ZeusMobile.Views
             MessagingCenter.Send(this, "ProtokollBearbeiten");
         }
 
+		protected override void OnAppearing()
+		{
+			base.OnAppearing();
 
-
+			if (!first)
+			{
+				MessagingCenter.Send(this, "InitNavigationView");
+			};
+			first = false;
+		}
     }
 }

@@ -7,13 +7,15 @@ namespace ZeusMobile.ViewModels
 {
     class SchadenNavigationViewModel : BaseViewModel
     {
-        readonly Schaden _schaden;
+        Schaden _schaden;
 
         public SchadenNavigationViewModel(Schaden schaden)
         {
             _schaden = schaden;
 
             InitNavigationView();
+
+            MessagingCenter.Subscribe<SchadenNavigationView>(this, "InitNavigationView", sender => InitNavigationView());
 
             MessagingCenter.Subscribe<SchadenNavigationView>(this, "VersicherteAnzeigen", sender => Navigation.Push(ViewFactory.CreatePage(new VersicherteViewModel(_schaden))));
 
@@ -26,19 +28,51 @@ namespace ZeusMobile.ViewModels
             MessagingCenter.Subscribe<SchadenNavigationView>(this, "ProtokollBearbeiten", sender => Navigation.Push(ViewFactory.CreatePage(new ProtokollViewModel(SchadenProtokoll))));
         }
 
-        public Schaden Schaden { get; set; }
-        public SchadenProtokoll SchadenProtokoll { get; set; }
+
         public Subject Subject { get; set; }
         public Versicherter Versicherter { get; set; }
         public Police Police { get; set; }
         public Versicherungsobjekt Versicherungsobjekt { get; set; }
 
+        public Schaden Schaden
+        {
+
+            get { return _schaden; }
+            set
+            {
+                if (_schaden == value)
+                    return;
+                _schaden = value;
+                OnPropertyChanged();
+            }
+        }
+
+
+        private SchadenProtokoll _schadenProtokoll;
+        public SchadenProtokoll SchadenProtokoll
+        {
+            get { return _schadenProtokoll; }
+            set
+            {
+                if (_schadenProtokoll == value)
+                    return;
+                _schadenProtokoll = value;
+                OnPropertyChanged();
+            }
+        }
+
         private void InitNavigationView()
         {
-            Schaden = _schaden;
+            SchadenNachlesen();
             ProtokollVomSchadenLesen();
             PoliceVomSchadenLesen();
             ObjektVomSchadenLesen();
+
+        }
+
+        private void SchadenNachlesen()
+        {
+            Schaden = App.Database.GetSchaden(_schaden.Id);
         }
 
         private void ProtokollVomSchadenLesen()
@@ -64,11 +98,7 @@ namespace ZeusMobile.ViewModels
             var versicherter = App.Database.GetVersicherter(versicherterId);
             if (versicherter != null)
             {
-				Subject = App.Database.GetSubject(versicherter.SubjektId);
-            }
-            else
-            {
-                Subject = new Subject { Name = "Unbekannt" };
+                Subject = App.Database.GetSubject(versicherter.SubjektId);
             }
 
         }

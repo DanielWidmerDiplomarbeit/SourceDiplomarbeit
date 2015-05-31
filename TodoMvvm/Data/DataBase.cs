@@ -108,6 +108,15 @@ namespace ZeusMobile.Data
             }
         }
 
+        public Schaden GetSchaden(int schadenId)
+        {
+            lock (locker)
+            {
+                return database.Find<Schaden>(x => x.Id == schadenId);
+            }
+        }
+
+
         public List<Versicherungsobjekt> getVersicherungsobjekte()
         {
             lock (locker)
@@ -136,20 +145,29 @@ namespace ZeusMobile.Data
             database.InsertOrReplaceAllWithChildren(items);
         }
 
-
-        public int SaveSchaden(Schaden item)
+        public void SaveSchaden(Schaden schaden)
         {
             lock (locker)
             {
-                if (item.Id != 0)
-                {
-                    database.Update(item);
-                    return item.Id;
-                }
-                return database.Insert(item);
+                database.InsertOrReplace(schaden);
             }
         }
 
+        public void SaveProtokoll(SchadenProtokoll protokoll)
+        {
+            lock (locker)
+            {
+                database.InsertOrReplace(protokoll);
+            }
+        }
+
+        public SchadenProtokoll GetProtokollByProtokollNr(int protokollnr)
+        {
+            lock (locker)
+            {
+                return database.Find<SchadenProtokoll>(x => x.ProtokollNr == protokollnr);
+            }
+        }
     }
 }
 

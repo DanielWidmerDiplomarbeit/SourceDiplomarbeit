@@ -2,6 +2,7 @@
 using System.Windows.Input;
 using Xamarin.Forms;
 using ZeusMobile.Models;
+using ZeusMobile.Views;
 
 namespace ZeusMobile.ViewModels
 {
@@ -9,30 +10,22 @@ namespace ZeusMobile.ViewModels
 	{
 		Schaden Schaden;
 
-		ICommand _saveCommand, _deleteCommand, _cancelCommand;
+		ICommand _saveCommand, _cancelCommand;
 
         public SchadenViewModel(Schaden schadenItem)
 		{
 			Schaden = schadenItem;
 			_saveCommand = new Command (Save);
-			_deleteCommand = new Command (Delete);
 			_cancelCommand = new Command (() => Navigation.Pop ());
 		}
 
 		public void Save ()
 		{
 			MessagingCenter.Send (this, "SchadenSaved", Schaden);
+			MessagingCenter.Send (this, "SchadenReload", Schaden);
 			Navigation.Pop ();
 		}
-
-		public void Delete ()
-		{
-			MessagingCenter.Send (this, "SchadenDeleted", Schaden);
-			Navigation.Pop ();
-		}
-
-	
-
+        
 		public int Id {
 			get { return Schaden.Id; }
 			set {
@@ -84,16 +77,10 @@ namespace ZeusMobile.ViewModels
                 OnPropertyChanged();
             }
         }
-        
 
-        public bool CanDelete {
+        public bool CanSave {
 			get { return Schaden.Id > 0; }
 		}
-
-		public bool CanCancel {
-			get { return !CanDelete; }
-		}
-			
 
 		public ICommand SaveCommand {
 			get { return _saveCommand; }
@@ -104,17 +91,7 @@ namespace ZeusMobile.ViewModels
 				OnPropertyChanged ();
 			}
 		}
-
-		public ICommand DeleteCommand {
-			get { return _deleteCommand; }
-			set {
-				if (_deleteCommand == value)
-					return;
-				_deleteCommand = value;
-				OnPropertyChanged ();
-			}
-		}
-
+	
 		public ICommand CancelCommand {
 			get { return _cancelCommand; }
 			set {

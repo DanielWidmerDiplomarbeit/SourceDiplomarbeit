@@ -15,7 +15,7 @@ namespace ZeusMobile
             ViewType = viewType;
         }
     }
-    // Can be replaced by all sorts of complexity and auto loading BS but this keeps it simple and loose
+
     static class ViewFactory
     {
         static Dictionary<Type, Type> typeDictionary = new Dictionary<Type, Type>();

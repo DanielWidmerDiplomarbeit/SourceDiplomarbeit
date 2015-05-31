@@ -1,4 +1,5 @@
 ﻿using System;
+using CoreFoundation;
 using NUnit.Framework;
 using System.IO;
 using SQLiteNetExtensions.Extensions;
@@ -13,8 +14,9 @@ namespace ZeusMobileTest
     [TestFixture]
     public class BasicTests
     {
+
         [Test]
-        public void Pass()
+        public void buildDemoDatabase()
         {
             const string sqliteFilename = "TestDbLite.db3";
             var documentsPath = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
@@ -59,6 +61,74 @@ namespace ZeusMobileTest
             Assert.AreEqual(2, database.GetSchadenProtokolle().ToList().Count());
         }
 
+        [Test]
+        public void Test_SaveSchaden()
+        {
+            var database = AppConn.TestDataBase;
+            var schaden = database.GetSchaden(1);
+            Assert.AreEqual("Wasserschaden Keller", schaden.Beschreibung);
+            schaden.Beschreibung = "Wasserschaden Estrich";
+            database.SaveSchaden(schaden);
+            schaden = database.GetSchaden(1);
+            Assert.AreEqual("Wasserschaden Estrich", schaden.Beschreibung);
+        }
+
+        [Test]
+        public void Test_InsertProtokoll()
+        {
+            var database = AppConn.TestDataBase;
+            var schaden = database.GetSchaden(1);
+
+            var protokoll = new SchadenProtokoll
+            {
+                Beschreibung = "Test Neues Schadenprotokoll",
+                SchadenId = schaden.Id,
+                Approxsumme = 500000,
+                Selbstbehalt = 5000,
+                Minimum = 400000,
+                Maximum = 60000,
+                InterneNotiz = "Ich bin eine interne Notiz ääää ööö üüü ÄÄÖÖÜÜ",
+                Ursache = "selber schuld",
+                UrsachenBeschreibung = "Er ist wirklich selber schuld",
+                ProtokollNr = 4711,
+                LetzteBearbeitung = DateTime.Now
+            };
+
+            database.SaveProtokoll(protokoll);
+            database.GetProtokollByProtokollNr(4711);
+            
+            Assert.AreEqual("Test Neues Schadenprotokoll", protokoll.Beschreibung);
+        }
+
+        public void Test_UpdateProtokoll()
+        {
+            var database = AppConn.TestDataBase;
+            var schaden = database.GetSchaden(1);
+
+            var protokoll = new SchadenProtokoll
+            {
+                Beschreibung = "Test Neues Schadenprotokoll",
+                SchadenId = schaden.Id,
+                Approxsumme = 500000,
+                Selbstbehalt = 5000,
+                Minimum = 400000,
+                Maximum = 60000,
+                InterneNotiz = "Ich bin eine interne Notiz ääää ööö üüü ÄÄÖÖÜÜ",
+                Ursache = "selber schuld",
+                UrsachenBeschreibung = "Er ist wirklich selber schuld",
+                ProtokollNr = 4712,
+                LetzteBearbeitung = DateTime.Now
+            };
+
+            database.SaveProtokoll(protokoll);
+            var neuesProtokoll = database.GetProtokollByProtokollNr(4712);
+            Assert.AreEqual(500000,neuesProtokoll.Approxsumme);
+            neuesProtokoll.Approxsumme = 555555;
+            database.SaveProtokoll(neuesProtokoll);
+            var mutiertesProtokoll = database.GetProtokollByProtokollNr(4712);
+
+            Assert.AreEqual(555555, mutiertesProtokoll.Approxsumme);
+        }
     }
 
     public static class AppConn
@@ -74,6 +144,5 @@ namespace ZeusMobileTest
         {
             get { return _database; }
         }
-
     }
 }

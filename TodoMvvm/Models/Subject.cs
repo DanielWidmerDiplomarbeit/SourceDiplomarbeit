@@ -9,7 +9,7 @@ namespace ZeusMobile.Models
         [MaxLength(20)]
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
-
+        
         [OneToOne(CascadeOperations = CascadeOperation.All)]
         public Versicherter Versicherte { get; set; }
 
