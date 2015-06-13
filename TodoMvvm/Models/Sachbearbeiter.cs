@@ -4,16 +4,16 @@ using SQLiteNetExtensions.Attributes;
 
 namespace ZeusMobile.Models
 {
-    public class SchadensExperte
+    public class Sachbearbeiter
     {
         [MaxLength(20)]
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
 
-        [ForeignKey(typeof(Subject))]
+        [ForeignKey(typeof(Person))]
         public int SubjektId { get; set; }
 
-        [ManyToMany(typeof(Subject))]
+        [ManyToMany(typeof(Person))]
         public List<Schaden> Schaeden { get; set; }
         
         [MaxLength(20)]

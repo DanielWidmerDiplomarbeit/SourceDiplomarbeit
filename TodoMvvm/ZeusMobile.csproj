@@ -57,9 +57,9 @@
     <Compile Include="Views\SchadenView.cs" />
     <Compile Include="Data\DataBase.cs" />
     <Compile Include="Views\SchadenItemCell.cs" />
-    <Compile Include="Models\Subject.cs" />
+    <Compile Include="Models\Person.cs" />
     <Compile Include="Models\Versicherter.cs" />
-    <Compile Include="Models\SchadensExperte.cs" />
+    <Compile Include="Models\Sachbearbeiter.cs" />
     <Compile Include="Data\DemoData.cs" />
     <Compile Include="Views\VersicherteView.cs" />
     <Compile Include="Views\ObjekteView.cs" />
@@ -96,8 +96,8 @@
     <None Include="Toolkit.Content\ApplicationBar.Select.png" />
     <Compile Include="Models\Police.cs" />
     <Compile Include="Models\Schaden.cs" />
-    <Compile Include="Models\SchadenProtokoll.cs" />
-    <Compile Include="Models\VersicherungsObjekt.cs" />
+    <Compile Include="Models\Protokoll.cs" />
+    <Compile Include="Models\Objekt.cs" />
   </ItemGroup>
   <ItemGroup />
 </Project>

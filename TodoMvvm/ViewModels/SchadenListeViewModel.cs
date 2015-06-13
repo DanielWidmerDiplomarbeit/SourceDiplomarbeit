@@ -32,9 +32,9 @@ namespace ZeusMobile.ViewModels
             }
             
 			MessagingCenter.Subscribe<SchadenListeViewModel, Schaden>(this, "SchadenListeReload", (sender, viewModel) => Reload());
-			MessagingCenter.Subscribe<SchadenViewModel, Schaden>(this, "SchadenSaved", (sender, model) =>
+			MessagingCenter.Subscribe<SchadenViewModel, Schaden>(this, "SchadenSaved", (sender, schaden) =>
             {
-                App.Database.SaveSchaden(model);
+                App.Database.SaveSchaden(schaden);
                 Reload();
             });
 

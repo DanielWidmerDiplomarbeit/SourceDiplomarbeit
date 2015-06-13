@@ -37,7 +37,7 @@ namespace ZeusMobile.Models
         public int Id { get; set; }
 
         [OneToMany(CascadeOperations = CascadeOperation.All)]
-        public List<Versicherungsobjekt> Versicherungsobjekte { get; set; }
+        public List<Objekt> Versicherungsobjekte { get; set; }
 
         [OneToMany(CascadeOperations = CascadeOperation.All)]
         public List<Schaden> Schaeden { get; set; }

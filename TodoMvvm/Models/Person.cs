@@ -4,7 +4,7 @@ using SQLiteNetExtensions.Attributes;
 
 namespace ZeusMobile.Models
 {
-    public class Subject
+    public class Person
     {
         [MaxLength(20)]
         [PrimaryKey, AutoIncrement]
@@ -14,7 +14,7 @@ namespace ZeusMobile.Models
         public Versicherter Versicherte { get; set; }
 
         [OneToOne(CascadeOperations = CascadeOperation.All)]
-        public SchadensExperte SchadensExperten { get; set; }
+        public Sachbearbeiter SchadensExperten { get; set; }
 
         [MaxLength(20)]
         public string Rolle { get; set; }
@@ -26,7 +26,7 @@ namespace ZeusMobile.Models
         public string Vorname { get; set; }
 
         [Ignore]
-        public string SubjectListeText
+        public string PersonListeText
         {
             get
             {

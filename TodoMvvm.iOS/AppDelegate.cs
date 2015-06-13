@@ -23,14 +23,14 @@ namespace ZeusMobileiOS
             string libraryPath = Path.Combine(documentsPath, "..", "Library");
             
             // Datenbank starten
-            var path = Path.Combine(libraryPath, sqliteFilename);
+            var dbPath = Path.Combine(libraryPath, sqliteFilename);
 
-			File.Delete (path);
+			File.Delete (dbPath);
 
 
-            var plat = new SQLite.Net.Platform.XamarinIOS.SQLitePlatformIOS();
-            var conn = new SQLite.Net.SQLiteConnection(plat, path);
-            App.SetDatabaseConnection(conn);
+            var plattform = new SQLite.Net.Platform.XamarinIOS.SQLitePlatformIOS();
+            var dbConnection = new SQLite.Net.SQLiteConnection(plattform, dbPath);
+            App.SetDatabaseConnection(dbConnection);
 
 			var demoData = new DemoData();
 			demoData.BuildDemoData(App.Database);

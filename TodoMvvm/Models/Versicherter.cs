@@ -11,7 +11,7 @@ namespace ZeusMobile.Models
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
 
-        [ForeignKey(typeof(Subject))]
+        [ForeignKey(typeof(Person))]
         public int SubjektId { get; set; }
         
         [OneToMany(CascadeOperations = CascadeOperation.All)]

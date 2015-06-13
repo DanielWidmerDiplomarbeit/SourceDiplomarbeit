@@ -17,28 +17,28 @@ namespace ZeusMobile.Data
         {
             database = conn;
 
-            database.CreateTable<Subject>();
+            database.CreateTable<Person>();
             database.CreateTable<Versicherter>();
-            database.CreateTable<SchadensExperte>();
+            database.CreateTable<Sachbearbeiter>();
             database.CreateTable<Police>();
             database.CreateTable<Schaden>();
-            database.CreateTable<SchadenProtokoll>();
-            database.CreateTable<Versicherungsobjekt>();
+            database.CreateTable<Protokoll>();
+            database.CreateTable<Objekt>();
         }
 
-        public List<Subject> GetSubjekte()
+        public List<Person> GetSubjekte()
         {
             lock (locker)
             {
-                return (from i in database.Table<Subject>() select i).ToList();
+                return (from i in database.Table<Person>() select i).ToList();
             }
         }
 
-        public Subject GetSubject(int subjectId)
+        public Person GetSubject(int subjectId)
         {
             lock (locker)
             {
-                return database.Find<Subject>(x => x.Id == subjectId);
+                return database.Find<Person>(x => x.Id == subjectId);
             }
         }
 
@@ -58,27 +58,27 @@ namespace ZeusMobile.Data
             }
         }
 
-        public List<SchadensExperte> GetSchadensExperten()
+        public List<Sachbearbeiter> GetSchadensExperten()
         {
             lock (locker)
             {
-                return (from i in database.Table<SchadensExperte>() select i).ToList();
+                return (from i in database.Table<Sachbearbeiter>() select i).ToList();
             }
         }
 
-        public List<SchadenProtokoll> GetSchadenProtokolle()
+        public List<Protokoll> GetSchadenProtokolle()
         {
             lock (locker)
             {
-                return (from i in database.Table<SchadenProtokoll>() select i).ToList();
+                return (from i in database.Table<Protokoll>() select i).ToList();
             }
         }
 
-        public SchadenProtokoll GetSchadenProtokoll(int schadenId)
+        public Protokoll GetSchadenProtokoll(int schadenId)
         {
             lock (locker)
             {
-                return database.Find<SchadenProtokoll>(x => x.Id == schadenId);
+                return database.Find<Protokoll>(x => x.Id == schadenId);
             }
         }
 
@@ -117,15 +117,15 @@ namespace ZeusMobile.Data
         }
 
 
-        public List<Versicherungsobjekt> getVersicherungsobjekte()
+        public List<Objekt> getVersicherungsobjekte()
         {
             lock (locker)
             {
-                return (from i in database.Table<Versicherungsobjekt>() select i).ToList();
+                return (from i in database.Table<Objekt>() select i).ToList();
             }
         }
 
-        public void InsertOrReplaceAllSubjectsWithChildren(List<Subject> items)
+        public void InsertOrReplaceAllSubjectsWithChildren(List<Person> items)
         {
             database.InsertOrReplaceAllWithChildren(items);
         }
@@ -153,7 +153,7 @@ namespace ZeusMobile.Data
             }
         }
 
-        public void SaveProtokoll(SchadenProtokoll protokoll)
+        public void SaveProtokoll(Protokoll protokoll)
         {
             lock (locker)
             {
@@ -161,11 +161,11 @@ namespace ZeusMobile.Data
             }
         }
 
-        public SchadenProtokoll GetProtokollByProtokollNr(int protokollnr)
+        public Protokoll GetProtokollByProtokollNr(int protokollnr)
         {
             lock (locker)
             {
-                return database.Find<SchadenProtokoll>(x => x.ProtokollNr == protokollnr);
+                return database.Find<Protokoll>(x => x.ProtokollNr == protokollnr);
             }
         }
     }

@@ -6,7 +6,7 @@ namespace ZeusMobile.Models
 
 
 
-    public class Versicherungsobjekt
+    public class Objekt
     {
 
         public enum enumBauart
@@ -22,7 +22,7 @@ namespace ZeusMobile.Models
         [ForeignKey(typeof(Police))]
         public int PoliceId { get; set; }
 
-        [ForeignKey(typeof(SchadenProtokoll))]
+        [ForeignKey(typeof(Protokoll))]
         public int SchadenProtokollId { get; set; }
         
         [MaxLength(10)]

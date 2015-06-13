@@ -8,8 +8,8 @@ namespace ZeusMobile.Data
 {
     public class DemoData
     {
-        public List<Subject> Subjects { get; private set; }
-        public List<SchadensExperte> SchadensExperten { get; private set; }
+        public List<Person> Subjects { get; private set; }
+        public List<Sachbearbeiter> SchadensExperten { get; private set; }
         public List<Police> Polices { get; private set; }
         public List<Schaden> Schaeden { get; private set; }
         public List<Versicherter> Versicherte { get; private set; }
@@ -37,13 +37,13 @@ namespace ZeusMobile.Data
 
                 if (subject.Rolle.Equals("Experte"))
                 {
-                    var experte = new SchadensExperte
+                    var experte = new Sachbearbeiter
                     {
                         ExpertenNr = expertenNr++,
                         SubjektId = subject.Id
                     };
 
-                    subject.SchadensExperten = new SchadensExperte();
+                    subject.SchadensExperten = new Sachbearbeiter();
                     subject.SchadensExperten = experte;
                 }
             }
@@ -89,7 +89,7 @@ namespace ZeusMobile.Data
                     var objekt2 = versicherungsobjekte.FirstOrDefault(x => x.ObjektId == "22");
                     objekt1.PoliceId = police.Id;
                     objekt2.PoliceId = police.Id;
-                    police.Versicherungsobjekte = new List<Versicherungsobjekt>();
+                    police.Versicherungsobjekte = new List<Objekt>();
                     police.Versicherungsobjekte.Add(objekt1);
                     police.Versicherungsobjekte.Add(objekt2);
 
@@ -97,7 +97,7 @@ namespace ZeusMobile.Data
                     var schaden2 = Schaeden.FirstOrDefault(x => x.GebaeudeNummer == 1718);
                     schaden1.PoliceId = police.Id;
                     schaden2.PoliceId = police.Id;
-                    schaden1.SchadenProtokoll = new SchadenProtokoll();
+                    schaden1.Protokoll = new Protokoll();
 
                     police.Schaeden = new List<Schaden>();
                     police.Schaeden.Add(schaden1);
@@ -108,7 +108,7 @@ namespace ZeusMobile.Data
                 {
                     var objekt3 = versicherungsobjekte.FirstOrDefault(x => x.ObjektId == "33");
                     objekt3.PoliceId = police.Id;
-                    police.Versicherungsobjekte = new List<Versicherungsobjekt>();
+                    police.Versicherungsobjekte = new List<Objekt>();
                     police.Versicherungsobjekte.Add(objekt3);
 
                     var schaden3 = Schaeden.FirstOrDefault(x => x.GebaeudeNummer == 1719);
@@ -126,14 +126,14 @@ namespace ZeusMobile.Data
             {
                 if (schaden.Id == 1)
                 {
-                    schaden.SchadenProtokoll = new SchadenProtokoll();
+                    schaden.Protokoll = new Protokoll();
                     var protokoll = DemoSchadenProtokoll().FirstOrDefault(x => x.ProtokollNr == 1);
                     protokoll.SchadenId = schaden.Id;
                 }
 
                 if (schaden.Id == 3)
                 {
-                    schaden.SchadenProtokoll = new SchadenProtokoll();
+                    schaden.Protokoll = new Protokoll();
                     var protokoll = DemoSchadenProtokoll().FirstOrDefault(x => x.ProtokollNr == 2);
                     protokoll.SchadenId = schaden.Id;
                 }
@@ -154,13 +154,13 @@ namespace ZeusMobile.Data
             return policen;
         }
 
-        private List<Versicherungsobjekt> DemoVersicherungsObjekte()
+        private List<Objekt> DemoVersicherungsObjekte()
         {
-            var objekte = new List<Versicherungsobjekt>
+            var objekte = new List<Objekt>
             {
-                new Versicherungsobjekt { ObjektId = "11", Bezeichnung="Einfamilienhaus", Bauart = Versicherungsobjekt.enumBauart.Voll, Hydrant ="1" },
-                new Versicherungsobjekt { ObjektId = "22", Bezeichnung="Garage", Bauart = Versicherungsobjekt.enumBauart.Voll, Hydrant ="1" },
-                new Versicherungsobjekt { ObjektId = "33", Bezeichnung="Ferienhaus", Bauart = Versicherungsobjekt.enumBauart.Voll, Hydrant ="2" }
+                new Objekt { ObjektId = "11", Bezeichnung="Einfamilienhaus", Bauart = Objekt.enumBauart.Voll, Hydrant ="1" },
+                new Objekt { ObjektId = "22", Bezeichnung="Garage", Bauart = Objekt.enumBauart.Voll, Hydrant ="1" },
+                new Objekt { ObjektId = "33", Bezeichnung="Ferienhaus", Bauart = Objekt.enumBauart.Voll, Hydrant ="2" }
             };
             return objekte;
         }
@@ -177,22 +177,22 @@ namespace ZeusMobile.Data
             return Schaeden;
         }
 
-        private List<SchadenProtokoll> DemoSchadenProtokoll()
+        private List<Protokoll> DemoSchadenProtokoll()
         {
-            var schadenProtokollList = new List<SchadenProtokoll> {
-            new SchadenProtokoll { ProtokollNr = 1,  Beschreibung = "Lawine",Approxsumme = 1200000, Selbstbehalt = 500},
-            new SchadenProtokoll { ProtokollNr = 2, Beschreibung = "Gleiche Lawine", Approxsumme = 500000, Selbstbehalt = 600},
+            var schadenProtokollList = new List<Protokoll> {
+            new Protokoll { ProtokollNr = 1,  Beschreibung = "Lawine",Approxsumme = 1200000, Selbstbehalt = 500},
+            new Protokoll { ProtokollNr = 2, Beschreibung = "Gleiche Lawine", Approxsumme = 500000, Selbstbehalt = 600},
          };
             return schadenProtokollList;
         }
 
-        private List<Subject> DemoSubjects()
+        private List<Person> DemoSubjects()
         {
-            var subjects = new List<Subject> {
-                new Subject {Name = "Kunde Adam", Rolle = "Kunde" },
-                new Subject {Name = "Kunde Bruno", Rolle = "Kunde" },
-                new Subject {Name = "Expertin Eva", Rolle = "Experte" },
-                new Subject {Name = "Experte Zorro", Rolle = "Experte" }
+            var subjects = new List<Person> {
+                new Person {Name = "Kunde Adam", Rolle = "Kunde" },
+                new Person {Name = "Kunde Bruno", Rolle = "Kunde" },
+                new Person {Name = "Expertin Eva", Rolle = "Experte" },
+                new Person {Name = "Experte Zorro", Rolle = "Experte" }
             };
             return subjects;
         }

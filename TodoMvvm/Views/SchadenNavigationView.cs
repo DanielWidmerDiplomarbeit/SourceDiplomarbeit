@@ -21,7 +21,7 @@ namespace ZeusMobile.Views
           };
 
             var versicherteNaviCell = new TextCell();
-            versicherteNaviCell.SetBinding(TextCell.TextProperty, "Subject.SubjectListeText");
+            versicherteNaviCell.SetBinding(TextCell.TextProperty, "Person.PersonListeText");
             versicherteNaviCell.Tapped += versicherteNaviCelll_Tapped;
 
             var policeNaviCell = new TextCell();
@@ -29,7 +29,7 @@ namespace ZeusMobile.Views
             policeNaviCell.Tapped += policeNaviCell_Tapped;
 
             var objektNaviCell = new TextCell();
-            objektNaviCell.SetBinding(TextCell.TextProperty, "Versicherungsobjekt.ObjektListeText");
+            objektNaviCell.SetBinding(TextCell.TextProperty, "Objekt.ObjektListeText");
             objektNaviCell.Tapped += objektNaviCell_Tapped;
 
             var schadenNaviCell = new TextCell();

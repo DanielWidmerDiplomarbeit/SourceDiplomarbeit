@@ -27,7 +27,7 @@ namespace ZeusMobile.Models
         public int Id { get; set; }
 
         [OneToOne(CascadeOperations = CascadeOperation.All)]
-        public SchadenProtokoll SchadenProtokoll { get; set; }
+        public Protokoll Protokoll { get; set; }
 
         [ForeignKey(typeof(Police))]
         public int PoliceId { get; set; }

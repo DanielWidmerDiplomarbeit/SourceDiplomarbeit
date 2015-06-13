@@ -79,7 +79,7 @@ namespace ZeusMobileTest
             var database = AppConn.TestDataBase;
             var schaden = database.GetSchaden(1);
 
-            var protokoll = new SchadenProtokoll
+            var protokoll = new Protokoll
             {
                 Beschreibung = "Test Neues Schadenprotokoll",
                 SchadenId = schaden.Id,
@@ -105,7 +105,7 @@ namespace ZeusMobileTest
             var database = AppConn.TestDataBase;
             var schaden = database.GetSchaden(1);
 
-            var protokoll = new SchadenProtokoll
+            var protokoll = new Protokoll
             {
                 Beschreibung = "Test Neues Schadenprotokoll",
                 SchadenId = schaden.Id,

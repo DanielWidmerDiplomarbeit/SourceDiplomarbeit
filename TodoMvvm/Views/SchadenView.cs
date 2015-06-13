@@ -69,7 +69,7 @@ namespace ZeusMobile.Views
             var meldeDatumLabel = new Label { Text = "Meldedatum" };
             var meldeDatumDatumPicker = new DatePicker { Format = "D" };
             meldeDatumDatumPicker.SetBinding(DatePicker.DateProperty, "Meldedatum");
-   
+
 
             //var eintrittsDatumDatumLabel = new Label { Text = "Eintrittsdatum" };
             //var eintrittsDatumDatumPicker = new DatePicker { Format = "D" };
@@ -102,8 +102,12 @@ namespace ZeusMobile.Views
             Content = new StackLayout
             {
                 VerticalOptions = LayoutOptions.StartAndExpand,
-                Children = {meldeDatumLabel, meldeDatumDatumPicker, tableView,
-                    saveButton, cancelButton}
+                Children = {
+                    meldeDatumLabel, 
+                    meldeDatumDatumPicker, 
+                    tableView,
+                    saveButton, 
+                    cancelButton}
             };
         }
     }
