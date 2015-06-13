@@ -6,6 +6,7 @@ using Xamarin.Forms;
 using ZeusMobile;
 using ZeusMobile.Data;
 
+
 namespace ZeusMobileiOS
 {
     [Register("AppDelegate")]
@@ -25,15 +26,15 @@ namespace ZeusMobileiOS
             // Datenbank starten
             var dbPath = Path.Combine(libraryPath, sqliteFilename);
 
-			File.Delete (dbPath);
+            File.Delete (dbPath);
 
 
             var plattform = new SQLite.Net.Platform.XamarinIOS.SQLitePlatformIOS();
             var dbConnection = new SQLite.Net.SQLiteConnection(plattform, dbPath);
             App.SetDatabaseConnection(dbConnection);
 
-			var demoData = new DemoData();
-			demoData.BuildDemoData(App.Database);
+            var demoData = new DemoData();
+            demoData.BuildDemoData(App.Database);
             
             _window.RootViewController = App.GetMainPage().CreateViewController();
 

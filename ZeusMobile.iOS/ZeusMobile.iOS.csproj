@@ -9,7 +9,7 @@
     <RootNamespace>ZeusMobileiOS</RootNamespace>
     <IPhoneResourcePrefix>Resources</IPhoneResourcePrefix>
     <NuGetPackageImportStamp>315236c3</NuGetPackageImportStamp>
-    <AssemblyName>TodoMvvm</AssemblyName>
+    <AssemblyName>ZeusMobileiOS</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhoneSimulator' ">
     <DebugSymbols>true</DebugSymbols>
@@ -53,7 +53,7 @@
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
     <MtouchDebug>true</MtouchDebug>
     <CodesignKey>iPhone Developer</CodesignKey>
-    <AssemblyName>QuickTodoiOS</AssemblyName>
+    <AssemblyName>ZeusMobileiOS</AssemblyName>
     <IpaPackageName>ZEUSMobile</IpaPackageName>
     <MtouchI18n>
     </MtouchI18n>
@@ -72,7 +72,7 @@
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
     <ConsolePause>false</ConsolePause>
     <CodesignKey>iPhone Developer</CodesignKey>
-    <AssemblyName>QuickTodoiOS</AssemblyName>
+    <AssemblyName>ZeusMobileiOS</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Ad-Hoc|iPhone' ">
     <DebugType>full</DebugType>
@@ -86,7 +86,7 @@
     <BuildIpa>true</BuildIpa>
     <CodesignProvision>6d469159-179f-4f18-a43d-ed9bdcc2ce12</CodesignProvision>
     <CodesignKey>iPhone Developer: Daniel Widmer (SMSVDBKSD5)</CodesignKey>
-    <AssemblyName>QuickTodoiOS</AssemblyName>
+    <AssemblyName>ZeusMobileiOS</AssemblyName>
     <IpaMetadata>Info.plist</IpaMetadata>
     <IpaPackageName>ZEUSMobile</IpaPackageName>
     <MtouchI18n>
@@ -104,13 +104,16 @@
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
     <CodesignProvision>Automatic:AppStore</CodesignProvision>
     <CodesignKey>iPhone Distribution</CodesignKey>
-    <AssemblyName>QuickTodoiOS</AssemblyName>
+    <AssemblyName>ZeusMobileiOS</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'DebugiPadSimulator|AnyCPU' ">
     <Optimize>false</Optimize>
     <OutputPath>bin\DebugiPadSimulator</OutputPath>
     <WarningLevel>4</WarningLevel>
     <AssemblyName>TodoMvvmiOS</AssemblyName>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>ZeusMobileiOS.Application</StartupObject>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="SQLite.Net">
@@ -160,9 +163,10 @@
   <ItemGroup>
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\TodoMvvm\ZeusMobile.csproj">
+    <ProjectReference Include="..\ZeusMobile\ZeusMobile.csproj">
       <Project>{5F610EA1-9E35-4870-AE9B-5E18B4B4D5B8}</Project>
       <Name>ZeusMobile</Name>
     </ProjectReference>

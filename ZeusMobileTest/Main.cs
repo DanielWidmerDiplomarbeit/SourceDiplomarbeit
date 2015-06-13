@@ -1,5 +1,4 @@
 ﻿using UIKit;
-using ZeusMobile;
 using ZeusMobile.Data;
 
 namespace ZeusMobileTest

@@ -5,7 +5,7 @@
 	<key>CFBundleDisplayName</key>
 	<string>ZeusMobileTest</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.student_zhaw.zeusmobiletest</string>
+	<string>com.conf.ZEUSMobile</string>
 	<key>CFBundleShortVersionString</key>
 	<string>1.0</string>
 	<key>CFBundleVersion</key>
@@ -16,11 +16,12 @@
 	<string>8.3</string>
 	<key>UIDeviceFamily</key>
 	<array>
-		<integer>1</integer>
 		<integer>2</integer>
 	</array>
 	<key>UISupportedInterfaceOrientations~ipad</key>
-	<array/>
+	<array>
+		<string>UIInterfaceOrientationLandscapeLeft</string>
+	</array>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationLandscapeLeft</string>

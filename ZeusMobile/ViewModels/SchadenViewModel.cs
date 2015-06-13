@@ -83,25 +83,29 @@ namespace ZeusMobile.ViewModels
 			get { return Schaden.Id > 0; }
 		}
 
-        //public ICommand SaveCommand {
-        //    get { return _saveCommand; }
-        //    set {
-        //        if (_saveCommand == value)
-        //            return;
-        //        _saveCommand = value;
-        //        OnPropertyChanged ();
-        //    }
-        //}
-	
-        //public ICommand CancelCommand {
-        //    get { return _cancelCommand; }
-        //    set {
-        //        if (_cancelCommand == value)
-        //            return;
-        //        _cancelCommand = value;
-        //        OnPropertyChanged ();
-        //    }
-        //}
+        public ICommand SaveCommand
+        {
+            get { return _saveCommand; }
+            set
+            {
+                if (_saveCommand == value)
+                    return;
+                _saveCommand = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public ICommand CancelCommand
+        {
+            get { return _cancelCommand; }
+            set
+            {
+                if (_cancelCommand == value)
+                    return;
+                _cancelCommand = value;
+                OnPropertyChanged();
+            }
+        }
 			
 	}
 }
