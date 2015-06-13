@@ -60,6 +60,7 @@ namespace ZeusMobile.Data
                 {
                     var police = Polices.FirstOrDefault(x => x.PolicenNr == "88");
                     police.VersicherterId = versicherter.Id;
+                    versicherter.KundeSeit = new DateTime(1991, 12, 31);
                     versicherter.Policen = new List<Police>();
                     versicherter.Policen.Add(police);
                 }
@@ -68,6 +69,7 @@ namespace ZeusMobile.Data
                 {
                     var police = Polices.FirstOrDefault(x => x.PolicenNr == "99");
                     police.VersicherterId = versicherter.Id;
+                    versicherter.KundeSeit = new DateTime(2011, 02, 28);
                     versicherter.Policen = new List<Police>();
                     versicherter.Policen.Add(police);
                 }
@@ -139,7 +141,7 @@ namespace ZeusMobile.Data
                 }
             }
 
-              database.InsertOrReplaceAllSchaedenWithChildren(Schaeden);
+            database.InsertOrReplaceAllSchaedenWithChildren(Schaeden);
 
         }
 
@@ -189,10 +191,10 @@ namespace ZeusMobile.Data
         private List<Person> DemoSubjects()
         {
             var subjects = new List<Person> {
-                new Person {Name = "Kunde Adam", Rolle = "Kunde" },
-                new Person {Name = "Kunde Bruno", Rolle = "Kunde" },
-                new Person {Name = "Expertin Eva", Rolle = "Experte" },
-                new Person {Name = "Experte Zorro", Rolle = "Experte" }
+                new Person {Vorname   ="Adam", Name = "Keller", Strasse = "Bachstr. 12", Plz = "8753 ", Ort = "Mollis",Rolle = "Kunde" },
+                new Person {Vorname   ="Beno", Name = "Müller",Strasse = "Im Kegel 5", Plz = "8945", Ort = "Elm", Rolle = "Kunde" },
+                new Person {Vorname   ="Eva", Name = "Appenzeller",Strasse = "Hauptsstr 134 ", Plz = "8800", Ort = "Glarus", Rolle = "Experte" },
+                new Person {Vorname   ="Peter", Name = "Zorro", Strasse = "Bahnhofstr. 11", Plz = "8800", Ort = "Glarus", Rolle = "Experte" }
             };
             return subjects;
         }

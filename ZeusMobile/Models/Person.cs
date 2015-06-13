@@ -19,11 +19,23 @@ namespace ZeusMobile.Models
         [MaxLength(20)]
         public string Rolle { get; set; }
         
-        [MaxLength(20)]
+        [MaxLength(50)]
         public string Name { get; set; }        
 
-        [MaxLength(20)]
+        [MaxLength(50)]
         public string Vorname { get; set; }
+        
+        [MaxLength(50)]
+        public string Strasse { get; set; }    
+        
+        [MaxLength(15)]
+        public string Nr { get; set; }
+
+        [MaxLength(6)]
+        public string Plz { get; set; }
+
+        [MaxLength(50)]
+        public string Ort { get; set; }
 
         [Ignore]
         public string PersonListeText

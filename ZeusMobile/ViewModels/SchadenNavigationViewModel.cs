@@ -17,7 +17,7 @@ namespace ZeusMobile.ViewModels
 
             MessagingCenter.Subscribe<SchadenNavigationView>(this, "InitNavigationView", sender => InitNavigationView());
 
-            MessagingCenter.Subscribe<SchadenNavigationView>(this, "VersicherteAnzeigen", sender => Navigation.Push(ViewFactory.CreatePage(new VersicherteViewModel(_schaden))));
+            MessagingCenter.Subscribe<SchadenNavigationView>(this, "VersicherteAnzeigen", sender => Navigation.Push(ViewFactory.CreatePage(new VersicherteViewModel(Versicherter, Person))));
 
             MessagingCenter.Subscribe<SchadenNavigationView>(this, "PolicenAnzeigen", sender => Navigation.Push(ViewFactory.CreatePage(new PolicenViewModel(_schaden))));
 
@@ -95,10 +95,10 @@ namespace ZeusMobile.ViewModels
 
         private void VersicherterVonPoliceLesen(int versicherterId)
         {
-            var versicherter = App.Database.GetVersicherter(versicherterId);
-            if (versicherter != null)
+            Versicherter = App.Database.GetVersicherter(versicherterId);
+            if (Versicherter != null)
             {
-                Person = App.Database.GetSubject(versicherter.SubjektId);
+                Person = App.Database.GetSubject(Versicherter.SubjektId);
             }
 
         }

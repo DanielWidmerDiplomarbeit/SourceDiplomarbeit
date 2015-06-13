@@ -24,6 +24,8 @@
     <MtouchDebug>true</MtouchDebug>
     <MtouchProfiling>true</MtouchProfiling>
     <StartupObject>ZeusMobileTest.Application</StartupObject>
+    <BuildIpa>True</BuildIpa>
+    <IpaPackageName>ZeusMobileTest</IpaPackageName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhone' ">
     <DebugType>full</DebugType>
