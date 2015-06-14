@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using ZeusMobile.Data;
 using ZeusMobile.Models;
 
 namespace ZeusMobile.Data
@@ -150,8 +149,8 @@ namespace ZeusMobile.Data
         {
             var policen = new List<Police>
             {
-                new Police { PolicenNr = "88", Bezeichnung = "Police EFH" , Kategorie = Police.EnumKategorie.Gebaeude , Abteilung = Police.EnumAbteilung.Monopol},
-                new Police { PolicenNr = "99", Bezeichnung = "Police Ferienwohnung", Kategorie = Police.EnumKategorie.Gebaeude, Abteilung = Police.EnumAbteilung.Monopol},
+                new Police { PolicenNr = "88", Bezeichnung = "Police EFH" , Kategorie = Police.EnumKategorie.Gebaeude , Abteilung = Police.EnumAbteilung.Monopol, Branche = Police.EnumBranche.Elementar, Deckung = Police.EnumDeckung.Voll},
+                new Police { PolicenNr = "99", Bezeichnung = "Police Ferienwohnung", Kategorie = Police.EnumKategorie.Gebaeude, Abteilung = Police.EnumAbteilung.Monopol, Branche = Police.EnumBranche.Elementar, Deckung = Police.EnumDeckung.Voll},
             };
             return policen;
         }

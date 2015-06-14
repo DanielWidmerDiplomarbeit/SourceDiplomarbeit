@@ -5,9 +5,12 @@ namespace ZeusMobile.ViewModels
     class ObjekteViewModel : BaseViewModel
     {
 
-        public ObjekteViewModel(Schaden schadenItem)
+        public ObjekteViewModel(Objekt objekt)
         {
+            Objekt = objekt;
         }
+
+        public Objekt Objekt { get; private set; }
     }
 }
 

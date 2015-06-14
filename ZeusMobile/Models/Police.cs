@@ -53,7 +53,11 @@ namespace ZeusMobile.Models
 
         public EnumAbteilung Abteilung { get; set; }
         
-        public EnumKategorie Kategorie { get; set; }
+        public EnumKategorie Kategorie { get; set; }   
+
+        public EnumBranche Branche { get; set; }
+
+        public EnumDeckung Deckung { get; set; }
 
         [Ignore]
         public string PoliceListeText

@@ -5,9 +5,12 @@ namespace ZeusMobile.ViewModels
     class PolicenViewModel : BaseViewModel
     {
 
-        public PolicenViewModel(Schaden schadenItem)
+        public PolicenViewModel(Police police)
         {
+            Police = police;
         }
+        
+        public Police Police { get; private set; }
     }
 }
 

@@ -12,10 +12,10 @@ namespace ZeusMobile.ViewModels
             Versicherter = versicherter;
             Person = person;
 
-            Aufbereiten();
+            AnzeigeAufbereiten();
         }
 
-        private void Aufbereiten()
+        private void AnzeigeAufbereiten()
         {
             if ( Versicherter != null && Versicherter.KundeSeit > DateTime.MinValue)
             {
