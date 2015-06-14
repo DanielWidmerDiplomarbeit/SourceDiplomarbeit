@@ -16,6 +16,7 @@ namespace ZeusMobile
             ViewFactory.Register<PolicenView, PolicenViewModel>();
             ViewFactory.Register<ObjekteView, ObjekteViewModel>();
             ViewFactory.Register<SchadenView, SchadenViewModel>();
+            ViewFactory.Register<SchadenOrtView, SchadenOrtViewModel>();
             ViewFactory.Register<ProtokollView, ProtokollViewModel>();
         }
 

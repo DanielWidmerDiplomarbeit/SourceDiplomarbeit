@@ -45,6 +45,7 @@
     <Compile Include="ViewModels\ObjekteViewModel.cs" />
     <Compile Include="ViewModels\PolicenViewModel.cs" />
     <Compile Include="ViewModels\ProtokollViewModel.cs" />
+    <Compile Include="ViewModels\SchadenOrtViewModel.cs" />
     <Compile Include="ViewModels\VersicherteViewModel.cs" />
     <Compile Include="Views\ProtokollView.cs" />
     <Compile Include="Views\PolicenView.cs" />
@@ -52,6 +53,7 @@
     <Compile Include="Views\SchadenListeView.cs" />
     <Compile Include="ViewModels\SchadenCellViewModel.cs" />
     <Compile Include="ViewModels\SchadenViewModel.cs" />
+    <Compile Include="Views\SchadenOrtView.cs" />
     <Compile Include="Views\SchadenView.cs" />
     <Compile Include="Data\DataBase.cs" />
     <Compile Include="Views\SchadenItemCell.cs" />

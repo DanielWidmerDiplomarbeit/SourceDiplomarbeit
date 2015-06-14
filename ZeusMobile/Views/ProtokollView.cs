@@ -14,21 +14,32 @@ namespace ZeusMobile.Views
               FontAttributes = FontAttributes.Bold,
               HorizontalOptions = LayoutOptions.Center
           };
+
             header.SetBinding(Label.TextProperty, "ProtokollListeText");
 
-            var beschreibungCell = new EntryCell { Label = "Beschreibung" };
-            beschreibungCell.SetBinding(EntryCell.TextProperty, "Beschreibung");
+            var ursacheLabel = new Label { Text = "Ursache" };
+            var ursacheEntry = new Entry { };
+            ursacheEntry.SetBinding(EntryCell.TextProperty, "Ursache");
 
-            var ursacheCell = new EntryCell { Label = "Ursache" };
-            ursacheCell.SetBinding(EntryCell.TextProperty, "Ursache");
+            var ursachenBeschreibungLabel = new Label { Text = "Ursachen Beschreibung" };
+            var ursachenBeschreibungEntry = new Editor { };
+            ursachenBeschreibungEntry.SetBinding(Editor.TextProperty, "UrsachenBeschreibung");
+            EditorProperties(ursachenBeschreibungEntry, ursachenBeschreibungLabel);
 
-            var ursachenBeschreibungLabel = new Label { Text = "UrsachenBeschreibung" };
-            var ursachenBeschreibungEntry = new Entry { };
-            ursachenBeschreibungEntry.SetBinding(Entry.TextProperty, "UrsachenBeschreibung");
+            var beschreibungLabel = new Label { Text = "Beschreibung" };
+            var beschreibungEntry = new Editor { };
+            beschreibungEntry.SetBinding(Editor.TextProperty, "Beschreibung");
+            beschreibungEntry.HeightRequest = 50;
+            beschreibungEntry.WidthRequest = 700;
+            beschreibungLabel.WidthRequest = 300;
+            EditorProperties(beschreibungEntry, beschreibungLabel);
 
-            var interneNotizLabel = new Label { Text = "InterneNotiz" };
-            var interneNotizEntry = new Entry { };
-            interneNotizEntry.SetBinding(Entry.TextProperty, "InterneNotiz");
+
+            var interneNotizLabel = new Label { Text = "Interne Notiz" };
+            var interneNotizEntry = new Editor { };
+            interneNotizEntry.SetBinding(Editor.TextProperty, "InterneNotiz");
+            EditorProperties(interneNotizEntry, interneNotizLabel);
+
 
             var approxsummeCell = new EntryCell { Label = "Approxsumme" };
             approxsummeCell.SetBinding(EntryCell.TextProperty, "Approxsumme");
@@ -45,23 +56,35 @@ namespace ZeusMobile.Views
             var letzteBearbeitungCell = new EntryCell { Label = "LetzteBearbeitung" };
             letzteBearbeitungCell.SetBinding(EntryCell.TextProperty, "LetzteBearbeitung");
             letzteBearbeitungCell.IsEnabled = false;
-            
-            var tableBeschreibung = new TableView
+
+            var saveButton = new Button { Text = "Save" };
+            saveButton.SetBinding(Button.CommandProperty, "SaveCommand");
+
+            var cancelButton = new Button { Text = "Cancel" };
+            cancelButton.SetBinding(Button.CommandProperty, "CancelCommand");
+            cancelButton.SetBinding(IsVisibleProperty, "CanCancel");
+
+            var beschreibungEditorLine = new StackLayout
             {
-                Intent = TableIntent.Form,
-                Root = new TableRoot
-                {
-                    new TableSection
-                    {
-                        beschreibungCell,
-                        ursacheCell
-                    }
-                }
+                Orientation = StackOrientation.Horizontal,
+                Children = { beschreibungLabel, beschreibungEntry }
+            };
+
+            var ursacheBeschreibungEditorLine = new StackLayout
+            {
+                Orientation = StackOrientation.Horizontal,
+                Children = { ursachenBeschreibungLabel, ursachenBeschreibungEntry }
+            };
+
+            var interneEditorLine = new StackLayout
+            {
+                Orientation = StackOrientation.Horizontal,
+                Children = { interneNotizLabel, interneNotizEntry }
             };
 
             var tableBetraege = new TableView
             {
-                Intent = TableIntent.Form,
+                Intent = TableIntent.Settings,
                 Root = new TableRoot
                 {
                     new TableSection
@@ -80,15 +103,24 @@ namespace ZeusMobile.Views
                    Children = 
                 {
                     header,
-                    tableBeschreibung,            
-                        ursachenBeschreibungLabel,
-                        ursachenBeschreibungEntry,
-                        interneNotizLabel,
-                        interneNotizEntry,
-                        tableBetraege
+                    ursacheLabel,
+                    ursacheEntry,
+                    ursacheBeschreibungEditorLine,
+                    beschreibungEditorLine,
+                    interneEditorLine,
+                    tableBetraege,
+                    saveButton,
+                    cancelButton
                 }
                };
-        }
+}
 
+        private static void EditorProperties(Editor editor, Label label)
+        {
+            editor.HeightRequest = 50;
+            editor.WidthRequest = 700;
+            editor.BackgroundColor = Color.FromRgb(245, 245, 245);
+            label.WidthRequest = 300;
+        }
     }
 }

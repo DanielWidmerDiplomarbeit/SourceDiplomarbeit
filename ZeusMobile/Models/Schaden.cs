@@ -63,18 +63,18 @@ namespace ZeusMobile.Models
 
         public DateTime Eintrittsdatum { get; set; }
 
-        public DateTime Meldedatum { get; set; } 
-        
+        public DateTime Meldedatum { get; set; }
+
         public DateTime LetzteMutation { get; set; }
 
         public EnumStatus Status { get; set; }
 
         [Ignore]
-        public String SchadenListeText
+        public String SchadenOrtListeText
         {
             get
             {
-                var listenText = Beschreibung;
+                string listenText = string.Empty;
                 if (!string.IsNullOrEmpty(Strasse))
                 {
                     listenText += ", " + Strasse;
@@ -83,7 +83,26 @@ namespace ZeusMobile.Models
                 {
                     listenText += " " + Hausnr;
                 }
-              
+                if (!string.IsNullOrEmpty(Plz))
+                {
+                    listenText += " " + Plz;
+                }
+                if (!string.IsNullOrEmpty(Ort))
+                {
+                    listenText += " " + Ort;
+                }
+
+                return listenText;
+            }
+        }
+
+        [Ignore]
+        public String SchadenListeText
+        {
+            get
+            {
+                var listenText = Beschreibung;
+
                 return listenText;
             }
         }

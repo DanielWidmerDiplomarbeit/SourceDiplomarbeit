@@ -23,7 +23,9 @@ namespace ZeusMobile.ViewModels
 
             MessagingCenter.Subscribe<SchadenNavigationView>(this, "ObjekteAnzeigen", sender => Navigation.Push(ViewFactory.CreatePage(new ObjekteViewModel(Objekt))));
 
-            MessagingCenter.Subscribe<SchadenNavigationView>(this, "SchadenBearbeiten", sender => Navigation.Push(ViewFactory.CreatePage(new SchadenViewModel(_schaden))));
+            MessagingCenter.Subscribe<SchadenNavigationView>(this, "SchadenBearbeiten", sender => Navigation.Push(ViewFactory.CreatePage(new SchadenViewModel(Schaden))));
+
+            MessagingCenter.Subscribe<SchadenNavigationView>(this, "SchadenOrtBearbeiten", sender => Navigation.Push(ViewFactory.CreatePage(new SchadenOrtViewModel(_schaden))));
 
             MessagingCenter.Subscribe<SchadenNavigationView>(this, "ProtokollBearbeiten", sender => Navigation.Push(ViewFactory.CreatePage(new ProtokollViewModel(Protokoll))));
         }

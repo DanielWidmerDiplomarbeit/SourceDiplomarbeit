@@ -7,8 +7,8 @@ namespace ZeusMobile.Views
 {
     public class SchadenNavigationView : ContentPage
     {
-		private bool first = true;
-		
+        private bool first = true;
+
         public SchadenNavigationView()
         {
 
@@ -36,13 +36,17 @@ namespace ZeusMobile.Views
             schadenNaviCell.SetBinding(TextCell.TextProperty, "Schaden.SchadenListeText");
             schadenNaviCell.Tapped += schadenNaviCell_Tapped;
 
+            var schadenOrtNaviCell = new TextCell();
+            schadenOrtNaviCell.SetBinding(TextCell.TextProperty, "Schaden.SchadenOrtListeText");
+            schadenOrtNaviCell.Tapped += schadenOrtNaviCell_Tapped;
+
             var protokollNaviCell = new TextCell();
             protokollNaviCell.SetBinding(TextCell.TextProperty, "Protokoll.ProtokollListeText");
             protokollNaviCell.Tapped += protokollNaviCell_Tapped;
 
             var tableView = new TableView
             {
-                Intent = TableIntent.Form,
+                Intent = TableIntent.Menu,
                 Root = new TableRoot("TableView Title")
                 {
                        new TableSection("Versicherte anzeigen")
@@ -60,7 +64,15 @@ namespace ZeusMobile.Views
 
                     new TableSection("Schaden bearbeiten")
                     {
-                        schadenNaviCell, protokollNaviCell
+                        schadenNaviCell
+                    },
+                    new TableSection("Schadenort bearbeiten")
+                    {
+                         schadenOrtNaviCell
+                    },
+                    new TableSection("Protokoll bearbeiten")
+                    {
+                       protokollNaviCell
                     }
                 }
             };
@@ -79,7 +91,7 @@ namespace ZeusMobile.Views
         {
             MessagingCenter.Send(this, "VersicherteAnzeigen");
         }
-        
+
         private void policeNaviCell_Tapped(object sender, EventArgs e)
         {
             MessagingCenter.Send(this, "PolicenAnzeigen");
@@ -95,20 +107,25 @@ namespace ZeusMobile.Views
             MessagingCenter.Send(this, "SchadenBearbeiten");
         }
 
+        private void schadenOrtNaviCell_Tapped(object sender, EventArgs e)
+        {
+            MessagingCenter.Send(this, "SchadenOrtBearbeiten");
+        }
+
         private void protokollNaviCell_Tapped(object sender, EventArgs e)
         {
             MessagingCenter.Send(this, "ProtokollBearbeiten");
         }
 
-		protected override void OnAppearing()
-		{
-			base.OnAppearing();
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
 
-			if (!first)
-			{
-				MessagingCenter.Send(this, "InitNavigationView");
-			};
-			first = false;
-		}
+            if (!first)
+            {
+                MessagingCenter.Send(this, "InitNavigationView");
+            };
+            first = false;
+        }
     }
 }

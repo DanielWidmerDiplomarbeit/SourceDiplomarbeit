@@ -26,91 +26,7 @@ namespace ZeusMobile.ViewModels
         #endregion
 
         #region schreibbare Properties
-
-        public string Gemeinde
-        {
-            get
-            {
-                return Schaden.Gemeinde;
-            }
-            set
-            {
-                if (Schaden.Gemeinde == value)
-                    return;
-                Schaden.Gemeinde = value;
-                OnPropertyChanged();
-            }
-        }
-        public string Strasse
-        {
-            get
-            {
-                return Schaden.Strasse;
-            }
-            set
-            {
-                if (Schaden.Strasse == value)
-                    return;
-                Schaden.Strasse = value;
-                OnPropertyChanged();
-            }
-        }
-        public String Hausnr
-        {
-            get
-            {
-                return Schaden.Hausnr;
-            }
-            set
-            {
-                if (Schaden.Hausnr == value)
-                    return;
-                Schaden.Hausnr = value;
-                OnPropertyChanged();
-            }
-        }
-        public String Plz
-        {
-            get
-            {
-                return Schaden.Plz;
-            }
-            set
-            {
-                if (Schaden.Plz == value)
-                    return;
-                Schaden.Plz = value;
-                OnPropertyChanged();
-            }
-        }
-        public String Ort
-        {
-            get
-            {
-                return Schaden.Ort;
-            }
-            set
-            {
-                if (Schaden.Ort == value)
-                    return;
-                Schaden.Ort = value;
-                OnPropertyChanged();
-            }
-        }
-        public String Land
-        {
-            get
-            {
-                return Schaden.Land;
-            }
-            set
-            {
-                if (Schaden.Land == value)
-                    return;
-                Schaden.Land = value;
-                OnPropertyChanged();
-            }
-        }
+     
         public string Beschreibung
         {
             get
@@ -122,34 +38,6 @@ namespace ZeusMobile.ViewModels
                 if (Schaden.Beschreibung == value)
                     return;
                 Schaden.Beschreibung = value;
-                OnPropertyChanged();
-            }
-        }
-        public int Parzelle
-        {
-            get
-            {
-                return Schaden.Parzelle;
-            }
-            set
-            {
-                if (Schaden.Parzelle == value)
-                    return;
-                Schaden.Parzelle = value;
-                OnPropertyChanged();
-            }
-        }
-        public int Gebaedenummer
-        {
-            get
-            {
-                return Schaden.GebaeudeNummer;
-            }
-            set
-            {
-                if (Schaden.GebaeudeNummer == value)
-                    return;
-                Schaden.GebaeudeNummer = value;
                 OnPropertyChanged();
             }
         }

@@ -39,13 +39,17 @@ namespace ZeusMobile.Models
             get
             {
                 var listenText = Beschreibung;
-                if (!string.IsNullOrEmpty(ProtokollNr.ToString()))
+                if (ProtokollNr > 0)
                 {
                     listenText += ", " + ProtokollNr;
                 }
                 if (!string.IsNullOrEmpty(Beschreibung))
                 {
                     listenText += " " + Beschreibung.PadLeft(50);
+                }
+                if (string.IsNullOrEmpty(listenText))
+                {
+                    return "Neues Protokoll";
                 }
                 return listenText;
             }

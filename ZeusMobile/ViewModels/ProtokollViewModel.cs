@@ -130,6 +130,7 @@ namespace ZeusMobile.ViewModels
                 OnPropertyChanged();
             }
         }
+
     }
 }
 
