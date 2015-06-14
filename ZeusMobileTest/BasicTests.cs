@@ -57,7 +57,7 @@ namespace ZeusMobileTest
             Assert.AreEqual(2, database.GetVersicherte().ToList().Count());
             Assert.AreEqual(2, database.GetSchadensExperten().ToList().Count());
             Assert.AreEqual(3, database.GetSchaeden().ToList().Count());
-            Assert.AreEqual(2, database.getPolicen().ToList().Count());
+            Assert.AreEqual(2, database.GetPolicen().ToList().Count());
             Assert.AreEqual(2, database.GetSchadenProtokolle().ToList().Count());
         }
 

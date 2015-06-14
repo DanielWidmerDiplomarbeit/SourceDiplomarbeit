@@ -83,13 +83,13 @@ namespace ZeusMobile.ViewModels
 
         private void PoliceVomSchadenLesen()
         {
-            Police = App.Database.getPolice(_schaden.Id);
+            Police = App.Database.GetPolice(_schaden.Id);
             VersicherterVonPoliceLesen(Police.VersicherterId);
         }
 
         private void ObjektVomSchadenLesen()
         {
-            var alleObjekte = App.Database.getVersicherungsobjekte();
+            var alleObjekte = App.Database.GetVersicherungsobjekte();
             Objekt = alleObjekte.FirstOrDefault();
         }
 

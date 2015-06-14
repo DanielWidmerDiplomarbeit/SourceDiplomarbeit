@@ -77,7 +77,7 @@ namespace ZeusMobile.Data
             database.InsertOrReplaceAllVersicherteWithChildren(Versicherte);
 
 
-            Polices = database.getPolicen();
+            Polices = database.GetPolicen();
 
             var versicherungsobjekte = DemoVersicherungsObjekte();
 
@@ -171,9 +171,9 @@ namespace ZeusMobile.Data
         {
             var Schaeden = new List<Schaden> {
 
-				new Schaden { Beschreibung ="Wasserschaden Keller", GebaeudeNummer = 1711, Eintrittsdatum = DateTime.Parse("01.07.2015"), Meldedatum = DateTime.Parse("02.07.2015"), Gemeinde = "Netstal", Strasse = "Obergasse", Hausnr = 1, HausNrZusatz = "A", Parzelle = 576, Land = "CH", Plz = "8754", Ort = "Netstal"},
-				new Schaden { Beschreibung ="Dach eingedrückt", GebaeudeNummer = 1718, Eintrittsdatum = DateTime.Parse("01.08.2015"), Meldedatum = DateTime.Parse("02.08.2015"), Gemeinde = "Netstal", Strasse = "Obergasse", Hausnr = 1, HausNrZusatz = "A", Parzelle = 416, Land = "CH", Plz = "8754", Ort = "Netstal"},
-				new Schaden { Beschreibung ="Wasserschaden", GebaeudeNummer = 1719, Eintrittsdatum = DateTime.Parse("01.08.2015"), Meldedatum = DateTime.Parse("02.08.2015"), Gemeinde = "Netstal", Strasse = "Am Bergli", Hausnr = 323, HausNrZusatz = null, Parzelle = 256, Land = "CH", Plz = "8754", Ort = "Netstal"}
+				new Schaden { Beschreibung ="Wasserschaden Keller", GebaeudeNummer = 1711, Eintrittsdatum = DateTime.Parse("01.07.2015"), Meldedatum = DateTime.Parse("02.07.2015"), Gemeinde = "Netstal", Strasse = "Obergasse", Hausnr = "1 A", Parzelle = 576, Land = "CH", Plz = "8754", Ort = "Netstal"},
+				new Schaden { Beschreibung ="Dach eingedrückt", GebaeudeNummer = 1718, Eintrittsdatum = DateTime.Parse("01.08.2015"), Meldedatum = DateTime.Parse("02.08.2015"), Gemeinde = "Netstal", Strasse = "Obergasse", Hausnr = "1 A", Parzelle = 416, Land = "CH", Plz = "8754", Ort = "Netstal"},
+				new Schaden { Beschreibung ="Wasserschaden", GebaeudeNummer = 1719, Eintrittsdatum = DateTime.Parse("01.08.2015"), Meldedatum = DateTime.Parse("02.08.2015"), Gemeinde = "Netstal", Strasse = "Am Bergli", Hausnr = "323", Parzelle = 256, Land = "CH", Plz = "8754", Ort = "Netstal"}
          };
             return Schaeden;
         }

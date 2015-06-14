@@ -83,7 +83,7 @@ namespace ZeusMobile.Data
         }
 
 
-        public List<Police> getPolicen()
+        public List<Police> GetPolicen()
         {
             lock (locker)
             {
@@ -91,7 +91,7 @@ namespace ZeusMobile.Data
             }
         }
 
-        public Police getPolice(int schadenId)
+        public Police GetPolice(int schadenId)
         {
             lock (locker)
             {
@@ -117,7 +117,7 @@ namespace ZeusMobile.Data
         }
 
 
-        public List<Objekt> getVersicherungsobjekte()
+        public List<Objekt> GetVersicherungsobjekte()
         {
             lock (locker)
             {
@@ -149,6 +149,7 @@ namespace ZeusMobile.Data
         {
             lock (locker)
             {
+                schaden.LetzteMutation = DateTime.Now;
                 database.InsertOrReplace(schaden);
             }
         }

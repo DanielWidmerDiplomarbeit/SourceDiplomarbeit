@@ -39,10 +39,7 @@ namespace ZeusMobile.Models
         public string Strasse { get; set; }
 
         [MaxLength(10)]
-        public int Hausnr { get; set; }
-
-        [MaxLength(10)]
-        public string HausNrZusatz { get; set; }
+        public string Hausnr { get; set; }
 
         [MaxLength(3)]
         public string Land { get; set; }
@@ -66,7 +63,9 @@ namespace ZeusMobile.Models
 
         public DateTime Eintrittsdatum { get; set; }
 
-        public DateTime Meldedatum { get; set; }
+        public DateTime Meldedatum { get; set; } 
+        
+        public DateTime LetzteMutation { get; set; }
 
         public EnumStatus Status { get; set; }
 
@@ -80,14 +79,11 @@ namespace ZeusMobile.Models
                 {
                     listenText += ", " + Strasse;
                 }
-                if (!string.IsNullOrEmpty(Hausnr.ToString()))
+                if (!string.IsNullOrEmpty(Hausnr))
                 {
                     listenText += " " + Hausnr;
                 }
-                if (!string.IsNullOrEmpty(HausNrZusatz))
-                {
-                    listenText += " " + HausNrZusatz;
-                }
+              
                 return listenText;
             }
         }

@@ -8,50 +8,64 @@ namespace ZeusMobile.Views
 
         public SchadenView()
         {
-            this.SetBinding(Page.TitleProperty, "PoliceId");
+            var beschreibungCell = new EntryCell { Label = "Beschreibung" };
+            beschreibungCell.SetBinding(EntryCell.TextProperty, "Beschreibung");
 
-            NavigationPage.SetHasNavigationBar(this, true);
+            var parzelleCell = new EntryCell { Label = "Parzelle" };
+            parzelleCell.SetBinding(EntryCell.TextProperty, "Parzelle");
 
-            //var prioritaetLabel = new Label { Text = "Priorität" };
-            //var prioritaetEntry = new Entry { };
-            //prioritaetEntry.SetBinding(Entry.TextProperty, "Prioritaet");
+            var gebaeudeNummerCell = new EntryCell { Label = "GebaeudeNummer" };
+            gebaeudeNummerCell.SetBinding(EntryCell.TextProperty, "GebaeudeNummer");
 
-            //var statusLabel = new Label { Text = "Status" };
-            //var statusEntry = new Entry { };
-            //statusEntry.SetBinding(Entry.TextProperty, "Status");
+            var gemeindeCell = new EntryCell { Label = "Gemeinde" };
+            gemeindeCell.SetBinding(EntryCell.TextProperty, "Gemeinde");
 
+            var strasseCell = new EntryCell { Label = "Strasse" };
+            strasseCell.SetBinding(EntryCell.TextProperty, "Strasse");
 
-            //var hausNrLabel = new Label { Text = "HausNr" };
-            //var hausNrEntry = new Entry { };
-            //hausNrEntry.SetBinding(Entry.TextProperty, "HausNr");
+            var hausnrCell = new EntryCell { Label = "Hausnr" };
+            hausnrCell.SetBinding(EntryCell.TextProperty, "Hausnr");
 
-            //var hausNrZusatzLabel = new Label { Text = "HausNr Zusatz" };
-            //var hausNrZusatzEntry = new Entry { };
-            //hausNrZusatzEntry.SetBinding(Entry.TextProperty, "HausNrZusatz");
+            var plzCell = new EntryCell { Label = "Plz" };
+            plzCell.SetBinding(EntryCell.TextProperty, "Plz");
 
-            //var landLabel = new Label { Text = "Land" };
-            //var landEntry = new Entry { };
-            //landEntry.SetBinding(Entry.TextProperty, "Land");
+            var ortCell = new EntryCell { Label = "Ort" };
+            ortCell.SetBinding(EntryCell.TextProperty, "Ort");
 
-            //var plzLabel = new Label { Text = "Postleitzahl" };
-            //var plzEntry = new Entry { };
-            //plzEntry.SetBinding(Entry.TextProperty, "plz");
+            var landCell = new EntryCell { Label = "Land" };
+            landCell.SetBinding(EntryCell.TextProperty, "Land");
 
-            //var ortLabel = new Label { Text = "Ort" };
-            //var ortEntry = new Entry { };
-            //ortEntry.SetBinding(Entry.TextProperty, "Ort");
+            var schadenNrCell = new EntryCell { Label = "Schaden Nr." };
+            schadenNrCell.SetBinding(EntryCell.TextProperty, "Schaden.Id");
 
-            //var gemeindeLabel = new Label { Text = "Gemeinde" };
-            //var gemeindeEntry = new Entry { };
-            //gemeindeEntry.SetBinding(Entry.TextProperty, "Gemeinde");
+            var statusCell = new EntryCell { Label = "Status" };
+            statusCell.SetBinding(EntryCell.TextProperty, "Schaden.Status");
 
-            //var parzelleLabel = new Label { Text = "Parzelle" };
-            //var parzelleEntry = new Entry { };
-            //parzelleEntry.SetBinding(Entry.TextProperty, "Parzelle");
+            var sachbearbeiterCell = new EntryCell { Label = "Sachbearbeiter" };
+            sachbearbeiterCell.SetBinding(EntryCell.TextProperty, "Schaden.Sachbearbeiter");
 
-            //var gebaeudeNrLabel = new Label { Text = "Gebäudenummer" };
-            //var gebaeudeNrEntry = new Entry { };
-            //gebaeudeNrEntry.SetBinding(Entry.TextProperty, "GebaeudeNr");
+            var mutationsdatumCell = new EntryCell { Label = "Mutationsdatum" };
+            mutationsdatumCell.SetBinding(EntryCell.TextProperty, "Schaden.Mutationsdatum");
+            mutationsdatumCell.IsEnabled = false;
+
+            var prioritaetCell = new EntryCell { Label = "Prioritaet" };
+            prioritaetCell.SetBinding(EntryCell.TextProperty, "Schaden.Prioritaet");
+
+            var meldeDatumLabel = new Label { Text = "Meldedatum" };
+            var meldeDatumDatumPicker = new DatePicker { Format = "D" };
+            meldeDatumDatumPicker.SetBinding(DatePicker.DateProperty, "Meldedatum");
+            
+            var eintrittsDatumDatumLabel = new Label { Text = "Eintrittsdatum" };
+            var eintrittsDatumDatumPicker = new DatePicker { Format = "D" };
+            eintrittsDatumDatumPicker.SetBinding(DatePicker.DateProperty, "Eintrittsdatum");
+           
+
+            var saveButton = new Button { Text = "Save" };
+            saveButton.SetBinding(Button.CommandProperty, "SaveCommand");
+
+            var cancelButton = new Button { Text = "Cancel" };
+            cancelButton.SetBinding(Button.CommandProperty, "CancelCommand");
+            cancelButton.SetBinding(IsVisibleProperty, "CanCancel");
 
             //var saveButton = new Button { Text = "Save" };
             //saveButton.SetBinding(Button.CommandProperty, "SaveCommand");
@@ -64,51 +78,68 @@ namespace ZeusMobile.Views
             //deleteButton.SetBinding(Button.CommandProperty, "DeleteCommand");
             //deleteButton.SetBinding(IsVisibleProperty, "CanDelete");
 
-
-
-            var meldeDatumLabel = new Label { Text = "Meldedatum" };
-            var meldeDatumDatumPicker = new DatePicker { Format = "D" };
-            meldeDatumDatumPicker.SetBinding(DatePicker.DateProperty, "Meldedatum");
-
-
-            //var eintrittsDatumDatumLabel = new Label { Text = "Eintrittsdatum" };
-            //var eintrittsDatumDatumPicker = new DatePicker { Format = "D" };
-            //eintrittsDatumDatumPicker.SetBinding(DatePicker.DateProperty, "Eintrittsdatum");
-
-
-            var strasseCell = new EntryCell { Label = "Strasse" };
-            strasseCell.SetBinding(EntryCell.TextProperty, "Strasse");
-
-            var saveButton = new Button { Text = "Save" };
-            saveButton.SetBinding(Button.CommandProperty, "SaveCommand");
-
-            var cancelButton = new Button { Text = "Cancel" };
-            cancelButton.SetBinding(Button.CommandProperty, "CancelCommand");
-            cancelButton.SetBinding(Button.IsVisibleProperty, "CanCancel");
-
-
-            var tableView = new TableView
+            var schadenKopfTable = new TableView
             {
-                Intent = TableIntent.Form,
+                Intent = TableIntent.Settings,
                 Root = new TableRoot
                 {
                     new TableSection
                     {
-                        strasseCell
+                       beschreibungCell, 
+                       schadenNrCell, 
+                       prioritaetCell
                     }
                 }
             };
 
+            var ortTable = new TableView
+            {
+                Intent = TableIntent.Settings,
+                Root = new TableRoot
+                {
+                    new TableSection("Schadenort")
+                    {
+                        strasseCell, 
+                        hausnrCell, 
+                        plzCell, 
+                        ortCell, 
+                        landCell, 
+                        parzelleCell, 
+                        gebaeudeNummerCell
+                    }
+                }
+            };
+
+            var statusTable = new TableView
+            {
+                Intent = TableIntent.Settings,
+                Root = new TableRoot
+                {
+                    new TableSection("Status")
+                    {
+                        statusCell,
+                        sachbearbeiterCell,
+                        mutationsdatumCell
+                    }
+                }
+            };
+
+
             Content = new StackLayout
             {
-                VerticalOptions = LayoutOptions.StartAndExpand,
+                //       VerticalOptions = LayoutOptions.StartAndExpand,
                 Children = {
-                    meldeDatumLabel, 
-                    meldeDatumDatumPicker, 
-                    tableView,
+                    schadenKopfTable,
+                    meldeDatumLabel,
+                    meldeDatumDatumPicker,
+                    eintrittsDatumDatumLabel,
+                    eintrittsDatumDatumPicker,
+                    statusTable,
+                    ortTable,
                     saveButton, 
                     cancelButton}
             };
+
         }
     }
 }
