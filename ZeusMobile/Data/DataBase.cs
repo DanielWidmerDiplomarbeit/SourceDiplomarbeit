@@ -78,7 +78,7 @@ namespace ZeusMobile.Data
         {
             lock (locker)
             {
-                return database.Find<Protokoll>(x => x.Id == schadenId);
+                return database.Find<Protokoll>(x => x.SchadenId == schadenId);
             }
         }
 
@@ -139,6 +139,10 @@ namespace ZeusMobile.Data
         {
             database.InsertOrReplaceAllWithChildren(items);
         }
+        public void InsertOrReplaceSchadenWithChildren(Schaden schaden)
+        {
+            database.InsertOrReplaceWithChildren(schaden);
+        }
 
         public void InsertOrReplaceAllPolicenWithChildren(List<Police> items)
         {
@@ -149,8 +153,15 @@ namespace ZeusMobile.Data
         {
             lock (locker)
             {
-                schaden.LetzteMutation = DateTime.Now;
-                database.InsertOrReplace(schaden);
+                if (schaden.Id == 0)
+                {
+                    database.Insert(schaden);
+                }
+                else
+                { 
+                    database.InsertOrReplace(schaden);
+                }
+               
             }
         }
 
@@ -158,15 +169,30 @@ namespace ZeusMobile.Data
         {
             lock (locker)
             {
-                database.InsertOrReplace(protokoll);
+                if (protokoll.Id == 0)
+                {
+                    database.Insert(protokoll);
+                }
+                else
+                {
+                    database.InsertOrReplace(protokoll);
+                }
+
             }
         }
-
-        public Protokoll GetProtokollByProtokollNr(int protokollnr)
+        public void DeleteProtokoll(Protokoll protokoll)
         {
             lock (locker)
             {
-                return database.Find<Protokoll>(x => x.ProtokollNr == protokollnr);
+                database.Delete(protokoll);
+            }
+        }
+
+        public Protokoll GetProtokollBySchadenNr(int schadenId)
+        {
+            lock (locker)
+            {
+                return database.Find<Protokoll>(x => x.SchadenId == schadenId);
             }
         }
     }

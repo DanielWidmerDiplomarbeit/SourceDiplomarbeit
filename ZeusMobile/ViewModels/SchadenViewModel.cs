@@ -106,7 +106,6 @@ namespace ZeusMobile.ViewModels
         public void Save()
         {
             MessagingCenter.Send(this, "SchadenSaved", Schaden);
-            MessagingCenter.Send(this, "SchadenReload", Schaden);
             Navigation.Pop();
         }
         #endregion

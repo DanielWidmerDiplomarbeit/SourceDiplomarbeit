@@ -1,6 +1,8 @@
 ﻿using System.Linq;
 using Xamarin.Forms;
+using ZeusMobile.Data;
 using ZeusMobile.Models;
+using ZeusMobile.Services;
 using ZeusMobile.Views;
 
 namespace ZeusMobile.ViewModels
@@ -8,10 +10,12 @@ namespace ZeusMobile.ViewModels
     class SchadenNavigationViewModel : BaseViewModel
     {
         Schaden _schaden;
+        private readonly ZeusDbService zeusDbService;
 
         public SchadenNavigationViewModel(Schaden schaden)
         {
             _schaden = schaden;
+            zeusDbService = new ZeusDbService(App.Database);
 
             InitNavigationView();
 
@@ -27,10 +31,9 @@ namespace ZeusMobile.ViewModels
 
             MessagingCenter.Subscribe<SchadenNavigationView>(this, "SchadenOrtBearbeiten", sender => Navigation.Push(ViewFactory.CreatePage(new SchadenOrtViewModel(_schaden))));
 
-            MessagingCenter.Subscribe<SchadenNavigationView>(this, "ProtokollBearbeiten", sender => Navigation.Push(ViewFactory.CreatePage(new ProtokollViewModel(Protokoll))));
+            MessagingCenter.Subscribe<SchadenNavigationView>(this, "ProtokollBearbeiten", sender => Navigation.Push(ViewFactory.CreatePage(new ProtokollViewModel(_schaden, Protokoll, App.Database))));
         }
-
-
+        
         public Person Person { get; set; }
         public Versicherter Versicherter { get; set; }
         public Police Police { get; set; }
@@ -38,7 +41,6 @@ namespace ZeusMobile.ViewModels
 
         public Schaden Schaden
         {
-
             get { return _schaden; }
             set
             {
@@ -48,7 +50,6 @@ namespace ZeusMobile.ViewModels
                 OnPropertyChanged();
             }
         }
-
 
         private Protokoll _protokoll;
         public Protokoll Protokoll
@@ -79,8 +80,15 @@ namespace ZeusMobile.ViewModels
 
         private void ProtokollVomSchadenLesen()
         {
-            Protokoll = App.Database.GetSchadenProtokoll(_schaden.Id) ??
-                               new Protokoll { SchadenId = _schaden.Id, Beschreibung = "Neues Protokoll" };
+           Protokoll = App.Database.GetSchadenProtokoll(_schaden.Id);
+            if (Protokoll == null)
+            {
+                Protokoll = new Protokoll{SchadenId =  _schaden.Id, Beschreibung = "Neues Protokoll"};
+                zeusDbService.SaveProtokoll(_schaden, Protokoll);
+                Protokoll = zeusDbService.ReadProtokoll(Schaden.Id);
+
+            }
+        
         }
 
         private void PoliceVomSchadenLesen()

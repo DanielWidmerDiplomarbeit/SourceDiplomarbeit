@@ -13,8 +13,6 @@ namespace ZeusMobile.Models
         [ForeignKey(typeof(Schaden))]
         public int SchadenId { get; set; }
 
-        public int ProtokollNr { get; set; }
-
         [MaxLength(4000)]
         public string Beschreibung { get; set; }
         
@@ -39,10 +37,7 @@ namespace ZeusMobile.Models
             get
             {
                 var listenText = Beschreibung;
-                if (ProtokollNr > 0)
-                {
-                    listenText += ", " + ProtokollNr;
-                }
+
                 if (!string.IsNullOrEmpty(Beschreibung))
                 {
                     listenText += " " + Beschreibung.PadLeft(50);

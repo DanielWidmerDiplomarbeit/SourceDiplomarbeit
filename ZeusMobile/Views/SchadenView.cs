@@ -5,7 +5,6 @@ namespace ZeusMobile.Views
 {
     public class SchadenView : ContentPage
     {
-
         public SchadenView()
         {
             var beschreibungCell = new EntryCell { Label = "Beschreibung" };
@@ -85,6 +84,15 @@ namespace ZeusMobile.Views
                     cancelButton}
             };
 
+
+
+        }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+
+                MessagingCenter.Send(this, "InitSchadenView");
         }
     }
 }

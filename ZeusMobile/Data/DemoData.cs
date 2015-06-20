@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using ZeusMobile.Models;
+using ZeusMobile.Services;
 
 namespace ZeusMobile.Data
 {
@@ -15,6 +16,7 @@ namespace ZeusMobile.Data
 
         public void BuildDemoData(DataBase database)
         {
+            var zeusDbService = new ZeusDbService(database);
             var versichertenNr = 3215;
             var expertenNr = 15;
 
@@ -127,19 +129,18 @@ namespace ZeusMobile.Data
             {
                 if (schaden.Id == 1)
                 {
-                    schaden.Protokoll = new Protokoll();
-                    var protokoll = DemoSchadenProtokoll().FirstOrDefault(x => x.ProtokollNr == 1);
-                    protokoll.SchadenId = schaden.Id;
+                    zeusDbService.SaveProtokoll(schaden,  DemoSchadenProtokoll()[0]);
                 }
-
+                if (schaden.Id == 2)
+                {
+                    zeusDbService.SaveProtokoll(schaden, DemoSchadenProtokoll()[1]);
+                }
+                
                 if (schaden.Id == 3)
                 {
-                    schaden.Protokoll = new Protokoll();
-                    var protokoll = DemoSchadenProtokoll().FirstOrDefault(x => x.ProtokollNr == 2);
-                    protokoll.SchadenId = schaden.Id;
+                    zeusDbService.SaveProtokoll(schaden, DemoSchadenProtokoll()[2]);
                 }
             }
-
             database.InsertOrReplaceAllSchaedenWithChildren(Schaeden);
 
         }
@@ -181,8 +182,9 @@ namespace ZeusMobile.Data
         private List<Protokoll> DemoSchadenProtokoll()
         {
             var schadenProtokollList = new List<Protokoll> {
-            new Protokoll { ProtokollNr = 1,  Beschreibung = "Lawine",Approxsumme = 1200000, Selbstbehalt = 500},
-            new Protokoll { ProtokollNr = 2, Beschreibung = "Gleiche Lawine", Approxsumme = 500000, Selbstbehalt = 600},
+            new Protokoll {  Beschreibung = "Lawine",Approxsumme = 1200000, Selbstbehalt = 500},
+            new Protokoll {  Beschreibung = "Gleiche Lawine", Approxsumme = 500000, Selbstbehalt = 600},
+            new Protokoll {  Beschreibung = "Wasser", Approxsumme = 12000, Selbstbehalt = 600},
          };
             return schadenProtokollList;
         }

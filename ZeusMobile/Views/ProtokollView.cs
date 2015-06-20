@@ -59,6 +59,11 @@ namespace ZeusMobile.Views
 
             var saveButton = new Button { Text = "Save" };
             saveButton.SetBinding(Button.CommandProperty, "SaveCommand");
+            saveButton.SetBinding(IsEnabledProperty, "CanSave");
+            
+            var deleteButton = new Button { Text = "Delete" };
+            deleteButton.SetBinding(Button.CommandProperty, "DeleteCommand");
+            deleteButton.SetBinding(IsVisibleProperty, "CanDelete");
 
             var cancelButton = new Button { Text = "Cancel" };
             cancelButton.SetBinding(Button.CommandProperty, "CancelCommand");
@@ -110,6 +115,7 @@ namespace ZeusMobile.Views
                     interneEditorLine,
                     tableBetraege,
                     saveButton,
+                    deleteButton,
                     cancelButton
                 }
                };

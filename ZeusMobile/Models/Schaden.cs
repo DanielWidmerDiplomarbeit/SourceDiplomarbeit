@@ -101,9 +101,7 @@ namespace ZeusMobile.Models
         {
             get
             {
-                var listenText = Beschreibung;
-
-                return listenText;
+                return Beschreibung;
             }
         }
     }

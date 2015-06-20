@@ -1,13 +1,11 @@
 ﻿using System;
-using CoreFoundation;
 using NUnit.Framework;
 using System.IO;
-using SQLiteNetExtensions.Extensions;
-using ZeusMobile;
 using System.Linq;
 using ZeusMobile.Data;
-using System.Collections.Generic;
 using ZeusMobile.Models;
+using ZeusMobile.Services
+ ;
 
 namespace ZeusMobileTest
 {
@@ -15,8 +13,8 @@ namespace ZeusMobileTest
     public class BasicTests
     {
 
-        [Test]
-        public void buildDemoDatabase()
+        [SetUp]
+        public void BuildDemoDatabase()
         {
             const string sqliteFilename = "TestDbLite.db3";
             var documentsPath = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
@@ -36,7 +34,7 @@ namespace ZeusMobileTest
                 {
                     File.Copy(path, dropBoxFile);
                 }
-                catch (Exception)
+                catch
                 {
                     // do nothing
                 }
@@ -58,26 +56,26 @@ namespace ZeusMobileTest
             Assert.AreEqual(2, database.GetSchadensExperten().ToList().Count());
             Assert.AreEqual(3, database.GetSchaeden().ToList().Count());
             Assert.AreEqual(2, database.GetPolicen().ToList().Count());
-            Assert.AreEqual(2, database.GetSchadenProtokolle().ToList().Count());
+            Assert.AreEqual(3, database.GetSchadenProtokolle().ToList().Count());
         }
 
         [Test]
         public void Test_SaveSchaden()
         {
-            var database = AppConn.TestDataBase;
-            var schaden = database.GetSchaden(1);
+            var zeusDbService = new ZeusDbService(AppConn.TestDataBase);
+            var schaden = zeusDbService.ReadSchaden(1);
             Assert.AreEqual("Wasserschaden Keller", schaden.Beschreibung);
             schaden.Beschreibung = "Wasserschaden Estrich";
-            database.SaveSchaden(schaden);
-            schaden = database.GetSchaden(1);
+            zeusDbService.SaveSchaden(schaden);
+            schaden = zeusDbService.ReadSchaden(1);
             Assert.AreEqual("Wasserschaden Estrich", schaden.Beschreibung);
         }
 
         [Test]
         public void Test_InsertProtokoll()
         {
-            var database = AppConn.TestDataBase;
-            var schaden = database.GetSchaden(1);
+            var zeusDbService = new ZeusDbService(AppConn.TestDataBase);
+            var schaden = zeusDbService.ReadSchaden(1);
 
             var protokoll = new Protokoll
             {
@@ -87,24 +85,26 @@ namespace ZeusMobileTest
                 Selbstbehalt = 5000,
                 Minimum = 400000,
                 Maximum = 60000,
-                InterneNotiz = "Ich bin eine interne Notiz ääää ööö üüü ÄÄÖÖÜÜ",
+                InterneNotiz = "Ich bin eine interne Notiz mit Sonderzeichen äöü ÄÖÜ",
                 Ursache = "selber schuld",
                 UrsachenBeschreibung = "Er ist wirklich selber schuld",
-                ProtokollNr = 4711,
                 LetzteBearbeitung = DateTime.Now
             };
+            zeusDbService.SaveProtokoll(schaden, protokoll);
 
-            database.SaveProtokoll(protokoll);
-            database.GetProtokollByProtokollNr(4711);
-            
+
+            zeusDbService.SaveProtokoll(schaden, protokoll);
+            protokoll = zeusDbService.ReadProtokoll(schaden.Id);
+
             Assert.AreEqual("Test Neues Schadenprotokoll", protokoll.Beschreibung);
         }
 
+        [Test]
         public void Test_UpdateProtokoll()
         {
-            var database = AppConn.TestDataBase;
-            var schaden = database.GetSchaden(1);
-
+            var zeusDbService = new ZeusDbService(AppConn.TestDataBase);
+            var schaden = zeusDbService.ReadSchaden(1);
+            var kontrolldatum = schaden.LetzteMutation;
             var protokoll = new Protokoll
             {
                 Beschreibung = "Test Neues Schadenprotokoll",
@@ -116,19 +116,67 @@ namespace ZeusMobileTest
                 InterneNotiz = "Ich bin eine interne Notiz ääää ööö üüü ÄÄÖÖÜÜ",
                 Ursache = "selber schuld",
                 UrsachenBeschreibung = "Er ist wirklich selber schuld",
-                ProtokollNr = 4712,
                 LetzteBearbeitung = DateTime.Now
             };
 
-            database.SaveProtokoll(protokoll);
-            var neuesProtokoll = database.GetProtokollByProtokollNr(4712);
-            Assert.AreEqual(500000,neuesProtokoll.Approxsumme);
+            zeusDbService.SaveProtokoll(schaden, protokoll);
+            var neuesProtokoll = zeusDbService.ReadProtokoll(schaden.Id);
+            Assert.AreEqual(500000, neuesProtokoll.Approxsumme);
             neuesProtokoll.Approxsumme = 555555;
-            database.SaveProtokoll(neuesProtokoll);
-            var mutiertesProtokoll = database.GetProtokollByProtokollNr(4712);
+            zeusDbService.SaveProtokoll(schaden, neuesProtokoll);
+            var mutiertesProtokoll = zeusDbService.ReadProtokoll(schaden.Id);
 
             Assert.AreEqual(555555, mutiertesProtokoll.Approxsumme);
+            Assert.AreNotEqual(kontrolldatum, schaden.LetzteMutation);
         }
+
+        [Test]
+        public void Test_DeleteProtokoll()
+        {
+            var zeusDbService = new ZeusDbService(AppConn.TestDataBase);
+            var schaden = zeusDbService.ReadSchaden(1);
+            var kontrolldatum = schaden.LetzteMutation;
+            var protokoll = new Protokoll
+            {
+                Beschreibung = "Test Neues Schadenprotokoll, löschen und neu Anlegen",
+                SchadenId = schaden.Id,
+                Approxsumme = 500000,
+                Selbstbehalt = 5000,
+                Minimum = 400000,
+                Maximum = 60000,
+                InterneNotiz = "Ich bin eine interne Notiz",
+                Ursache = "Wasser",
+                UrsachenBeschreibung = "Wasserschaden",
+                LetzteBearbeitung = DateTime.Now
+            };
+
+            zeusDbService.SaveProtokoll(schaden, protokoll);
+            zeusDbService.DeleteProtokoll(protokoll);
+
+            var geloeschtesProtokoll = zeusDbService.ReadProtokoll(schaden.Id);
+            Assert.AreEqual(null, geloeschtesProtokoll, "Nach dem Löschen darf kein Protokoll vorhanden sein");
+            Assert.AreNotEqual(kontrolldatum, schaden.LetzteMutation);
+
+            protokoll = new Protokoll
+            {
+                Beschreibung = "Zweites Schadenprotokoll, nach Löschen",
+                SchadenId = schaden.Id,
+                Approxsumme = 500000,
+                Selbstbehalt = 5000,
+                Minimum = 400000,
+                Maximum = 60000,
+                InterneNotiz = "Ich bin eine interne Notiz",
+                Ursache = "Wasser",
+                UrsachenBeschreibung = "Wasserschaden",
+                LetzteBearbeitung = DateTime.Now
+            };
+
+            zeusDbService.SaveProtokoll(schaden, protokoll);
+            var neuesProtokoll = zeusDbService.ReadProtokoll(schaden.Id);
+
+            Assert.AreEqual("Zweites Schadenprotokoll, nach Löschen", neuesProtokoll.Beschreibung);
+        }
+
     }
 
     public static class AppConn

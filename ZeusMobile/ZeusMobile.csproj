@@ -37,6 +37,8 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="App.cs" />
+    <Compile Include="Services\IZeusDbService.cs" />
+    <Compile Include="Services\ZeusDbService.cs" />
     <Compile Include="ViewModels\SchadenNavigationViewModel.cs" />
     <Compile Include="ViewModels\SchadenListeViewModel.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
