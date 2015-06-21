@@ -14,17 +14,17 @@ namespace ZeusMobile.Views
             schadenNrCell.SetBinding(EntryCell.TextProperty, "Schaden.Id");
 
             var statusCell = new EntryCell { Label = "Status" };
-            statusCell.SetBinding(EntryCell.TextProperty, "Schaden.Status");
+            statusCell.SetBinding(EntryCell.TextProperty, "Status");
 
             var sachbearbeiterCell = new EntryCell { Label = "Sachbearbeiter" };
             sachbearbeiterCell.SetBinding(EntryCell.TextProperty, "Schaden.Sachbearbeiter");
 
             var mutationsdatumCell = new EntryCell { Label = "Mutationsdatum" };
-            mutationsdatumCell.SetBinding(EntryCell.TextProperty, "Schaden.Mutationsdatum");
+            mutationsdatumCell.SetBinding(EntryCell.TextProperty, "Schaden.MutationsDatumText");
             mutationsdatumCell.IsEnabled = false;
-
+            
             var prioritaetCell = new EntryCell { Label = "Prioritaet" };
-            prioritaetCell.SetBinding(EntryCell.TextProperty, "Schaden.Prioritaet");
+            prioritaetCell.SetBinding(EntryCell.TextProperty, "Prioritaet");
 
             var meldeDatumLabel = new Label { Text = "Meldedatum" };
             var meldeDatumDatumPicker = new DatePicker { Format = "D" };

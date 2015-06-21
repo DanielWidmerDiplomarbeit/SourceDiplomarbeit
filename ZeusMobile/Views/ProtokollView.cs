@@ -54,7 +54,7 @@ namespace ZeusMobile.Views
             maximumCell.SetBinding(EntryCell.TextProperty, "Maximum");
 
             var letzteBearbeitungCell = new EntryCell { Label = "LetzteBearbeitung" };
-            letzteBearbeitungCell.SetBinding(EntryCell.TextProperty, "LetzteBearbeitung");
+            letzteBearbeitungCell.SetBinding(EntryCell.TextProperty, "Protokoll.LetzteBearbeitungText");
             letzteBearbeitungCell.IsEnabled = false;
 
             var saveButton = new Button { Text = "Save" };

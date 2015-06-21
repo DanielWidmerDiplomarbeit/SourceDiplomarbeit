@@ -135,7 +135,7 @@
   </PropertyGroup>
   <PropertyGroup>
     <StartupObject>ZeusMobileiOS.Application</StartupObject>
-    <AssemblyName>TodoMvvm</AssemblyName>
+    <AssemblyName>ZeusMobileiOS</AssemblyName>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="SQLite.Net">

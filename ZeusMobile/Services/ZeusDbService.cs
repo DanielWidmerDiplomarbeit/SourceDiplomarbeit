@@ -16,13 +16,17 @@ namespace ZeusMobile.Services
 
         public void SaveProtokoll(Schaden schaden, Protokoll protokoll)
         {
-            if (schaden.Status == Schaden.EnumStatus.Gemeldet
-                || schaden.Status == Schaden.EnumStatus.ZurBesichtigung
-                || schaden.Status == 0)
-            {
-                schaden.Status = Schaden.EnumStatus.Aufgenommen;
-            }
+            SaveProtokoll(schaden, protokoll, 0);
+        }
 
+        public void SaveProtokoll(Schaden schaden, Protokoll protokoll, Schaden.EnumStatus status)
+        {
+            if (status > 0)
+            {
+                schaden.Status = status;
+            }
+            
+            protokoll.LetzteBearbeitung = DateTime.Now;
             protokoll.SchadenId = schaden.Id;
             _dataBase.SaveProtokoll(protokoll);
             protokoll = _dataBase.GetProtokollBySchadenNr(schaden.Id);
@@ -32,7 +36,8 @@ namespace ZeusMobile.Services
                 schaden.Protokoll = new Protokoll();
                 schaden.Protokoll = protokoll;
             }
-            
+
+
             schaden.LetzteMutation = DateTime.Now;
             _dataBase.SaveSchaden(schaden);
         }
@@ -65,7 +70,7 @@ namespace ZeusMobile.Services
 
         public List<Schaden> ReadSchadenListe()
         {
-            throw new NotImplementedException();
+            return _dataBase.GetSchaeden();
         }
 
         public Objekt ReadObjekt(int objektId)

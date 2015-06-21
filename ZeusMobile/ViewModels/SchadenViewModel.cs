@@ -9,7 +9,7 @@ namespace ZeusMobile.ViewModels
 {
     class SchadenViewModel : BaseViewModel
     {
-       
+
         ICommand _saveCommand, _cancelCommand;
 
         public SchadenViewModel(Schaden schaden)
@@ -20,13 +20,11 @@ namespace ZeusMobile.ViewModels
         }
 
         #region nur lesbare Properties
-        
         public Schaden Schaden { get; set; }
 
         #endregion
 
         #region schreibbare Properties
-     
         public string Beschreibung
         {
             get
@@ -41,32 +39,19 @@ namespace ZeusMobile.ViewModels
                 OnPropertyChanged();
             }
         }
-        public Schaden.EnumPrioritaet Prioritaet
+        public string Prioritaet
         {
             get
             {
-                return Schaden.Prioritaet;
-            }
-            set
-            {
-                if (Schaden.Prioritaet == value)
-                    return;
-                Schaden.Prioritaet = value;
-                OnPropertyChanged();
+                return ConvertToString(Schaden.Prioritaet);
+
             }
         }
-        public Schaden.EnumStatus Status
+        public string Status
         {
             get
             {
-                return Schaden.Status;
-            }
-            set
-            {
-                if (Schaden.Status == value)
-                    return;
-                Schaden.Status = value;
-                OnPropertyChanged();
+                return ConvertToString(Schaden.Status);
             }
         }
 
@@ -98,7 +83,7 @@ namespace ZeusMobile.ViewModels
         }
         #endregion
 
-        #region commandMethoden
+        #region Methoden
         public bool CanSave
         {
             get { return Schaden.Id > 0; }
@@ -107,6 +92,10 @@ namespace ZeusMobile.ViewModels
         {
             MessagingCenter.Send(this, "SchadenSaved", Schaden);
             Navigation.Pop();
+        }
+        public static String ConvertToString(Enum eEnum)
+        {
+            return Enum.GetName(eEnum.GetType(), eEnum);
         }
         #endregion
     }

@@ -6,7 +6,6 @@ namespace ZeusMobile.Models
 {
     public class Protokoll
     {
-
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
 
@@ -15,7 +14,7 @@ namespace ZeusMobile.Models
 
         [MaxLength(4000)]
         public string Beschreibung { get; set; }
-        
+
         [MaxLength(4000)]
         public string InterneNotiz { get; set; }
 
@@ -32,21 +31,24 @@ namespace ZeusMobile.Models
         public DateTime LetzteBearbeitung { get; set; }
 
         [Ignore]
+        public string LetzteBearbeitungText
+        {
+            get
+            {
+                if (LetzteBearbeitung.Equals(DateTime.MinValue))
+                {
+                    return string.Empty;
+                }
+                return LetzteBearbeitung.ToString("dd.MM.yyyy HH:mm:ss ");
+            }
+        }
+
+        [Ignore]
         public String ProtokollListeText
         {
             get
             {
-                var listenText = Beschreibung;
-
-                if (!string.IsNullOrEmpty(Beschreibung))
-                {
-                    listenText += " " + Beschreibung.PadLeft(50);
-                }
-                if (string.IsNullOrEmpty(listenText))
-                {
-                    return "Neues Protokoll";
-                }
-                return listenText;
+                return string.IsNullOrEmpty(Beschreibung) ? "Neues Protokoll" : Beschreibung;
             }
         }
     }

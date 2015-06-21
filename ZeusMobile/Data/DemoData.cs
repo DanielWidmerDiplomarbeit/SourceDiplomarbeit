@@ -129,13 +129,13 @@ namespace ZeusMobile.Data
             {
                 if (schaden.Id == 1)
                 {
-                    zeusDbService.SaveProtokoll(schaden,  DemoSchadenProtokoll()[0]);
+                    zeusDbService.SaveProtokoll(schaden, DemoSchadenProtokoll()[0]);
                 }
                 if (schaden.Id == 2)
                 {
                     zeusDbService.SaveProtokoll(schaden, DemoSchadenProtokoll()[1]);
                 }
-                
+
                 if (schaden.Id == 3)
                 {
                     zeusDbService.SaveProtokoll(schaden, DemoSchadenProtokoll()[2]);
@@ -172,9 +172,9 @@ namespace ZeusMobile.Data
         {
             var Schaeden = new List<Schaden> {
 
-				new Schaden { Beschreibung ="Wasserschaden Keller", GebaeudeNummer = 1711, Eintrittsdatum = DateTime.Parse("01.07.2015"), Meldedatum = DateTime.Parse("02.07.2015"), Gemeinde = "Netstal", Strasse = "Obergasse", Hausnr = "1 A", Parzelle = 576, Land = "CH", Plz = "8754", Ort = "Netstal"},
-				new Schaden { Beschreibung ="Dach eingedrückt", GebaeudeNummer = 1718, Eintrittsdatum = DateTime.Parse("01.08.2015"), Meldedatum = DateTime.Parse("02.08.2015"), Gemeinde = "Netstal", Strasse = "Obergasse", Hausnr = "1 A", Parzelle = 416, Land = "CH", Plz = "8754", Ort = "Netstal"},
-				new Schaden { Beschreibung ="Wasserschaden", GebaeudeNummer = 1719, Eintrittsdatum = DateTime.Parse("01.08.2015"), Meldedatum = DateTime.Parse("02.08.2015"), Gemeinde = "Netstal", Strasse = "Am Bergli", Hausnr = "323", Parzelle = 256, Land = "CH", Plz = "8754", Ort = "Netstal"}
+				new Schaden {Status = Schaden.EnumStatus.ZurBesichtigung, LetzteMutation = DateTime.Now, Beschreibung ="Wasserschaden Keller", GebaeudeNummer = 1711, Eintrittsdatum = DateTime.Parse("01.07.2015"), Meldedatum = DateTime.Parse("02.07.2015"), Gemeinde = "Netstal", Strasse = "Obergasse", Hausnr = "1 A", Parzelle = 576, Land = "CH", Plz = "8754", Ort = "Netstal"},
+				new Schaden {Status = Schaden.EnumStatus.ZurBesichtigung, LetzteMutation = DateTime.Now, Beschreibung ="Dach eingedrückt", GebaeudeNummer = 1718, Eintrittsdatum = DateTime.Parse("01.08.2015"), Meldedatum = DateTime.Parse("02.08.2015"), Gemeinde = "Netstal", Strasse = "Obergasse", Hausnr = "1 A", Parzelle = 416, Land = "CH", Plz = "8754", Ort = "Netstal"},
+				new Schaden {Status = Schaden.EnumStatus.ZurBesichtigung, LetzteMutation = DateTime.Now, Beschreibung ="Wasserschaden", GebaeudeNummer = 1719, Eintrittsdatum = DateTime.Parse("01.08.2015"), Meldedatum = DateTime.Parse("02.08.2015"), Gemeinde = "Netstal", Strasse = "Am Bergli", Hausnr = "323", Parzelle = 256, Land = "CH", Plz = "8754", Ort = "Netstal"}
          };
             return Schaeden;
         }

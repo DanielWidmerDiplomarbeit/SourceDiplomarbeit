@@ -10,136 +10,130 @@ namespace ZeusMobile.ViewModels
     internal class ProtokollViewModel : BaseViewModel
     {
         private  Schaden _schaden;
-        private Protokoll _protokoll;
         private readonly ZeusDbService _zeusDbService;
         ICommand _saveCommand, _deleteCommand, _cancelCommand;
 
         public ProtokollViewModel(Schaden schaden, Protokoll protokoll, DataBase dataBase)
         {
             _schaden = schaden;
-            _protokoll = protokoll;
+            Protokoll = protokoll;
             _zeusDbService = new ZeusDbService(dataBase);
             _saveCommand = new Command(Save);
             _deleteCommand = new Command(Delete);
             _cancelCommand = new Command(() => Navigation.Pop());
         }
 
+        public Protokoll Protokoll { get; set; }
+
         public int Id
         {
-            get { return _protokoll.Id; }
+            get { return Protokoll.Id; }
         }
 
         public string ProtokollListeText
         {
-            get { return _protokoll.ProtokollListeText; }
+            get { return Protokoll.ProtokollListeText; }
         }
 
         public string Beschreibung
         {
-            get { return _protokoll.Beschreibung; }
+            get { return Protokoll.Beschreibung; }
             set
             {
-                if (_protokoll.Beschreibung == value)
+                if (Protokoll.Beschreibung == value)
                     return;
-                _protokoll.Beschreibung = value;
+                Protokoll.Beschreibung = value;
                 OnPropertyChanged();
             }
         }
 
         public string InterneNotiz
         {
-            get { return _protokoll.InterneNotiz; }
+            get { return Protokoll.InterneNotiz; }
             set
             {
-                if (_protokoll.InterneNotiz == value)
+                if (Protokoll.InterneNotiz == value)
                     return;
-                _protokoll.InterneNotiz = value;
+                Protokoll.InterneNotiz = value;
                 OnPropertyChanged();
             }
         }
 
         public string Ursache
         {
-            get { return _protokoll.Ursache; }
+            get { return Protokoll.Ursache; }
             set
             {
-                if (_protokoll.Ursache == value)
+                if (Protokoll.Ursache == value)
                     return;
-                _protokoll.Ursache = value;
+                Protokoll.Ursache = value;
                 OnPropertyChanged();
             }
         }
 
         public string UrsachenBeschreibung
         {
-            get { return _protokoll.UrsachenBeschreibung; }
+            get { return Protokoll.UrsachenBeschreibung; }
             set
             {
-                if (_protokoll.UrsachenBeschreibung == value)
+                if (Protokoll.UrsachenBeschreibung == value)
                     return;
-                _protokoll.UrsachenBeschreibung = value;
+                Protokoll.UrsachenBeschreibung = value;
                 OnPropertyChanged();
             }
         }
 
         public decimal Approxsumme
         {
-            get { return _protokoll.Approxsumme; }
+            get { return Protokoll.Approxsumme; }
             set
             {
-                if (_protokoll.Approxsumme == value)
+                if (Protokoll.Approxsumme == value)
                     return;
-                _protokoll.Approxsumme = value;
+                Protokoll.Approxsumme = value;
                 OnPropertyChanged();
             }
         }
 
         public decimal Selbstbehalt
         {
-            get { return _protokoll.Selbstbehalt; }
+            get { return Protokoll.Selbstbehalt; }
             set
             {
-                if (_protokoll.Selbstbehalt == value)
+                if (Protokoll.Selbstbehalt == value)
                     return;
-                _protokoll.Selbstbehalt = value;
+                Protokoll.Selbstbehalt = value;
                 OnPropertyChanged();
             }
         }
 
         public decimal Minimum
         {
-            get { return _protokoll.Minimum; }
+            get { return Protokoll.Minimum; }
             set
             {
-                if (_protokoll.Minimum == value)
+                if (Protokoll.Minimum == value)
                     return;
-                _protokoll.Minimum = value;
+                Protokoll.Minimum = value;
                 OnPropertyChanged();
             }
         }
 
         public decimal Maximum
         {
-            get { return _protokoll.Maximum; }
+            get { return Protokoll.Maximum; }
             set
             {
-                if (_protokoll.Maximum == value)
+                if (Protokoll.Maximum == value)
                     return;
-                _protokoll.Maximum = value;
+                Protokoll.Maximum = value;
                 OnPropertyChanged();
             }
         }
 
         public DateTime LetzteBearbeitung
         {
-            get { return _protokoll.LetzteBearbeitung; }
-            set
-            {
-                if (_protokoll.LetzteBearbeitung == value)
-                    return;
-                _protokoll.LetzteBearbeitung = value;
-                OnPropertyChanged();
-            }
+            get { return Protokoll.LetzteBearbeitung; }
         }
 
         #region commands
@@ -184,7 +178,7 @@ namespace ZeusMobile.ViewModels
 
         public bool CanDelete
         {
-            get { return _protokoll.Id > 0; }
+            get { return Protokoll.Id > 0; }
         }
         public bool CanCancel
         {
@@ -197,13 +191,13 @@ namespace ZeusMobile.ViewModels
 
         public void Delete  ()
         {
-            _zeusDbService.DeleteProtokoll( _protokoll);
+            _zeusDbService.DeleteProtokoll( Protokoll);
             MessagingCenter.Send(this, "SchadenSaved", _schaden);
             Navigation.Pop();
         }    
         public void Save()
         {
-            _zeusDbService.SaveProtokoll(_schaden, _protokoll);
+            _zeusDbService.SaveProtokoll(_schaden, Protokoll, Schaden.EnumStatus.Aufgenommen);
             MessagingCenter.Send(this, "SchadenSaved", _schaden);
             Navigation.Pop();
         }

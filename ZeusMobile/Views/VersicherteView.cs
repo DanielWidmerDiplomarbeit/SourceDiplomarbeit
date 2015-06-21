@@ -38,10 +38,10 @@ namespace ZeusMobile.Views
 
             var kundenNrCell = new EntryCell { Label = "Versichertern-Nummer" };
             kundenNrCell.SetBinding(EntryCell.TextProperty, "Versicherter.VersichertenNr");
-  
+
             var kundeSeitCell = new EntryCell { Label = "Kunde seit" };
             kundeSeitCell.SetBinding(EntryCell.TextProperty, "KundeSeitAnzeige");
-  
+
             var personTable = new TableView
              {
                  Intent = TableIntent.Settings,

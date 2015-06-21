@@ -34,7 +34,7 @@ namespace ZeusMobile.Views
             sachbearbeiterCell.SetBinding(EntryCell.TextProperty, "Schaden.Sachbearbeiter");
 
             var mutationsdatumCell = new EntryCell { Label = "Mutationsdatum" };
-            mutationsdatumCell.SetBinding(EntryCell.TextProperty, "Schaden.Mutationsdatum");
+            mutationsdatumCell.SetBinding(EntryCell.TextProperty, "Schaden.MutationsDatumText");
             mutationsdatumCell.IsEnabled = false;
 
             var saveButton = new Button { Text = "Save" };

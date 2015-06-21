@@ -76,6 +76,8 @@ namespace ZeusMobileTest
         {
             var zeusDbService = new ZeusDbService(AppConn.TestDataBase);
             var schaden = zeusDbService.ReadSchaden(1);
+            var altesProtokoll = zeusDbService.ReadProtokoll(1);
+            zeusDbService.DeleteProtokoll(altesProtokoll);
 
             var protokoll = new Protokoll
             {
@@ -91,9 +93,6 @@ namespace ZeusMobileTest
                 LetzteBearbeitung = DateTime.Now
             };
             zeusDbService.SaveProtokoll(schaden, protokoll);
-
-
-            zeusDbService.SaveProtokoll(schaden, protokoll);
             protokoll = zeusDbService.ReadProtokoll(schaden.Id);
 
             Assert.AreEqual("Test Neues Schadenprotokoll", protokoll.Beschreibung);
@@ -104,6 +103,9 @@ namespace ZeusMobileTest
         {
             var zeusDbService = new ZeusDbService(AppConn.TestDataBase);
             var schaden = zeusDbService.ReadSchaden(1);
+            var altesProtokoll = zeusDbService.ReadProtokoll(1);
+            zeusDbService.DeleteProtokoll(altesProtokoll);
+            
             var kontrolldatum = schaden.LetzteMutation;
             var protokoll = new Protokoll
             {

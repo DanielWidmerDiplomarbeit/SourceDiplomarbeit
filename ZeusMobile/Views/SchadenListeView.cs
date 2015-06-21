@@ -18,16 +18,22 @@ namespace ZeusMobile.Views
             pendenteFaelle.SetBinding(Switch.IsToggledProperty, "NurPendente");
             pendenteFaelle.Toggled += pendenteFaelle_Toggled;
 
-
+            var sucheLabel = new Label { Text = "Suche:" };
+            var suchText = new Entry();
+            suchText.SetBinding(Entry.TextProperty, "SucheText");
+     
             var listView = new ListView { RowHeight = 40 };
             listView.SetBinding(ListView.ItemsSourceProperty, "SchadensAuswahlListe");
             listView.SetBinding(ListView.SelectedItemProperty, new Binding("SelectedItem", BindingMode.TwoWay));
             listView.ItemTemplate = new DataTemplate(typeof(SchadenItemCell));
 
+            var searchButton = new Button { Text = "Suche" };
+            searchButton.SetBinding(Button.CommandProperty, "SearchCommand");
+            
             Content = new StackLayout
             {
                 VerticalOptions = LayoutOptions.FillAndExpand,
-                Children = { pendenteFaelleLabel, pendenteFaelle, listView }
+                Children = { sucheLabel ,suchText, searchButton, pendenteFaelleLabel, pendenteFaelle, listView }
             };
         }
 

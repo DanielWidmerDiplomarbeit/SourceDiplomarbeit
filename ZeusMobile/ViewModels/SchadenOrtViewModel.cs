@@ -169,8 +169,7 @@ namespace ZeusMobile.ViewModels
         }
 
         #endregion
-
-
+        
         #region commands
         public ICommand SaveCommand
         {

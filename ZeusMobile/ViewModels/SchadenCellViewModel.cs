@@ -7,7 +7,13 @@ namespace ZeusMobile.ViewModels
 	{
 	    public Schaden Schaden { get; set; }
 
-        public string SchadenListeText { get { return Schaden.SchadenListeText; } }
+	    public string SchadenListeText
+	    {
+	        get
+	        {
+                return Schaden.Beschreibung + " " + Schaden.Ort;
+	        }
+	    }
 		
 		public SchadenCellViewModel (Schaden schadenItem)
 		{

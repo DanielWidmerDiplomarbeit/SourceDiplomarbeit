@@ -1,14 +1,52 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
+using System.Windows.Input;
 using Xamarin.Forms;
 using ZeusMobile.Models;
-using ZeusMobile.Views;
+using ZeusMobile.Services;
+
 
 namespace ZeusMobile.ViewModels
 {
     class SchadenListeViewModel : BaseViewModel
     {
-        ObservableCollection<SchadenCellViewModel> _schadensAuswahlListe = new ObservableCollection<SchadenCellViewModel>();
+        private ObservableCollection<SchadenCellViewModel> _schadensAuswahlListe = new ObservableCollection<SchadenCellViewModel>();
+
+
+        private readonly ZeusDbService _zeusDbService;
+        private List<Schaden> _alleSchaeden;
+        private ICommand _searchCommand;
+        
+        public SchadenListeViewModel()
+        {
+            _zeusDbService = new ZeusDbService(App.Database);
+            _searchCommand = new Command(Load);
+            NurPendente = true;
+
+            Load();
+            
+            MessagingCenter.Subscribe<SchadenListeViewModel, Schaden>(this, "SchadenListeReload", (sender, viewModel) => Load());
+            MessagingCenter.Subscribe<SchadenOrtViewModel, Schaden>(this, "SchadenOrtSaved", (sender, schaden) =>
+            {
+                _zeusDbService.SaveSchaden(schaden);
+                Load();
+            });
+            
+            MessagingCenter.Subscribe<SchadenViewModel, Schaden>(this, "SchadenSaved", (sender, schaden) =>
+            {
+                _zeusDbService.SaveSchaden(schaden);
+                Load();
+            });
+            
+            MessagingCenter.Subscribe<ProtokollViewModel, Schaden>(this, "SchadenSaved", (sender, schaden) =>
+            {
+                _zeusDbService.SaveSchaden(schaden);
+                Load();
+            });
+
+        }
 
         public ObservableCollection<SchadenCellViewModel> SchadensAuswahlListe
         {
@@ -21,44 +59,7 @@ namespace ZeusMobile.ViewModels
                 OnPropertyChanged();
             }
         }
-
-        public SchadenListeViewModel()
-        {
-            var all = App.Database.GetSchaeden().ToList();
-
-            foreach (var t in all)
-            {
-                _schadensAuswahlListe.Add(new SchadenCellViewModel(t));
-            }
-            
-			MessagingCenter.Subscribe<SchadenListeViewModel, Schaden>(this, "SchadenListeReload", (sender, viewModel) => Reload());
-
-            MessagingCenter.Subscribe<SchadenOrtViewModel, Schaden>(this, "SchadenOrtSaved", (sender, schaden) =>
-            {
-                App.Database.SaveSchaden(schaden);
-                Reload();
-            });
-
-            MessagingCenter.Subscribe<SchadenViewModel, Schaden>(this, "SchadenSaved", (sender, schaden) =>
-            {
-                App.Database.SaveSchaden(schaden);
-                Reload();
-            });
-
-        }
-
-        void Reload()
-        {
-            var alleSchaeden = App.Database.GetSchaeden().ToList();
-
-            var x = new ObservableCollection<SchadenCellViewModel>();
-            foreach (var t in alleSchaeden)
-            {
-                x.Add(new SchadenCellViewModel(t));
-            }
-            SchadensAuswahlListe = x;
-        }
-
+        
         private bool _nurPendente;
         public bool NurPendente
         {
@@ -69,6 +70,33 @@ namespace ZeusMobile.ViewModels
                     return;
 
                 _nurPendente = value;
+                OnPropertyChanged();
+                Load();
+            }
+        }
+
+        private string _sucheText;
+        public string SucheText
+        {
+            get { return _sucheText; }
+            set
+            {
+                if (_sucheText == value)
+                    return;
+
+                _sucheText = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public ICommand SearchCommand
+        {
+            get { return _searchCommand; }
+            set
+            {
+                if (_searchCommand == value)
+                    return;
+                _searchCommand = value;
                 OnPropertyChanged();
             }
         }
@@ -94,6 +122,28 @@ namespace ZeusMobile.ViewModels
                     Navigation.Push(ViewFactory.CreatePage(schadenvm));
 
                     _selectedItem = null;
+                }
+            }
+        }
+
+        void Load()
+        {
+            _alleSchaeden = _zeusDbService.ReadSchadenListe().ToList();
+
+            Filter();
+        }
+        private void Filter()
+        {
+            SchadensAuswahlListe = new ObservableCollection<SchadenCellViewModel>();
+
+            foreach (var schaden in _alleSchaeden)
+            {
+                if (!NurPendente || NurPendente && schaden.Status < Schaden.EnumStatus.Aufgenommen)
+                {
+                    if (string.IsNullOrEmpty(SucheText) || schaden.Ort.ToUpper().Contains(SucheText.ToUpper()) || schaden.Beschreibung.ToUpper().Contains(SucheText.ToUpper()))
+                    {
+                        SchadensAuswahlListe.Add(new SchadenCellViewModel(schaden));
+                    }
                 }
             }
         }

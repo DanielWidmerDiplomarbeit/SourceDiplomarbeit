@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using SQLite.Net.Attributes;
 using SQLiteNetExtensions.Attributes;
 
@@ -68,6 +69,19 @@ namespace ZeusMobile.Models
         public DateTime LetzteMutation { get; set; }
 
         public EnumStatus Status { get; set; }
+
+        [Ignore]
+        public string MutationsDatumText
+        {
+            get
+            {
+                if (LetzteMutation.Equals(DateTime.MinValue))
+                {
+                    return string.Empty;
+                }
+                return LetzteMutation.ToString("dd.MM.yyyy HH:mm:ss ");
+            }
+        }
 
         [Ignore]
         public String SchadenOrtListeText
