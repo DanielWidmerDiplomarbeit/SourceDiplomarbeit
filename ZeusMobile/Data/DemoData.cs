@@ -182,9 +182,9 @@ namespace ZeusMobile.Data
         private List<Protokoll> DemoSchadenProtokoll()
         {
             var schadenProtokollList = new List<Protokoll> {
-            new Protokoll {  Beschreibung = "Lawine",Approxsumme = 1200000, Selbstbehalt = 500},
-            new Protokoll {  Beschreibung = "Gleiche Lawine", Approxsumme = 500000, Selbstbehalt = 600},
-            new Protokoll {  Beschreibung = "Wasser", Approxsumme = 12000, Selbstbehalt = 600},
+            new Protokoll {  Beschreibung = "Keller überschwemmt", Ursache ="Dorfbach über das Ufer getreten", Approxsumme = 1200000, Selbstbehalt = 500, Minimum = 1000000, Maximum = 1500000},
+            new Protokoll {  Beschreibung = "Dach eingedrückt wegen zu hoher Schneemenge", Ursache  = "Schneefälle zu stark, nasser Schnee", Approxsumme = 500000, Selbstbehalt = 600, Minimum = 400000, Maximum = 650000},
+            new Protokoll {  Beschreibung = "Wasser im Keller", Ursache = "Leitung beim Nachbarn gebrochen", Approxsumme = 12000, Selbstbehalt = 600, Minimum = 8000, Maximum = 16000},
          };
             return schadenProtokollList;
         }

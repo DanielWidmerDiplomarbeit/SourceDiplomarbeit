@@ -1,9 +1,8 @@
-﻿using System;
-using ZeusMobile.Models;
+﻿using ZeusMobile.Models;
 
 namespace ZeusMobile.ViewModels
 {
-	class SchadenCellViewModel : BaseViewModel
+    public class SchadenCellViewModel : BaseViewModel
 	{
 	    public Schaden Schaden { get; set; }
 

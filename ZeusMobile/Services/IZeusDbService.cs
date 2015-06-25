@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ZeusMobile.Models;
+using ZeusMobile.ViewModels;
 
 namespace ZeusMobile.Services
 {
@@ -17,7 +19,8 @@ namespace ZeusMobile.Services
         //Schaden
         void SaveSchaden(Schaden schaden);
         Schaden ReadSchaden(int schadenId);
-        List<Schaden> ReadSchadenListe();
+
+        ObservableCollection<SchadenCellViewModel> ReadSchadenListe(string sucheText, bool nurPendente);
 
         //Objekt
         Objekt ReadObjekt(int objektId);

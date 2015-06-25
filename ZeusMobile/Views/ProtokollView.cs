@@ -17,16 +17,16 @@ namespace ZeusMobile.Views
 
             header.SetBinding(Label.TextProperty, "ProtokollListeText");
 
-            var ursacheLabel = new Label { Text = "Ursache" };
+            var ursacheLabel = new Label { Text = " Ursache" };
             var ursacheEntry = new Entry { };
             ursacheEntry.SetBinding(EntryCell.TextProperty, "Ursache");
 
-            var ursachenBeschreibungLabel = new Label { Text = "Ursachen Beschreibung" };
+            var ursachenBeschreibungLabel = new Label { Text = " Ursachen Beschreibung" };
             var ursachenBeschreibungEntry = new Editor { };
             ursachenBeschreibungEntry.SetBinding(Editor.TextProperty, "UrsachenBeschreibung");
             EditorProperties(ursachenBeschreibungEntry, ursachenBeschreibungLabel);
 
-            var beschreibungLabel = new Label { Text = "Beschreibung" };
+            var beschreibungLabel = new Label { Text = " Beschreibung" };
             var beschreibungEntry = new Editor { };
             beschreibungEntry.SetBinding(Editor.TextProperty, "Beschreibung");
             beschreibungEntry.HeightRequest = 50;
@@ -35,7 +35,7 @@ namespace ZeusMobile.Views
             EditorProperties(beschreibungEntry, beschreibungLabel);
 
 
-            var interneNotizLabel = new Label { Text = "Interne Notiz" };
+            var interneNotizLabel = new Label { Text = " Interne Notiz" };
             var interneNotizEntry = new Editor { };
             interneNotizEntry.SetBinding(Editor.TextProperty, "InterneNotiz");
             EditorProperties(interneNotizEntry, interneNotizLabel);

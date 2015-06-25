@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
+﻿using System.Collections.ObjectModel;
 using System.Windows.Input;
 using Xamarin.Forms;
 using ZeusMobile.Models;
@@ -16,9 +13,8 @@ namespace ZeusMobile.ViewModels
 
 
         private readonly ZeusDbService _zeusDbService;
-        private List<Schaden> _alleSchaeden;
         private ICommand _searchCommand;
-        
+
         public SchadenListeViewModel()
         {
             _zeusDbService = new ZeusDbService(App.Database);
@@ -26,20 +22,20 @@ namespace ZeusMobile.ViewModels
             NurPendente = true;
 
             Load();
-            
+
             MessagingCenter.Subscribe<SchadenListeViewModel, Schaden>(this, "SchadenListeReload", (sender, viewModel) => Load());
             MessagingCenter.Subscribe<SchadenOrtViewModel, Schaden>(this, "SchadenOrtSaved", (sender, schaden) =>
             {
                 _zeusDbService.SaveSchaden(schaden);
                 Load();
             });
-            
+
             MessagingCenter.Subscribe<SchadenViewModel, Schaden>(this, "SchadenSaved", (sender, schaden) =>
             {
                 _zeusDbService.SaveSchaden(schaden);
                 Load();
             });
-            
+
             MessagingCenter.Subscribe<ProtokollViewModel, Schaden>(this, "SchadenSaved", (sender, schaden) =>
             {
                 _zeusDbService.SaveSchaden(schaden);
@@ -59,7 +55,7 @@ namespace ZeusMobile.ViewModels
                 OnPropertyChanged();
             }
         }
-        
+
         private bool _nurPendente;
         public bool NurPendente
         {
@@ -126,26 +122,9 @@ namespace ZeusMobile.ViewModels
             }
         }
 
-        void Load()
+        private void Load()
         {
-            _alleSchaeden = _zeusDbService.ReadSchadenListe().ToList();
-
-            Filter();
-        }
-        private void Filter()
-        {
-            SchadensAuswahlListe = new ObservableCollection<SchadenCellViewModel>();
-
-            foreach (var schaden in _alleSchaeden)
-            {
-                if (!NurPendente || NurPendente && schaden.Status < Schaden.EnumStatus.Aufgenommen)
-                {
-                    if (string.IsNullOrEmpty(SucheText) || schaden.Ort.ToUpper().Contains(SucheText.ToUpper()) || schaden.Beschreibung.ToUpper().Contains(SucheText.ToUpper()))
-                    {
-                        SchadensAuswahlListe.Add(new SchadenCellViewModel(schaden));
-                    }
-                }
-            }
+            SchadensAuswahlListe = _zeusDbService.ReadSchadenListe(SucheText, NurPendente);
         }
     }
 }

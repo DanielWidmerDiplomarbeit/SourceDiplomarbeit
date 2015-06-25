@@ -91,7 +91,7 @@ namespace ZeusMobile.Models
                 string listenText = string.Empty;
                 if (!string.IsNullOrEmpty(Strasse))
                 {
-                    listenText += ", " + Strasse;
+                    listenText += Strasse;
                 }
                 if (!string.IsNullOrEmpty(Hausnr))
                 {

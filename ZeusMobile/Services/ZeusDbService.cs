@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using ZeusMobile.Data;
 using ZeusMobile.Models;
+using ZeusMobile.ViewModels;
 
 namespace ZeusMobile.Services
 {
@@ -25,7 +27,7 @@ namespace ZeusMobile.Services
             {
                 schaden.Status = status;
             }
-            
+
             protokoll.LetzteBearbeitung = DateTime.Now;
             protokoll.SchadenId = schaden.Id;
             _dataBase.SaveProtokoll(protokoll);
@@ -68,11 +70,25 @@ namespace ZeusMobile.Services
             return _dataBase.GetSchaden(schadenId);
         }
 
-        public List<Schaden> ReadSchadenListe()
+        public ObservableCollection<SchadenCellViewModel> ReadSchadenListe(string sucheText, bool nurPendente)
         {
-            return _dataBase.GetSchaeden();
-        }
+            var alleSchaeden = _dataBase.GetSchaeden();
 
+            var schadensAuswahlListe = new ObservableCollection<SchadenCellViewModel>();
+
+            foreach (var schaden in alleSchaeden)
+            {
+                if (!nurPendente || nurPendente && schaden.Status < Schaden.EnumStatus.Aufgenommen)
+                {
+                    if (string.IsNullOrEmpty(sucheText) || schaden.Ort.ToUpper().Contains(sucheText.ToUpper()) || schaden.Beschreibung.ToUpper().Contains(sucheText.ToUpper()))
+                    {
+                        schadensAuswahlListe.Add(new SchadenCellViewModel(schaden));
+                    }
+                }
+            }
+            return schadensAuswahlListe;
+        }
+        
         public Objekt ReadObjekt(int objektId)
         {
             throw new NotImplementedException();

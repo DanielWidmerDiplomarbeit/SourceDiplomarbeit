@@ -22,7 +22,7 @@ namespace ZeusMobile.Views
             var bauartCell = new EntryCell { Label = "Bauart" };
             bauartCell.SetBinding(EntryCell.TextProperty, "Objekt.Bauart");
 
-            var hydrantCell = new EntryCell { Label = "Hydrant" };
+            var hydrantCell = new EntryCell { Label = "Hydrant Nr" };
             hydrantCell.SetBinding(EntryCell.TextProperty, "Objekt.Hydrant");
 
 

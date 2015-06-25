@@ -26,11 +26,11 @@ namespace ZeusMobile.Views
             var prioritaetCell = new EntryCell { Label = "Prioritaet" };
             prioritaetCell.SetBinding(EntryCell.TextProperty, "Prioritaet");
 
-            var meldeDatumLabel = new Label { Text = "Meldedatum" };
+            var meldeDatumLabel = new Label { Text = " Meldedatum" };
             var meldeDatumDatumPicker = new DatePicker { Format = "D" };
             meldeDatumDatumPicker.SetBinding(DatePicker.DateProperty, "Meldedatum");
 
-            var eintrittsDatumDatumLabel = new Label { Text = "Eintrittsdatum" };
+            var eintrittsDatumDatumLabel = new Label { Text = " Eintrittsdatum" };
             var eintrittsDatumDatumPicker = new DatePicker { Format = "D" };
             eintrittsDatumDatumPicker.SetBinding(DatePicker.DateProperty, "Eintrittsdatum");
 

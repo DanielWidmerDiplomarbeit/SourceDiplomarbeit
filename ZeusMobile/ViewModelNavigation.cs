@@ -3,7 +3,7 @@ using ZeusMobile.ViewModels;
 
 namespace ZeusMobile
 {
-	class ViewModelNavigation
+    public class ViewModelNavigation
 	{
 		readonly Page _implementor;
 

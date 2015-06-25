@@ -3,7 +3,7 @@ using System.Runtime.CompilerServices;
 
 namespace ZeusMobile.ViewModels
 {
-    class BaseViewModel : INotifyPropertyChanged
+    public class BaseViewModel : INotifyPropertyChanged
     {
 
         public ViewModelNavigation Navigation { get; set; }
