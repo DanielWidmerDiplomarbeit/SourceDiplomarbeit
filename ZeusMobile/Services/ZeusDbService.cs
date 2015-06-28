@@ -1,5 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿// <copyright company="ZHAW">
+// Copyright (c) 2015 All Right Reserved
+// </copyright>
+// <author>Daniel Widmer</author>
+// <date>30.06.2015</date>
+using System;
 using System.Collections.ObjectModel;
 using ZeusMobile.Data;
 using ZeusMobile.Models;
@@ -78,6 +82,7 @@ namespace ZeusMobile.Services
 
             foreach (var schaden in alleSchaeden)
             {
+                // ReSharper disable once ConditionIsAlwaysTrueOrFalse
                 if (!nurPendente || nurPendente && schaden.Status < Schaden.EnumStatus.Aufgenommen)
                 {
                     if (string.IsNullOrEmpty(sucheText) || schaden.Ort.ToUpper().Contains(sucheText.ToUpper()) || schaden.Beschreibung.ToUpper().Contains(sucheText.ToUpper()))
@@ -88,7 +93,7 @@ namespace ZeusMobile.Services
             }
             return schadensAuswahlListe;
         }
-        
+
         public Objekt ReadObjekt(int objektId)
         {
             throw new NotImplementedException();

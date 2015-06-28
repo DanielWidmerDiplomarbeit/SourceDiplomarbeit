@@ -1,6 +1,12 @@
-﻿using Xamarin.Forms;
+﻿// <copyright company="ZHAW">
+// Copyright (c) 2015 All Right Reserved
+// </copyright>
+// <author>Daniel Widmer</author>
+// <date>30.06.2015</date>
 
-namespace ZeusMobile
+using Xamarin.Forms;
+
+namespace ZeusMobile.Views
 {
 	public class SchadenItemCell : ViewCell
 	{

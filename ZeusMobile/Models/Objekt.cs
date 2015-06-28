@@ -1,4 +1,9 @@
-﻿using SQLite.Net.Attributes;
+﻿// <copyright company="ZHAW">
+// Copyright (c) 2015 All Right Reserved
+// </copyright>
+// <author>Daniel Widmer</author>
+// <date>30.06.2015</date>
+using SQLite.Net.Attributes;
 using SQLiteNetExtensions.Attributes;
 
 namespace ZeusMobile.Models
@@ -9,7 +14,7 @@ namespace ZeusMobile.Models
     public class Objekt
     {
 
-        public enum enumBauart
+        public enum EnumBauart
         {
             Voll = 1,
             Teilweise = 2
@@ -34,7 +39,7 @@ namespace ZeusMobile.Models
         
         public string Hydrant { get; set; }
         
-        public enumBauart Bauart { get; set; }
+        public EnumBauart Bauart { get; set; }
 
         [Ignore]
         public string ObjektListeText

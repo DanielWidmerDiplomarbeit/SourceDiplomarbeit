@@ -1,4 +1,10 @@
-﻿using System.Reflection;
+﻿// <copyright company="ZHAW">
+// Copyright (c) 2015 All Right Reserved
+// </copyright>
+// <author>Daniel Widmer</author>
+// <date>30.06.2015</date>
+
+using System.Reflection;
 
 [assembly: AssemblyTitle("ZeusMobile")]
 [assembly: AssemblyDescription("PCL Klassen")]

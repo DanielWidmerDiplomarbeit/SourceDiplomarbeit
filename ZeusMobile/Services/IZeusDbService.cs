@@ -1,9 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿// <copyright company="ZHAW">
+// Copyright (c) 2015 All Right Reserved
+// </copyright>
+// <author>Daniel Widmer</author>
+// <date>30.06.2015</date>
+
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using ZeusMobile.Models;
 using ZeusMobile.ViewModels;
 

@@ -1,4 +1,9 @@
-﻿using System;
+﻿// <copyright company="ZHAW">
+// Copyright (c) 2015 All Right Reserved
+// </copyright>
+// <author>Daniel Widmer</author>
+// <date>30.06.2015</date>
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using ZeusMobile.Models;
@@ -59,6 +64,15 @@ namespace ZeusMobile.Data
             {
                 if (versicherter.VersichertenNr == 3215)
                 {
+                    var police = Polices.FirstOrDefault(x => x.PolicenNr == "77");
+                    police.VersicherterId = versicherter.Id;
+                    versicherter.KundeSeit = new DateTime(1995, 12, 31);
+                    versicherter.Policen = new List<Police>();
+                    versicherter.Policen.Add(police);
+                }     
+                
+                if (versicherter.VersichertenNr == 3216)
+                {
                     var police = Polices.FirstOrDefault(x => x.PolicenNr == "88");
                     police.VersicherterId = versicherter.Id;
                     versicherter.KundeSeit = new DateTime(1991, 12, 31);
@@ -66,7 +80,7 @@ namespace ZeusMobile.Data
                     versicherter.Policen.Add(police);
                 }
 
-                if (versicherter.VersichertenNr == 3216)
+                if (versicherter.VersichertenNr == 3217)
                 {
                     var police = Polices.FirstOrDefault(x => x.PolicenNr == "99");
                     police.VersicherterId = versicherter.Id;
@@ -86,27 +100,37 @@ namespace ZeusMobile.Data
             foreach (var police in Polices)
             {
 
-                if (police.PolicenNr.Equals("88"))
+                if (police.PolicenNr.Equals("77"))
                 {
                     var objekt1 = versicherungsobjekte.FirstOrDefault(x => x.ObjektId == "11");
-                    var objekt2 = versicherungsobjekte.FirstOrDefault(x => x.ObjektId == "22");
                     objekt1.PoliceId = police.Id;
-                    objekt2.PoliceId = police.Id;
                     police.Versicherungsobjekte = new List<Objekt>();
                     police.Versicherungsobjekte.Add(objekt1);
-                    police.Versicherungsobjekte.Add(objekt2);
 
                     var schaden1 = Schaeden.FirstOrDefault(x => x.GebaeudeNummer == 1711);
-                    var schaden2 = Schaeden.FirstOrDefault(x => x.GebaeudeNummer == 1718);
                     schaden1.PoliceId = police.Id;
-                    schaden2.PoliceId = police.Id;
                     schaden1.Protokoll = new Protokoll();
 
                     police.Schaeden = new List<Schaden>();
                     police.Schaeden.Add(schaden1);
+                }
+
+                if (police.PolicenNr.Equals("88"))
+                {
+                    var objekt2 = versicherungsobjekte.FirstOrDefault(x => x.ObjektId == "22");
+                    objekt2.PoliceId = police.Id;
+                    police.Versicherungsobjekte = new List<Objekt>();
+                    police.Versicherungsobjekte.Add(objekt2);
+
+                    var schaden2 = Schaeden.FirstOrDefault(x => x.GebaeudeNummer == 1718);
+                    schaden2.PoliceId = police.Id;
+                    schaden2.Protokoll = new Protokoll();
+
+                    police.Schaeden = new List<Schaden>();
                     police.Schaeden.Add(schaden2);
 
                 }
+
                 if (police.PolicenNr.Equals("99"))
                 {
                     var objekt3 = versicherungsobjekte.FirstOrDefault(x => x.ObjektId == "33");
@@ -150,6 +174,7 @@ namespace ZeusMobile.Data
         {
             var policen = new List<Police>
             {
+                new Police { PolicenNr = "77", Bezeichnung = "Police EFH" , Kategorie = Police.EnumKategorie.Gebaeude , Abteilung = Police.EnumAbteilung.Monopol, Branche = Police.EnumBranche.Elementar, Deckung = Police.EnumDeckung.Voll},
                 new Police { PolicenNr = "88", Bezeichnung = "Police EFH" , Kategorie = Police.EnumKategorie.Gebaeude , Abteilung = Police.EnumAbteilung.Monopol, Branche = Police.EnumBranche.Elementar, Deckung = Police.EnumDeckung.Voll},
                 new Police { PolicenNr = "99", Bezeichnung = "Police Ferienwohnung", Kategorie = Police.EnumKategorie.Gebaeude, Abteilung = Police.EnumAbteilung.Monopol, Branche = Police.EnumBranche.Elementar, Deckung = Police.EnumDeckung.Voll},
             };
@@ -160,9 +185,9 @@ namespace ZeusMobile.Data
         {
             var objekte = new List<Objekt>
             {
-                new Objekt { ObjektId = "11", Bezeichnung="Einfamilienhaus", Bauart = Objekt.enumBauart.Voll, Hydrant ="1" },
-                new Objekt { ObjektId = "22", Bezeichnung="Garage", Bauart = Objekt.enumBauart.Voll, Hydrant ="1" },
-                new Objekt { ObjektId = "33", Bezeichnung="Ferienhaus", Bauart = Objekt.enumBauart.Voll, Hydrant ="2" }
+                new Objekt { ObjektId = "11", Bezeichnung="Einfamilienhaus", Bauart = Objekt.EnumBauart.Voll, Hydrant ="1612" },
+                new Objekt { ObjektId = "22", Bezeichnung="Garage", Bauart = Objekt.EnumBauart.Voll, Hydrant ="125" },
+                new Objekt { ObjektId = "33", Bezeichnung="Ferienhaus", Bauart = Objekt.EnumBauart.Voll, Hydrant ="840" }
             };
             return objekte;
         }
@@ -170,13 +195,13 @@ namespace ZeusMobile.Data
 
         private List<Schaden> DemoSchadensfaelle()
         {
-            var Schaeden = new List<Schaden> {
+            var schaeden = new List<Schaden> {
 
-				new Schaden {Status = Schaden.EnumStatus.ZurBesichtigung, LetzteMutation = DateTime.Now, Beschreibung ="Wasserschaden Keller", GebaeudeNummer = 1711, Eintrittsdatum = DateTime.Parse("01.07.2015"), Meldedatum = DateTime.Parse("02.07.2015"), Gemeinde = "Netstal", Strasse = "Obergasse", Hausnr = "1 A", Parzelle = 576, Land = "CH", Plz = "8754", Ort = "Netstal"},
+				new Schaden {Status = Schaden.EnumStatus.ZurBesichtigung, LetzteMutation = DateTime.Now, Beschreibung ="Wasserschaden Keller", GebaeudeNummer = 1711, Eintrittsdatum = DateTime.Parse("01.07.2015"), Meldedatum = DateTime.Parse("02.07.2015"), Gemeinde = "Netstal", Strasse = "Obergasse", Hausnr = "1 A", Parzelle = 576, Land = "CH", Plz = "8754", Ort = "Mollis"},
 				new Schaden {Status = Schaden.EnumStatus.ZurBesichtigung, LetzteMutation = DateTime.Now, Beschreibung ="Dach eingedrückt", GebaeudeNummer = 1718, Eintrittsdatum = DateTime.Parse("01.08.2015"), Meldedatum = DateTime.Parse("02.08.2015"), Gemeinde = "Netstal", Strasse = "Obergasse", Hausnr = "1 A", Parzelle = 416, Land = "CH", Plz = "8754", Ort = "Netstal"},
-				new Schaden {Status = Schaden.EnumStatus.ZurBesichtigung, LetzteMutation = DateTime.Now, Beschreibung ="Wasserschaden", GebaeudeNummer = 1719, Eintrittsdatum = DateTime.Parse("01.08.2015"), Meldedatum = DateTime.Parse("02.08.2015"), Gemeinde = "Netstal", Strasse = "Am Bergli", Hausnr = "323", Parzelle = 256, Land = "CH", Plz = "8754", Ort = "Netstal"}
+				new Schaden {Status = Schaden.EnumStatus.ZurBesichtigung, LetzteMutation = DateTime.Now, Beschreibung ="Wasserschaden", GebaeudeNummer = 1719, Eintrittsdatum = DateTime.Parse("01.08.2015"), Meldedatum = DateTime.Parse("02.08.2015"), Gemeinde = "Netstal", Strasse = "Am Bergli", Hausnr = "323", Parzelle = 256, Land = "CH", Plz = "8754", Ort = "Glarus"}
          };
-            return Schaeden;
+            return schaeden;
         }
 
         private List<Protokoll> DemoSchadenProtokoll()
@@ -194,6 +219,7 @@ namespace ZeusMobile.Data
             var subjects = new List<Person> {
                 new Person {Vorname   ="Adam", Name = "Keller", Strasse = "Bachstr. 12", Plz = "8753 ", Ort = "Mollis",Rolle = "Kunde" },
                 new Person {Vorname   ="Beno", Name = "Müller",Strasse = "Im Kegel 5", Plz = "8945", Ort = "Elm", Rolle = "Kunde" },
+                new Person {Vorname   ="Peter", Name = "Muster",Strasse = "Im Gärtli", Plz = "8945", Ort = "Elm", Rolle = "Kunde" },
                 new Person {Vorname   ="Eva", Name = "Appenzeller",Strasse = "Hauptsstr 134 ", Plz = "8800", Ort = "Glarus", Rolle = "Experte" },
                 new Person {Vorname   ="Peter", Name = "Zorro", Strasse = "Bahnhofstr. 11", Plz = "8800", Ort = "Glarus", Rolle = "Experte" }
             };

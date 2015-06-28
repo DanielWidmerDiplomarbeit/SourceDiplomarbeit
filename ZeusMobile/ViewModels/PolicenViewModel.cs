@@ -1,4 +1,5 @@
-﻿using ZeusMobile.Models;
+﻿using ZeusMobile.BaseClassesGD;
+using ZeusMobile.Models;
 
 namespace ZeusMobile.ViewModels
 {

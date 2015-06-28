@@ -1,4 +1,9 @@
-﻿using Xamarin.Forms;
+﻿// <copyright company="ZHAW">
+// Copyright (c) 2015 All Right Reserved
+// </copyright>
+// <author>Daniel Widmer</author>
+// <date>30.06.2015</date>
+using Xamarin.Forms;
 
 namespace ZeusMobile.Views
 {
@@ -18,16 +23,16 @@ namespace ZeusMobile.Views
             header.SetBinding(Label.TextProperty, "ProtokollListeText");
 
             var ursacheLabel = new Label { Text = " Ursache" };
-            var ursacheEntry = new Entry { };
+            var ursacheEntry = new Entry();
             ursacheEntry.SetBinding(EntryCell.TextProperty, "Ursache");
 
             var ursachenBeschreibungLabel = new Label { Text = " Ursachen Beschreibung" };
-            var ursachenBeschreibungEntry = new Editor { };
+            var ursachenBeschreibungEntry = new Editor();
             ursachenBeschreibungEntry.SetBinding(Editor.TextProperty, "UrsachenBeschreibung");
             EditorProperties(ursachenBeschreibungEntry, ursachenBeschreibungLabel);
 
             var beschreibungLabel = new Label { Text = " Beschreibung" };
-            var beschreibungEntry = new Editor { };
+            var beschreibungEntry = new Editor();
             beschreibungEntry.SetBinding(Editor.TextProperty, "Beschreibung");
             beschreibungEntry.HeightRequest = 50;
             beschreibungEntry.WidthRequest = 700;
@@ -36,7 +41,7 @@ namespace ZeusMobile.Views
 
 
             var interneNotizLabel = new Label { Text = " Interne Notiz" };
-            var interneNotizEntry = new Editor { };
+            var interneNotizEntry = new Editor();
             interneNotizEntry.SetBinding(Editor.TextProperty, "InterneNotiz");
             EditorProperties(interneNotizEntry, interneNotizLabel);
 

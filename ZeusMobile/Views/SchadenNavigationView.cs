@@ -1,13 +1,17 @@
-﻿using System;
+﻿// <copyright company="ZHAW">
+// Copyright (c) 2015 All Right Reserved
+// </copyright>
+// <author>Daniel Widmer</author>
+// <date>30.06.2015</date>
+
+using System;
 using Xamarin.Forms;
-using ZeusMobile.Models;
-using ZeusMobile.ViewModels;
 
 namespace ZeusMobile.Views
 {
     public class SchadenNavigationView : ContentPage
     {
-        private bool first = true;
+        private bool _first = true;
 
         public SchadenNavigationView()
         {
@@ -121,11 +125,11 @@ namespace ZeusMobile.Views
         {
             base.OnAppearing();
 
-            if (!first)
+            if (!_first)
             {
                 MessagingCenter.Send(this, "InitNavigationView");
             };
-            first = false;
+            _first = false;
         }
     }
 }

@@ -1,11 +1,16 @@
-﻿using Xamarin.Forms;
-using ZeusMobile.Models;
+﻿// <copyright company="ZHAW">
+// Copyright (c) 2015 All Right Reserved
+// </copyright>
+// <author>Daniel Widmer</author>
+// <date>30.06.2015</date>
+
+using Xamarin.Forms;
 
 namespace ZeusMobile.Views
 {
     public class SchadenListeView : ContentPage
     {
-        bool first = true;
+        bool _first = true;
 
         public SchadenListeView()
         {
@@ -53,11 +58,11 @@ namespace ZeusMobile.Views
         {
             base.OnAppearing();
 
-            if (!first)
+            if (!_first)
             {
                 MessagingCenter.Send(this, "SchadenListeReload");
-            };
-            first = false;
+            }
+            _first = false;
         }
     }
 }

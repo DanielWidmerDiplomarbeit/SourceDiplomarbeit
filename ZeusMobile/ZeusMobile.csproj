@@ -40,9 +40,9 @@
     <Compile Include="Services\ZeusDbService.cs" />
     <Compile Include="ViewModels\SchadenNavigationViewModel.cs" />
     <Compile Include="ViewModels\SchadenListeViewModel.cs" />
-    <Compile Include="ViewModels\BaseViewModel.cs" />
-    <Compile Include="ViewModelNavigation.cs" />
-    <Compile Include="ViewFactory.cs" />
+    <Compile Include="BaseClassesGD\BaseViewModel.cs" />
+    <Compile Include="BaseClassesGD\ViewModelNavigation.cs" />
+    <Compile Include="BaseClassesGD\ViewFactory.cs" />
     <Compile Include="ViewModels\ObjekteViewModel.cs" />
     <Compile Include="ViewModels\PolicenViewModel.cs" />
     <Compile Include="ViewModels\ProtokollViewModel.cs" />
@@ -90,11 +90,6 @@
   <ItemGroup />
   <ItemGroup>
     <None Include="packages.config" />
-    <None Include="Toolkit.Content\ApplicationBar.Add.png" />
-    <None Include="Toolkit.Content\ApplicationBar.Cancel.png" />
-    <None Include="Toolkit.Content\ApplicationBar.Check.png" />
-    <None Include="Toolkit.Content\ApplicationBar.Delete.png" />
-    <None Include="Toolkit.Content\ApplicationBar.Select.png" />
     <Compile Include="Models\Police.cs" />
     <Compile Include="Models\Schaden.cs" />
     <Compile Include="Models\Protokoll.cs" />

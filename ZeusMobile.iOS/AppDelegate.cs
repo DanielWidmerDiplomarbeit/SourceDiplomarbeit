@@ -10,7 +10,7 @@ using ZeusMobile.Data;
 namespace ZeusMobileiOS
 {
     [Register("AppDelegate")]
-    public partial class AppDelegate : UIApplicationDelegate
+    public class AppDelegate : UIApplicationDelegate
     {
         UIWindow _window;
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)

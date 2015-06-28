@@ -1,9 +1,13 @@
-﻿using System;
-using System.Globalization;
+﻿// <copyright company="ZHAW">
+// Copyright (c) 2015 All Right Reserved
+// </copyright>
+// <author>Daniel Widmer</author>
+// <date>30.06.2015</date>
+using System;
 using System.Windows.Input;
 using Xamarin.Forms;
+using ZeusMobile.BaseClassesGD;
 using ZeusMobile.Models;
-using ZeusMobile.Views;
 
 namespace ZeusMobile.ViewModels
 {

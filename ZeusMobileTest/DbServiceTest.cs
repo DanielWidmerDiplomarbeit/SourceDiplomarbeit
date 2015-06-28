@@ -1,7 +1,11 @@
-﻿using System;
+﻿// <copyright company="ZHAW">
+// Copyright (c) 2015 All Right Reserved
+// </copyright>
+// <author>Daniel Widmer</author>
+// <date>30.06.2015</date>
+using System;
 using NUnit.Framework;
 using System.IO;
-using System.Linq;
 using ZeusMobile.Data;
 using ZeusMobile.Models;
 using ZeusMobile.Services;
@@ -113,54 +117,6 @@ namespace ZeusMobileTest
 
             Assert.AreEqual("Test Neues Schadenprotokoll", protokoll.Beschreibung);
         }
-
-
-        //[Test]
-        //public void Test_2_2_3_SchadenSichern()
-        //{
-        //    var zeusDbService = new ZeusDbService(AppConn.TestDataBase);
-        //    var schaden = zeusDbService.ReadSchaden(1);
-        //    Assert.AreEqual("Wasserschaden Keller", schaden.Beschreibung);
-        //    schaden.Beschreibung = "Wasserschaden Estrich";
-        //    zeusDbService.SaveSchaden(schaden);
-        //    schaden = zeusDbService.ReadSchaden(1);
-        //    Assert.AreEqual("Wasserschaden Estrich", schaden.Beschreibung);
-        //}
-
-
-        //[Test]
-        //public void Test_2_2_4_UpdateBestehendesProtokoll()
-        //{
-        //    var zeusDbService = new ZeusDbService(AppConn.TestDataBase);
-        //    var schaden = zeusDbService.ReadSchaden(1);
-        //    var altesProtokoll = zeusDbService.ReadProtokoll(1);
-        //    zeusDbService.DeleteProtokoll(altesProtokoll);
-
-        //    var kontrolldatum = schaden.LetzteMutation;
-        //    var protokoll = new Protokoll
-        //    {
-        //        Beschreibung = "Test Neues Schadenprotokoll",
-        //        SchadenId = schaden.Id,
-        //        Approxsumme = 500000,
-        //        Selbstbehalt = 5000,
-        //        Minimum = 400000,
-        //        Maximum = 60000,
-        //        InterneNotiz = "Ich bin eine interne Notiz ääää ööö üüü ÄÄÖÖÜÜ",
-        //        Ursache = "selber schuld",
-        //        UrsachenBeschreibung = "Er ist wirklich selber schuld",
-        //        LetzteBearbeitung = DateTime.Now
-        //    };
-
-        //    zeusDbService.SaveProtokoll(schaden, protokoll);
-        //    var neuesProtokoll = zeusDbService.ReadProtokoll(schaden.Id);
-        //    Assert.AreEqual(500000, neuesProtokoll.Approxsumme);
-        //    neuesProtokoll.Approxsumme = 555555;
-        //    zeusDbService.SaveProtokoll(schaden, neuesProtokoll);
-        //    var mutiertesProtokoll = zeusDbService.ReadProtokoll(schaden.Id);
-
-        //    Assert.AreEqual(555555, mutiertesProtokoll.Approxsumme);
-        //    Assert.AreNotEqual(kontrolldatum, schaden.LetzteMutation);
-        //}
 
         [Test]
         public void Test_2_3_1_NeuesProtokoll()
@@ -319,7 +275,7 @@ namespace ZeusMobileTest
                 {
                     File.Copy(path, dropBoxFile);
                 }
-                catch
+                catch (IOException)
                 {
                     // do nothing
                 }
@@ -335,13 +291,6 @@ namespace ZeusMobileTest
 
             var demoData = new DemoData();
             demoData.BuildDemoData(database);
-
-            Assert.AreEqual(4, database.GetSubjekte().ToList().Count());
-            Assert.AreEqual(2, database.GetVersicherte().ToList().Count());
-            Assert.AreEqual(2, database.GetSchadensExperten().ToList().Count());
-            Assert.AreEqual(3, database.GetSchaeden().ToList().Count());
-            Assert.AreEqual(2, database.GetPolicen().ToList().Count());
-            Assert.AreEqual(3, database.GetSchadenProtokolle().ToList().Count());
         }
     }
 
