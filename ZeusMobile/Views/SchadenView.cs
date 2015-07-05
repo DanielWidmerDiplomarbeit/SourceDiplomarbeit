@@ -4,6 +4,8 @@
 // <author>Daniel Widmer</author>
 // <date>30.06.2015</date>
 using Xamarin.Forms;
+using ZeusMobile.Models;
+using System;
 
 namespace ZeusMobile.Views
 {
@@ -11,6 +13,16 @@ namespace ZeusMobile.Views
     {
         public SchadenView()
         {
+			Label statusPickerLabel = new Label {	Text = "Status"	};
+			Picker picker = new	Picker{ Title = "Status"};
+
+			picker.Items.Add(Schaden.EnumStatus.ZurBesichtigung.ToString());
+			picker.Items.Add(Schaden.EnumStatus.Gemeldet.ToString());
+			picker.Items.Add(Schaden.EnumStatus.Aufgenommen.ToString());
+
+			picker.SetBinding( Picker.SelectedIndexProperty,"Status");
+
+
             var beschreibungCell = new EntryCell { Label = "Beschreibung" };
             beschreibungCell.SetBinding(EntryCell.TextProperty, "Beschreibung");
 
@@ -64,9 +76,8 @@ namespace ZeusMobile.Views
                    Intent = TableIntent.Settings,
                    Root = new TableRoot
                 {
-                    new TableSection("Status")
+                    new TableSection("Mutation")
                     {
-                        statusCell,
                         sachbearbeiterCell,
                         mutationsdatumCell
                     }
@@ -83,6 +94,8 @@ namespace ZeusMobile.Views
                     meldeDatumDatumPicker,
                     eintrittsDatumDatumLabel,
                     eintrittsDatumDatumPicker,
+					statusPickerLabel,
+					picker,
                     statusTable,
                     saveButton, 
                     cancelButton}

@@ -47,17 +47,24 @@ namespace ZeusMobile.ViewModels
         {
             get
             {
-                return ConvertToString(Schaden.Prioritaet);
+				return Enum.GetName(typeof(Schaden.EnumPrioritaet), Schaden.Prioritaet);
+            }
+        }
 
-            }
-        }
-        public string Status
-        {
-            get
-            {
-                return ConvertToString(Schaden.Status);
-            }
-        }
+		public int Status
+		{
+			get
+			{
+				return (int)Schaden.Status;
+			}
+			set
+			{
+				if (Schaden.Status == (Schaden.EnumStatus)value)
+					return;
+				Schaden.Status = (Schaden.EnumStatus)value;
+				OnPropertyChanged();
+			}
+		}
 
         #endregion
 
