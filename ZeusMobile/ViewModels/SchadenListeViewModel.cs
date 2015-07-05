@@ -33,7 +33,7 @@ namespace ZeusMobile.ViewModels
             MessagingCenter.Subscribe<SchadenOrtViewModel, Schaden>(this, "SchadenOrtSaved", (sender, schaden) =>
             {
                 _zeusDbService.SaveSchaden(schaden);
-                Load();
+					Load() ;
             });
 
             MessagingCenter.Subscribe<SchadenViewModel, Schaden>(this, "SchadenSaved", (sender, schaden) =>

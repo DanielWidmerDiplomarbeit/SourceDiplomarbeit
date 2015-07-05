@@ -17,7 +17,7 @@ namespace ZeusMobile.ViewModels
 	    {
 	        get
 	        {
-                return Schaden.Beschreibung + " " + Schaden.Ort;
+				return Schaden.Beschreibung + ", " + Schaden.Strasse + " " + Schaden.Ort;
 	        }
 	    }
 		
